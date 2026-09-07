@@ -1,0 +1,46 @@
+{
+  "scenario_id": "attack-chain-01",
+  "scenario_name": "Finance file-server exfiltration",
+  "scenario_type": "attack",
+  "correct_answer": "one attack chain",
+  "generated_by": "generate-scenario skill",
+  "seed": 1337,
+  "total_events": 500,
+  "attack_event_count": 16,
+  "attack_event_ids": [
+    "E-0095",
+    "E-0096",
+    "E-0097",
+    "E-0102",
+    "E-0107",
+    "E-0111",
+    "E-0115",
+    "E-0117",
+    "E-0119",
+    "E-0122",
+    "E-0124",
+    "E-0125",
+    "E-0129",
+    "E-0132",
+    "E-0136",
+    "E-0137"
+  ],
+  "assets_involved": [
+    "198.51.100.22",
+    "203.0.113.47",
+    "DC-01",
+    "FILESRV-01",
+    "WKSTN-042",
+    "administrator",
+    "jsmith"
+  ],
+  "chain_summary": [
+    "External RDP logon to WKSTN-042 as jsmith (initial access)",
+    "PowerShell payload execution and C2 beacon to 203.0.113.47",
+    "Local discovery and LSASS credential dump on WKSTN-042",
+    "Pass-the-hash to DC-01, then admin logon to FILESRV-01 (lateral movement)",
+    "Remote execution and reading of Finance/HR files on FILESRV-01 (collection)",
+    "480MB exfiltration to 198.51.100.22, then log-clearing cleanup"
+  ],
+  "note": "Removing FILESRV-01 should collapse the exfiltration edges but leave the credential-theft path (WKSTN-042 -> DC-01) intact."
+}

@@ -1,17 +1,24 @@
-# Maven
-target/
-.mvn/wrapper/maven-wrapper.jar
-!.mvn/wrapper/maven-wrapper.properties
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node / Vite
+node_modules/
+dist/
+public/scenarios/
+
+# Deploy
+.vercel/
 
 # IDE
 .idea/
-*.iml
-*.iws
 .vscode/
-.settings/
-.project
-.classpath
-.factorypath
+*.iml
 
 # OS
 .DS_Store
@@ -21,3 +28,4 @@ Thumbs.db
 *.log
 .env
 .env.*
+!.env.example

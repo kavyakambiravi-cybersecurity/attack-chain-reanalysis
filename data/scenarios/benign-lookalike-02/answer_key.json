@@ -1,0 +1,161 @@
+{
+  "scenario_id": "benign-lookalike-02",
+  "scenario_name": "Benign lookalike (busy IT night, no attack)",
+  "scenario_type": "benign",
+  "correct_answer": "no attack",
+  "generated_by": "generate-scenario skill",
+  "seed": 2026,
+  "total_events": 500,
+  "attack_event_count": 0,
+  "attack_event_ids": [],
+  "lookalike_event_count": 16,
+  "lookalike_event_ids": [
+    "E-0046",
+    "E-0091",
+    "E-0122",
+    "E-0154",
+    "E-0178",
+    "E-0192",
+    "E-0208",
+    "E-0221",
+    "E-0240",
+    "E-0259",
+    "E-0287",
+    "E-0335",
+    "E-0379",
+    "E-0412",
+    "E-0435",
+    "E-0456"
+  ],
+  "lookalikes": [
+    {
+      "id": "E-0046",
+      "type": "authentication",
+      "source": "192.0.2.20 (corp-vpn-gateway)",
+      "target": "WKSTN-017",
+      "detail": "Interactive logon for kdurand via corporate VPN gateway, MFA satisfied",
+      "why_benign": "Resembles external RDP access, but it is a known admin on the corporate VPN with MFA."
+    },
+    {
+      "id": "E-0091",
+      "type": "process_start",
+      "source": "svc_sccm",
+      "target": "WKSTN-023",
+      "detail": "powershell.exe -File C:\\ProgramData\\SCCM\\inventory.ps1 (Microsoft-signed)",
+      "why_benign": "Resembles PowerShell payload execution, but it is the signed SCCM inventory task."
+    },
+    {
+      "id": "E-0122",
+      "type": "network_connection",
+      "source": "WKSTN-031",
+      "target": "52.96.0.20 (outlook.office365.com)",
+      "detail": "Periodic HTTPS check-in to office365, ~2KB every 60s",
+      "why_benign": "Resembles C2 beaconing, but the destination is Microsoft 365 and cadence is normal."
+    },
+    {
+      "id": "E-0154",
+      "type": "process_start",
+      "source": "svc_edr",
+      "target": "SQL-01",
+      "detail": "MsMpEng.exe opened a handle to lsass.exe during scheduled AV scan",
+      "why_benign": "Resembles LSASS credential access, but it is Microsoft Defender scanning."
+    },
+    {
+      "id": "E-0178",
+      "type": "authentication",
+      "source": "svc_backup",
+      "target": "FILESRV-02",
+      "detail": "Network logon for svc_backup succeeded during nightly backup window",
+      "why_benign": "Resembles a lateral-movement service logon, but it is the backup service account on schedule."
+    },
+    {
+      "id": "E-0192",
+      "type": "network_connection",
+      "source": "BACKUP-01",
+      "target": "20.150.44.10 (blob.core.windows.net Azure)",
+      "detail": "Scheduled cloud backup upload, 512GB to Azure Blob Storage",
+      "why_benign": "Resembles large-volume exfiltration, but it is the nightly backup to the known Azure tenant."
+    },
+    {
+      "id": "E-0208",
+      "type": "file_access",
+      "source": "apatel",
+      "target": "FILESRV-01",
+      "detail": "Read \\\\FILESRV-01\\Finance\\Q3_forecast.xlsx",
+      "why_benign": "Resembles data collection, but apatel is in Finance and this is their own file."
+    },
+    {
+      "id": "E-0221",
+      "type": "file_access",
+      "source": "hokonkwo",
+      "target": "FILESRV-01",
+      "detail": "Read \\\\FILESRV-01\\HR\\employee_roster.csv",
+      "why_benign": "Resembles HR data theft, but hokonkwo is in HR and routinely reads the roster."
+    },
+    {
+      "id": "E-0240",
+      "type": "process_start",
+      "source": "svc_monitor",
+      "target": "DC-01",
+      "detail": "wevtutil.exe el (enumerate log names) by monitoring agent",
+      "why_benign": "Resembles log tampering, but it only enumerates logs read-only; nothing is cleared."
+    },
+    {
+      "id": "E-0259",
+      "type": "authentication",
+      "source": "WKSTN-005",
+      "target": "DC-01",
+      "detail": "Kerberos TGT for administrator during the approved Tuesday patch window (MFA)",
+      "why_benign": "Resembles credential abuse, but it is an admin during the scheduled patch window with MFA."
+    },
+    {
+      "id": "E-0287",
+      "type": "network_connection",
+      "source": "WKSTN-044",
+      "target": "140.82.112.3 (github)",
+      "detail": "git push over HTTPS 443, 40MB to corporate GitHub org",
+      "why_benign": "Resembles outbound exfiltration, but it is a developer pushing code to GitHub."
+    },
+    {
+      "id": "E-0335",
+      "type": "process_start",
+      "source": "lchen",
+      "target": "WKSTN-050",
+      "detail": "cmd.exe /c whoami (run during a helpdesk troubleshooting call)",
+      "why_benign": "Resembles host discovery, but it is a single benign command during a support call."
+    },
+    {
+      "id": "E-0379",
+      "type": "network_connection",
+      "source": "WEB-01",
+      "target": "FILESRV-02",
+      "detail": "SMB session to FILESRV-02:445 for scheduled web asset sync",
+      "why_benign": "Resembles lateral movement, but it is a documented app-to-fileserver content sync."
+    },
+    {
+      "id": "E-0412",
+      "type": "authentication",
+      "source": "rgarcia",
+      "target": "FILESRV-01",
+      "detail": "Network logon for rgarcia succeeded (Finance share access)",
+      "why_benign": "Resembles unauthorized access, but rgarcia is in Finance and uses this share daily."
+    },
+    {
+      "id": "E-0435",
+      "type": "file_access",
+      "source": "svc_backup",
+      "target": "FILESRV-01",
+      "detail": "Created archive E:\\Backups\\finance_2026-09-05.7z (nightly backup job)",
+      "why_benign": "Resembles data staging, but it is the scheduled backup job writing to the backup volume."
+    },
+    {
+      "id": "E-0456",
+      "type": "process_start",
+      "source": "eschmidt",
+      "target": "WKSTN-012",
+      "detail": "rundll32.exe shell32.dll,OpenAs_RunDLL (Windows 'Open with' dialog)",
+      "why_benign": "Resembles a malicious rundll32 proxy, but it is the normal Windows shell handler."
+    }
+  ],
+  "note": "There is no attack. Each lookalike event resembles a technique but is individually benign, and they share no pivot host, credential, or external destination. A correct analysis draws no attack chain (or only dashed, unverified fragments), never a connected intrusion."
+}

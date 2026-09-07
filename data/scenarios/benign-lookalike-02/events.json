@@ -1,0 +1,4002 @@
+[
+  {
+    "id": "E-0001",
+    "timestamp": "2026-09-05T07:32:10Z",
+    "source": "apatel",
+    "target": "WKSTN-039",
+    "type": "authentication",
+    "detail": "Interactive logon for apatel succeeded"
+  },
+  {
+    "id": "E-0002",
+    "timestamp": "2026-09-05T07:34:20Z",
+    "source": "WKSTN-019",
+    "target": "8.8.8.8 (dns)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 8.8.8.8 (dns)"
+  },
+  {
+    "id": "E-0003",
+    "timestamp": "2026-09-05T07:34:30Z",
+    "source": "MAIL-01",
+    "target": "WKSTN-049",
+    "type": "network_connection",
+    "detail": "SMB read from \\\\WKSTN-049\\Shared over 445"
+  },
+  {
+    "id": "E-0004",
+    "timestamp": "2026-09-05T07:36:07Z",
+    "source": "WKSTN-001",
+    "target": "17.253.144.10 (apple-updates)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 17.253.144.10 (apple-updates)"
+  },
+  {
+    "id": "E-0005",
+    "timestamp": "2026-09-05T07:36:18Z",
+    "source": "mjones",
+    "target": "WKSTN-034",
+    "type": "process_start",
+    "detail": "OUTLOOK.EXE started by explorer.exe"
+  },
+  {
+    "id": "E-0006",
+    "timestamp": "2026-09-05T07:37:19Z",
+    "source": "nsingh",
+    "target": "WKSTN-053",
+    "type": "process_start",
+    "detail": "OneDrive.exe sync process started"
+  },
+  {
+    "id": "E-0007",
+    "timestamp": "2026-09-05T07:37:58Z",
+    "source": "mjones",
+    "target": "FILESRV-01",
+    "type": "process_start",
+    "detail": "svchost.exe -k netsvcs spawned"
+  },
+  {
+    "id": "E-0008",
+    "timestamp": "2026-09-05T07:38:19Z",
+    "source": "jsmith",
+    "target": "WKSTN-008",
+    "type": "authentication",
+    "detail": "Kerberos logon succeeded for jsmith"
+  },
+  {
+    "id": "E-0009",
+    "timestamp": "2026-09-05T07:38:37Z",
+    "source": "apatel",
+    "target": "WKSTN-048",
+    "type": "process_start",
+    "detail": "gpupdate.exe /force"
+  },
+  {
+    "id": "E-0010",
+    "timestamp": "2026-09-05T07:38:47Z",
+    "source": "WKSTN-021",
+    "target": "151.101.1.140 (fastly-cdn)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 151.101.1.140 (fastly-cdn)"
+  },
+  {
+    "id": "E-0011",
+    "timestamp": "2026-09-05T07:40:19Z",
+    "source": "nsingh",
+    "target": "WKSTN-046",
+    "type": "authentication",
+    "detail": "Screen unlock for nsingh"
+  },
+  {
+    "id": "E-0012",
+    "timestamp": "2026-09-05T07:41:27Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-023",
+    "type": "file_access",
+    "detail": "Modified \\\\WKSTN-023\\Shared\\budget_draft.xlsx"
+  },
+  {
+    "id": "E-0013",
+    "timestamp": "2026-09-05T07:41:29Z",
+    "source": "svc_backup",
+    "target": "WKSTN-017",
+    "type": "process_start",
+    "detail": "MsMpEng.exe scheduled scan started"
+  },
+  {
+    "id": "E-0014",
+    "timestamp": "2026-09-05T07:42:08Z",
+    "source": "eschmidt",
+    "target": "WKSTN-019",
+    "type": "authentication",
+    "detail": "Failed logon (bad password) for eschmidt"
+  },
+  {
+    "id": "E-0015",
+    "timestamp": "2026-09-05T07:42:15Z",
+    "source": "kdurand",
+    "target": "WKSTN-006",
+    "type": "process_start",
+    "detail": "svchost.exe -k netsvcs spawned"
+  },
+  {
+    "id": "E-0016",
+    "timestamp": "2026-09-05T07:42:32Z",
+    "source": "hokonkwo",
+    "target": "SQL-01",
+    "type": "authentication",
+    "detail": "Interactive logon for hokonkwo succeeded"
+  },
+  {
+    "id": "E-0017",
+    "timestamp": "2026-09-05T07:47:21Z",
+    "source": "apatel",
+    "target": "WKSTN-021",
+    "type": "process_start",
+    "detail": "Teams.exe started"
+  },
+  {
+    "id": "E-0018",
+    "timestamp": "2026-09-05T07:49:16Z",
+    "source": "mjones",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-02\\Projects\\roadmap.pptx"
+  },
+  {
+    "id": "E-0019",
+    "timestamp": "2026-09-05T07:52:14Z",
+    "source": "nsingh",
+    "target": "WKSTN-023",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-01\\Shared\\onboarding.pdf"
+  },
+  {
+    "id": "E-0020",
+    "timestamp": "2026-09-05T07:52:42Z",
+    "source": "WKSTN-006",
+    "target": "142.250.72.14 (google)",
+    "type": "network_connection",
+    "detail": "TLS session established to 142.250.72.14 (google)"
+  },
+  {
+    "id": "E-0021",
+    "timestamp": "2026-09-05T07:53:43Z",
+    "source": "WKSTN-053",
+    "target": "142.250.72.14 (google)",
+    "type": "network_connection",
+    "detail": "Software update check to 142.250.72.14 (google)"
+  },
+  {
+    "id": "E-0022",
+    "timestamp": "2026-09-05T07:54:08Z",
+    "source": "hokonkwo",
+    "target": "WKSTN-057",
+    "type": "authentication",
+    "detail": "Screen unlock for hokonkwo"
+  },
+  {
+    "id": "E-0023",
+    "timestamp": "2026-09-05T07:54:27Z",
+    "source": "lchen",
+    "target": "WKSTN-022",
+    "type": "process_start",
+    "detail": "chrome.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0024",
+    "timestamp": "2026-09-05T07:55:16Z",
+    "source": "svc_sql",
+    "target": "VPN-01",
+    "type": "file_access",
+    "detail": "Read \\\\VPN-01\\Shared\\weekly_report.docx"
+  },
+  {
+    "id": "E-0025",
+    "timestamp": "2026-09-05T07:55:31Z",
+    "source": "nsingh",
+    "target": "WKSTN-054",
+    "type": "process_start",
+    "detail": "svchost.exe -k netsvcs spawned"
+  },
+  {
+    "id": "E-0026",
+    "timestamp": "2026-09-05T07:57:20Z",
+    "source": "hokonkwo",
+    "target": "WKSTN-001",
+    "type": "process_start",
+    "detail": "OUTLOOK.EXE started by explorer.exe"
+  },
+  {
+    "id": "E-0027",
+    "timestamp": "2026-09-05T07:57:56Z",
+    "source": "WKSTN-039",
+    "target": "13.107.42.14 (office365)",
+    "type": "network_connection",
+    "detail": "TLS session established to 13.107.42.14 (office365)"
+  },
+  {
+    "id": "E-0028",
+    "timestamp": "2026-09-05T07:58:43Z",
+    "source": "SQL-01",
+    "target": "104.18.32.47 (cloudflare)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 104.18.32.47 (cloudflare)"
+  },
+  {
+    "id": "E-0029",
+    "timestamp": "2026-09-05T08:00:01Z",
+    "source": "lchen",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Opened C:\\Users\\lchen\\Downloads\\invoice.pdf"
+  },
+  {
+    "id": "E-0030",
+    "timestamp": "2026-09-05T08:00:32Z",
+    "source": "PRINT-01",
+    "target": "8.8.8.8 (dns)",
+    "type": "network_connection",
+    "detail": "Software update check to 8.8.8.8 (dns)"
+  },
+  {
+    "id": "E-0031",
+    "timestamp": "2026-09-05T08:01:41Z",
+    "source": "VPN-01",
+    "target": "17.253.144.10 (apple-updates)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 17.253.144.10 (apple-updates)"
+  },
+  {
+    "id": "E-0032",
+    "timestamp": "2026-09-05T08:04:31Z",
+    "source": "WKSTN-008",
+    "target": "8.8.8.8 (dns)",
+    "type": "network_connection",
+    "detail": "TLS session established to 8.8.8.8 (dns)"
+  },
+  {
+    "id": "E-0033",
+    "timestamp": "2026-09-05T08:05:52Z",
+    "source": "lchen",
+    "target": "WKSTN-052",
+    "type": "authentication",
+    "detail": "svc_backup scheduled-task logon succeeded"
+  },
+  {
+    "id": "E-0034",
+    "timestamp": "2026-09-05T08:07:10Z",
+    "source": "lchen",
+    "target": "FILESRV-02",
+    "type": "file_access",
+    "detail": "Modified \\\\FILESRV-02\\Shared\\budget_draft.xlsx"
+  },
+  {
+    "id": "E-0035",
+    "timestamp": "2026-09-05T08:07:45Z",
+    "source": "svc_backup",
+    "target": "WKSTN-001",
+    "type": "authentication",
+    "detail": "Kerberos logon succeeded for svc_backup"
+  },
+  {
+    "id": "E-0036",
+    "timestamp": "2026-09-05T08:08:39Z",
+    "source": "twhite",
+    "target": "WKSTN-010",
+    "type": "authentication",
+    "detail": "Interactive logon for twhite succeeded"
+  },
+  {
+    "id": "E-0037",
+    "timestamp": "2026-09-05T08:09:00Z",
+    "source": "nsingh",
+    "target": "WKSTN-004",
+    "type": "authentication",
+    "detail": "Screen unlock for nsingh"
+  },
+  {
+    "id": "E-0038",
+    "timestamp": "2026-09-05T08:09:31Z",
+    "source": "WKSTN-058",
+    "target": "WKSTN-013",
+    "type": "network_connection",
+    "detail": "Print job submitted to PRINT-01 on 9100"
+  },
+  {
+    "id": "E-0039",
+    "timestamp": "2026-09-05T08:10:06Z",
+    "source": "lchen",
+    "target": "FILESRV-02",
+    "type": "authentication",
+    "detail": "Service ticket (TGS) issued for lchen"
+  },
+  {
+    "id": "E-0040",
+    "timestamp": "2026-09-05T08:10:57Z",
+    "source": "kdurand",
+    "target": "WKSTN-042",
+    "type": "authentication",
+    "detail": "Kerberos logon succeeded for kdurand"
+  },
+  {
+    "id": "E-0041",
+    "timestamp": "2026-09-05T08:10:58Z",
+    "source": "WKSTN-039",
+    "target": "8.8.8.8 (dns)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 8.8.8.8 (dns)"
+  },
+  {
+    "id": "E-0042",
+    "timestamp": "2026-09-05T08:11:30Z",
+    "source": "svc_backup",
+    "target": "PRINT-01",
+    "type": "authentication",
+    "detail": "svc_backup scheduled-task logon succeeded"
+  },
+  {
+    "id": "E-0043",
+    "timestamp": "2026-09-05T08:11:31Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-028",
+    "type": "file_access",
+    "detail": "Modified \\\\WKSTN-028\\Shared\\budget_draft.xlsx"
+  },
+  {
+    "id": "E-0044",
+    "timestamp": "2026-09-05T08:11:56Z",
+    "source": "nsingh",
+    "target": "WKSTN-023",
+    "type": "authentication",
+    "detail": "Failed logon (bad password) for nsingh"
+  },
+  {
+    "id": "E-0045",
+    "timestamp": "2026-09-05T08:13:13Z",
+    "source": "WKSTN-036",
+    "target": "140.82.112.3 (github)",
+    "type": "network_connection",
+    "detail": "TLS session established to 140.82.112.3 (github)"
+  },
+  {
+    "id": "E-0046",
+    "timestamp": "2026-09-05T08:15:00Z",
+    "source": "192.0.2.20 (corp-vpn-gateway)",
+    "target": "WKSTN-017",
+    "type": "authentication",
+    "detail": "Interactive logon for kdurand via corporate VPN gateway, MFA satisfied"
+  },
+  {
+    "id": "E-0047",
+    "timestamp": "2026-09-05T08:15:44Z",
+    "source": "eschmidt",
+    "target": "WKSTN-014",
+    "type": "process_start",
+    "detail": "gpupdate.exe /force"
+  },
+  {
+    "id": "E-0048",
+    "timestamp": "2026-09-05T08:15:57Z",
+    "source": "lchen",
+    "target": "WKSTN-010",
+    "type": "authentication",
+    "detail": "Screen unlock for lchen"
+  },
+  {
+    "id": "E-0049",
+    "timestamp": "2026-09-05T08:16:53Z",
+    "source": "WKSTN-003",
+    "target": "20.190.128.10 (login.microsoftonline.com)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 20.190.128.10 (login.microsoftonline.com)"
+  },
+  {
+    "id": "E-0050",
+    "timestamp": "2026-09-05T08:22:15Z",
+    "source": "yamamoto",
+    "target": "WKSTN-047",
+    "type": "process_start",
+    "detail": "python.exe nightly_report.py"
+  },
+  {
+    "id": "E-0051",
+    "timestamp": "2026-09-05T08:23:19Z",
+    "source": "yamamoto",
+    "target": "FILESRV-02",
+    "type": "process_start",
+    "detail": "python.exe nightly_report.py"
+  },
+  {
+    "id": "E-0052",
+    "timestamp": "2026-09-05T08:26:32Z",
+    "source": "lchen",
+    "target": "WKSTN-008",
+    "type": "file_access",
+    "detail": "Write C:\\Users\\lchen\\Documents\\notes.txt"
+  },
+  {
+    "id": "E-0053",
+    "timestamp": "2026-09-05T08:27:06Z",
+    "source": "WKSTN-040",
+    "target": "WKSTN-049",
+    "type": "network_connection",
+    "detail": "Outbound 443 to 10.0.2.201"
+  },
+  {
+    "id": "E-0054",
+    "timestamp": "2026-09-05T08:27:10Z",
+    "source": "WKSTN-028",
+    "target": "FILESRV-02",
+    "type": "network_connection",
+    "detail": "SMB read from \\\\FILESRV-02\\Shared over 445"
+  },
+  {
+    "id": "E-0055",
+    "timestamp": "2026-09-05T08:27:40Z",
+    "source": "WKSTN-010",
+    "target": "FILESRV-02",
+    "type": "network_connection",
+    "detail": "SMB read from \\\\FILESRV-02\\Shared over 445"
+  },
+  {
+    "id": "E-0056",
+    "timestamp": "2026-09-05T08:28:35Z",
+    "source": "lchen",
+    "target": "DC-01",
+    "type": "authentication",
+    "detail": "Screen unlock for lchen"
+  },
+  {
+    "id": "E-0057",
+    "timestamp": "2026-09-05T08:29:11Z",
+    "source": "apatel",
+    "target": "BUILD-01",
+    "type": "authentication",
+    "detail": "Service ticket (TGS) issued for apatel"
+  },
+  {
+    "id": "E-0058",
+    "timestamp": "2026-09-05T08:30:14Z",
+    "source": "WKSTN-032",
+    "target": "WKSTN-042",
+    "type": "network_connection",
+    "detail": "LDAP query to WKSTN-042 on 389"
+  },
+  {
+    "id": "E-0059",
+    "timestamp": "2026-09-05T08:31:44Z",
+    "source": "WKSTN-043",
+    "target": "142.250.72.14 (google)",
+    "type": "network_connection",
+    "detail": "TLS session established to 142.250.72.14 (google)"
+  },
+  {
+    "id": "E-0060",
+    "timestamp": "2026-09-05T08:32:35Z",
+    "source": "jsmith",
+    "target": "WKSTN-040",
+    "type": "process_start",
+    "detail": "Teams.exe started"
+  },
+  {
+    "id": "E-0061",
+    "timestamp": "2026-09-05T08:33:32Z",
+    "source": "svc_backup",
+    "target": "WKSTN-043",
+    "type": "process_start",
+    "detail": "chrome.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0062",
+    "timestamp": "2026-09-05T08:33:40Z",
+    "source": "lchen",
+    "target": "WKSTN-052",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-02\\Projects\\roadmap.pptx"
+  },
+  {
+    "id": "E-0063",
+    "timestamp": "2026-09-05T08:34:33Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-032",
+    "type": "process_start",
+    "detail": "Teams.exe started"
+  },
+  {
+    "id": "E-0064",
+    "timestamp": "2026-09-05T08:35:46Z",
+    "source": "kdurand",
+    "target": "VPN-01",
+    "type": "file_access",
+    "detail": "Opened C:\\Users\\kdurand\\Downloads\\invoice.pdf"
+  },
+  {
+    "id": "E-0065",
+    "timestamp": "2026-09-05T08:38:40Z",
+    "source": "svc_backup",
+    "target": "WKSTN-054",
+    "type": "process_start",
+    "detail": "chrome.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0066",
+    "timestamp": "2026-09-05T08:39:27Z",
+    "source": "bmurphy",
+    "target": "WEB-01",
+    "type": "authentication",
+    "detail": "Failed logon (bad password) for bmurphy"
+  },
+  {
+    "id": "E-0067",
+    "timestamp": "2026-09-05T08:40:32Z",
+    "source": "lchen",
+    "target": "WKSTN-037",
+    "type": "file_access",
+    "detail": "Read \\\\WKSTN-037\\Shared\\weekly_report.docx"
+  },
+  {
+    "id": "E-0068",
+    "timestamp": "2026-09-05T08:43:45Z",
+    "source": "PRINT-01",
+    "target": "WKSTN-026",
+    "type": "network_connection",
+    "detail": "LDAP query to WKSTN-026 on 389"
+  },
+  {
+    "id": "E-0069",
+    "timestamp": "2026-09-05T08:45:01Z",
+    "source": "administrator",
+    "target": "WKSTN-055",
+    "type": "process_start",
+    "detail": "Teams.exe started"
+  },
+  {
+    "id": "E-0070",
+    "timestamp": "2026-09-05T08:47:41Z",
+    "source": "kdurand",
+    "target": "WKSTN-020",
+    "type": "authentication",
+    "detail": "Service ticket (TGS) issued for kdurand"
+  },
+  {
+    "id": "E-0071",
+    "timestamp": "2026-09-05T08:47:53Z",
+    "source": "rgarcia",
+    "target": "PRINT-01",
+    "type": "file_access",
+    "detail": "Opened C:\\Users\\rgarcia\\Downloads\\invoice.pdf"
+  },
+  {
+    "id": "E-0072",
+    "timestamp": "2026-09-05T08:48:16Z",
+    "source": "WKSTN-009",
+    "target": "WKSTN-002",
+    "type": "network_connection",
+    "detail": "SMB read from \\\\WKSTN-002\\Shared over 445"
+  },
+  {
+    "id": "E-0073",
+    "timestamp": "2026-09-05T08:48:59Z",
+    "source": "WKSTN-035",
+    "target": "17.253.144.10 (apple-updates)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 17.253.144.10 (apple-updates)"
+  },
+  {
+    "id": "E-0074",
+    "timestamp": "2026-09-05T08:50:01Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-049",
+    "type": "authentication",
+    "detail": "Failed logon (bad password) for svc_monitor"
+  },
+  {
+    "id": "E-0075",
+    "timestamp": "2026-09-05T08:50:12Z",
+    "source": "hokonkwo",
+    "target": "WKSTN-046",
+    "type": "process_start",
+    "detail": "chrome.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0076",
+    "timestamp": "2026-09-05T08:51:13Z",
+    "source": "lchen",
+    "target": "WKSTN-035",
+    "type": "authentication",
+    "detail": "Failed logon (bad password) for lchen"
+  },
+  {
+    "id": "E-0077",
+    "timestamp": "2026-09-05T08:52:59Z",
+    "source": "WKSTN-052",
+    "target": "WKSTN-014",
+    "type": "network_connection",
+    "detail": "Print job submitted to PRINT-01 on 9100"
+  },
+  {
+    "id": "E-0078",
+    "timestamp": "2026-09-05T08:54:46Z",
+    "source": "svc_sql",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-02\\Projects\\roadmap.pptx"
+  },
+  {
+    "id": "E-0079",
+    "timestamp": "2026-09-05T08:54:48Z",
+    "source": "svc_sql",
+    "target": "WKSTN-053",
+    "type": "process_start",
+    "detail": "chrome.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0080",
+    "timestamp": "2026-09-05T08:58:53Z",
+    "source": "nsingh",
+    "target": "WKSTN-047",
+    "type": "process_start",
+    "detail": "chrome.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0081",
+    "timestamp": "2026-09-05T09:01:20Z",
+    "source": "rgarcia",
+    "target": "WKSTN-004",
+    "type": "process_start",
+    "detail": "Code.exe started"
+  },
+  {
+    "id": "E-0082",
+    "timestamp": "2026-09-05T09:03:52Z",
+    "source": "WKSTN-004",
+    "target": "WKSTN-051",
+    "type": "network_connection",
+    "detail": "SMB read from \\\\WKSTN-051\\Shared over 445"
+  },
+  {
+    "id": "E-0083",
+    "timestamp": "2026-09-05T09:04:07Z",
+    "source": "WKSTN-007",
+    "target": "104.18.32.47 (cloudflare)",
+    "type": "network_connection",
+    "detail": "TLS session established to 104.18.32.47 (cloudflare)"
+  },
+  {
+    "id": "E-0084",
+    "timestamp": "2026-09-05T09:05:31Z",
+    "source": "jsmith",
+    "target": "WKSTN-053",
+    "type": "process_start",
+    "detail": "gpupdate.exe /force"
+  },
+  {
+    "id": "E-0085",
+    "timestamp": "2026-09-05T09:05:55Z",
+    "source": "VPN-01",
+    "target": "WKSTN-025",
+    "type": "network_connection",
+    "detail": "Outbound 443 to 10.0.20.130"
+  },
+  {
+    "id": "E-0086",
+    "timestamp": "2026-09-05T09:07:08Z",
+    "source": "lchen",
+    "target": "WKSTN-052",
+    "type": "authentication",
+    "detail": "Screen unlock for lchen"
+  },
+  {
+    "id": "E-0087",
+    "timestamp": "2026-09-05T09:07:37Z",
+    "source": "WKSTN-022",
+    "target": "151.101.1.140 (fastly-cdn)",
+    "type": "network_connection",
+    "detail": "Software update check to 151.101.1.140 (fastly-cdn)"
+  },
+  {
+    "id": "E-0088",
+    "timestamp": "2026-09-05T09:07:55Z",
+    "source": "twhite",
+    "target": "WKSTN-016",
+    "type": "process_start",
+    "detail": "OUTLOOK.EXE started by explorer.exe"
+  },
+  {
+    "id": "E-0089",
+    "timestamp": "2026-09-05T09:08:23Z",
+    "source": "twhite",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-01\\Shared\\weekly_report.docx"
+  },
+  {
+    "id": "E-0090",
+    "timestamp": "2026-09-05T09:09:29Z",
+    "source": "apatel",
+    "target": "WKSTN-036",
+    "type": "process_start",
+    "detail": "Code.exe started"
+  },
+  {
+    "id": "E-0091",
+    "timestamp": "2026-09-05T09:10:00Z",
+    "source": "svc_sccm",
+    "target": "WKSTN-023",
+    "type": "process_start",
+    "detail": "powershell.exe -File C:\\ProgramData\\SCCM\\inventory.ps1 (Microsoft-signed)"
+  },
+  {
+    "id": "E-0092",
+    "timestamp": "2026-09-05T09:10:40Z",
+    "source": "apatel",
+    "target": "WKSTN-026",
+    "type": "process_start",
+    "detail": "Code.exe started"
+  },
+  {
+    "id": "E-0093",
+    "timestamp": "2026-09-05T09:11:16Z",
+    "source": "administrator",
+    "target": "WKSTN-025",
+    "type": "process_start",
+    "detail": "MsMpEng.exe scheduled scan started"
+  },
+  {
+    "id": "E-0094",
+    "timestamp": "2026-09-05T09:11:46Z",
+    "source": "twhite",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-01\\Shared\\onboarding.pdf"
+  },
+  {
+    "id": "E-0095",
+    "timestamp": "2026-09-05T09:12:31Z",
+    "source": "hokonkwo",
+    "target": "WKSTN-059",
+    "type": "authentication",
+    "detail": "Screen unlock for hokonkwo"
+  },
+  {
+    "id": "E-0096",
+    "timestamp": "2026-09-05T09:15:19Z",
+    "source": "rgarcia",
+    "target": "WKSTN-014",
+    "type": "file_access",
+    "detail": "Read \\\\WKSTN-014\\Shared\\weekly_report.docx"
+  },
+  {
+    "id": "E-0097",
+    "timestamp": "2026-09-05T09:16:02Z",
+    "source": "nsingh",
+    "target": "WKSTN-021",
+    "type": "process_start",
+    "detail": "slack.exe started"
+  },
+  {
+    "id": "E-0098",
+    "timestamp": "2026-09-05T09:16:30Z",
+    "source": "WKSTN-028",
+    "target": "140.82.112.3 (github)",
+    "type": "network_connection",
+    "detail": "TLS session established to 140.82.112.3 (github)"
+  },
+  {
+    "id": "E-0099",
+    "timestamp": "2026-09-05T09:17:05Z",
+    "source": "WKSTN-041",
+    "target": "8.8.8.8 (dns)",
+    "type": "network_connection",
+    "detail": "TLS session established to 8.8.8.8 (dns)"
+  },
+  {
+    "id": "E-0100",
+    "timestamp": "2026-09-05T09:17:33Z",
+    "source": "WKSTN-040",
+    "target": "WKSTN-013",
+    "type": "network_connection",
+    "detail": "LDAP query to WKSTN-013 on 389"
+  },
+  {
+    "id": "E-0101",
+    "timestamp": "2026-09-05T09:18:33Z",
+    "source": "WKSTN-004",
+    "target": "WKSTN-028",
+    "type": "network_connection",
+    "detail": "RDP session to WKSTN-028 on 3389"
+  },
+  {
+    "id": "E-0102",
+    "timestamp": "2026-09-05T09:19:01Z",
+    "source": "bmurphy",
+    "target": "WKSTN-023",
+    "type": "process_start",
+    "detail": "chrome.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0103",
+    "timestamp": "2026-09-05T09:20:02Z",
+    "source": "jsmith",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-01\\Shared\\onboarding.pdf"
+  },
+  {
+    "id": "E-0104",
+    "timestamp": "2026-09-05T09:20:03Z",
+    "source": "WKSTN-048",
+    "target": "WKSTN-016",
+    "type": "network_connection",
+    "detail": "RDP session to WKSTN-016 on 3389"
+  },
+  {
+    "id": "E-0105",
+    "timestamp": "2026-09-05T09:21:02Z",
+    "source": "WKSTN-027",
+    "target": "8.8.8.8 (dns)",
+    "type": "network_connection",
+    "detail": "Software update check to 8.8.8.8 (dns)"
+  },
+  {
+    "id": "E-0106",
+    "timestamp": "2026-09-05T09:21:59Z",
+    "source": "WKSTN-012",
+    "target": "140.82.112.3 (github)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 140.82.112.3 (github)"
+  },
+  {
+    "id": "E-0107",
+    "timestamp": "2026-09-05T09:22:33Z",
+    "source": "bmurphy",
+    "target": "WKSTN-010",
+    "type": "process_start",
+    "detail": "MsMpEng.exe scheduled scan started"
+  },
+  {
+    "id": "E-0108",
+    "timestamp": "2026-09-05T09:22:38Z",
+    "source": "mjones",
+    "target": "WKSTN-017",
+    "type": "authentication",
+    "detail": "Kerberos logon succeeded for mjones"
+  },
+  {
+    "id": "E-0109",
+    "timestamp": "2026-09-05T09:22:45Z",
+    "source": "WKSTN-003",
+    "target": "8.8.8.8 (dns)",
+    "type": "network_connection",
+    "detail": "TLS session established to 8.8.8.8 (dns)"
+  },
+  {
+    "id": "E-0110",
+    "timestamp": "2026-09-05T09:22:53Z",
+    "source": "kdurand",
+    "target": "WKSTN-034",
+    "type": "process_start",
+    "detail": "OneDrive.exe sync process started"
+  },
+  {
+    "id": "E-0111",
+    "timestamp": "2026-09-05T09:24:36Z",
+    "source": "bmurphy",
+    "target": "WKSTN-043",
+    "type": "process_start",
+    "detail": "excel.exe started"
+  },
+  {
+    "id": "E-0112",
+    "timestamp": "2026-09-05T09:25:59Z",
+    "source": "nsingh",
+    "target": "WKSTN-003",
+    "type": "file_access",
+    "detail": "Modified \\\\WKSTN-003\\Shared\\budget_draft.xlsx"
+  },
+  {
+    "id": "E-0113",
+    "timestamp": "2026-09-05T09:26:51Z",
+    "source": "rgarcia",
+    "target": "DC-01",
+    "type": "process_start",
+    "detail": "slack.exe started"
+  },
+  {
+    "id": "E-0114",
+    "timestamp": "2026-09-05T09:28:12Z",
+    "source": "WKSTN-026",
+    "target": "WKSTN-020",
+    "type": "network_connection",
+    "detail": "Outbound 443 to 10.0.20.40"
+  },
+  {
+    "id": "E-0115",
+    "timestamp": "2026-09-05T09:28:47Z",
+    "source": "WKSTN-001",
+    "target": "13.107.42.14 (office365)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 13.107.42.14 (office365)"
+  },
+  {
+    "id": "E-0116",
+    "timestamp": "2026-09-05T09:28:49Z",
+    "source": "mjones",
+    "target": "WKSTN-022",
+    "type": "process_start",
+    "detail": "slack.exe started"
+  },
+  {
+    "id": "E-0117",
+    "timestamp": "2026-09-05T09:29:16Z",
+    "source": "twhite",
+    "target": "SQL-01",
+    "type": "process_start",
+    "detail": "MsMpEng.exe scheduled scan started"
+  },
+  {
+    "id": "E-0118",
+    "timestamp": "2026-09-05T09:31:01Z",
+    "source": "mjones",
+    "target": "FILESRV-01",
+    "type": "authentication",
+    "detail": "Kerberos logon succeeded for mjones"
+  },
+  {
+    "id": "E-0119",
+    "timestamp": "2026-09-05T09:31:22Z",
+    "source": "bmurphy",
+    "target": "WKSTN-023",
+    "type": "file_access",
+    "detail": "Write C:\\Users\\bmurphy\\Documents\\notes.txt"
+  },
+  {
+    "id": "E-0120",
+    "timestamp": "2026-09-05T09:33:11Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-024",
+    "type": "process_start",
+    "detail": "svchost.exe -k netsvcs spawned"
+  },
+  {
+    "id": "E-0121",
+    "timestamp": "2026-09-05T09:33:25Z",
+    "source": "lchen",
+    "target": "WKSTN-036",
+    "type": "file_access",
+    "detail": "Modified \\\\WKSTN-036\\Shared\\budget_draft.xlsx"
+  },
+  {
+    "id": "E-0122",
+    "timestamp": "2026-09-05T09:35:00Z",
+    "source": "WKSTN-031",
+    "target": "52.96.0.20 (outlook.office365.com)",
+    "type": "network_connection",
+    "detail": "Periodic HTTPS check-in to office365, ~2KB every 60s"
+  },
+  {
+    "id": "E-0123",
+    "timestamp": "2026-09-05T09:35:17Z",
+    "source": "WKSTN-037",
+    "target": "WKSTN-041",
+    "type": "network_connection",
+    "detail": "SMB read from \\\\WKSTN-041\\Shared over 445"
+  },
+  {
+    "id": "E-0124",
+    "timestamp": "2026-09-05T09:35:39Z",
+    "source": "jsmith",
+    "target": "WKSTN-042",
+    "type": "process_start",
+    "detail": "MsMpEng.exe scheduled scan started"
+  },
+  {
+    "id": "E-0125",
+    "timestamp": "2026-09-05T09:36:14Z",
+    "source": "WKSTN-039",
+    "target": "WKSTN-023",
+    "type": "network_connection",
+    "detail": "RDP session to WKSTN-023 on 3389"
+  },
+  {
+    "id": "E-0126",
+    "timestamp": "2026-09-05T09:36:21Z",
+    "source": "mjones",
+    "target": "WKSTN-046",
+    "type": "file_access",
+    "detail": "Modified \\\\WKSTN-046\\Shared\\budget_draft.xlsx"
+  },
+  {
+    "id": "E-0127",
+    "timestamp": "2026-09-05T09:36:41Z",
+    "source": "WKSTN-028",
+    "target": "WKSTN-053",
+    "type": "network_connection",
+    "detail": "Outbound 443 to 10.0.1.88"
+  },
+  {
+    "id": "E-0128",
+    "timestamp": "2026-09-05T09:36:52Z",
+    "source": "yamamoto",
+    "target": "WKSTN-050",
+    "type": "authentication",
+    "detail": "Service ticket (TGS) issued for yamamoto"
+  },
+  {
+    "id": "E-0129",
+    "timestamp": "2026-09-05T09:37:46Z",
+    "source": "kdurand",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-01\\Shared\\weekly_report.docx"
+  },
+  {
+    "id": "E-0130",
+    "timestamp": "2026-09-05T09:38:23Z",
+    "source": "WKSTN-016",
+    "target": "WKSTN-033",
+    "type": "network_connection",
+    "detail": "Print job submitted to PRINT-01 on 9100"
+  },
+  {
+    "id": "E-0131",
+    "timestamp": "2026-09-05T09:39:53Z",
+    "source": "WKSTN-056",
+    "target": "WKSTN-025",
+    "type": "network_connection",
+    "detail": "Outbound 443 to 10.0.3.88"
+  },
+  {
+    "id": "E-0132",
+    "timestamp": "2026-09-05T09:40:06Z",
+    "source": "WKSTN-029",
+    "target": "WKSTN-055",
+    "type": "network_connection",
+    "detail": "RDP session to WKSTN-055 on 3389"
+  },
+  {
+    "id": "E-0133",
+    "timestamp": "2026-09-05T09:41:23Z",
+    "source": "hokonkwo",
+    "target": "WKSTN-034",
+    "type": "authentication",
+    "detail": "Kerberos logon succeeded for hokonkwo"
+  },
+  {
+    "id": "E-0134",
+    "timestamp": "2026-09-05T09:41:57Z",
+    "source": "WKSTN-046",
+    "target": "104.18.32.47 (cloudflare)",
+    "type": "network_connection",
+    "detail": "Software update check to 104.18.32.47 (cloudflare)"
+  },
+  {
+    "id": "E-0135",
+    "timestamp": "2026-09-05T09:42:41Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-057",
+    "type": "process_start",
+    "detail": "Teams.exe started"
+  },
+  {
+    "id": "E-0136",
+    "timestamp": "2026-09-05T09:43:40Z",
+    "source": "administrator",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-02\\Projects\\roadmap.pptx"
+  },
+  {
+    "id": "E-0137",
+    "timestamp": "2026-09-05T09:44:36Z",
+    "source": "eschmidt",
+    "target": "WKSTN-052",
+    "type": "process_start",
+    "detail": "gpupdate.exe /force"
+  },
+  {
+    "id": "E-0138",
+    "timestamp": "2026-09-05T09:46:34Z",
+    "source": "DC-02",
+    "target": "WKSTN-040",
+    "type": "network_connection",
+    "detail": "RDP session to WKSTN-040 on 3389"
+  },
+  {
+    "id": "E-0139",
+    "timestamp": "2026-09-05T09:49:55Z",
+    "source": "bmurphy",
+    "target": "WKSTN-051",
+    "type": "process_start",
+    "detail": "slack.exe started"
+  },
+  {
+    "id": "E-0140",
+    "timestamp": "2026-09-05T09:52:18Z",
+    "source": "administrator",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Write C:\\Users\\administrator\\Documents\\notes.txt"
+  },
+  {
+    "id": "E-0141",
+    "timestamp": "2026-09-05T09:53:01Z",
+    "source": "mjones",
+    "target": "FILESRV-02",
+    "type": "file_access",
+    "detail": "Modified \\\\FILESRV-02\\Shared\\budget_draft.xlsx"
+  },
+  {
+    "id": "E-0142",
+    "timestamp": "2026-09-05T09:53:19Z",
+    "source": "svc_sql",
+    "target": "FILESRV-02",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-01\\Shared\\onboarding.pdf"
+  },
+  {
+    "id": "E-0143",
+    "timestamp": "2026-09-05T09:53:33Z",
+    "source": "WKSTN-042",
+    "target": "140.82.112.3 (github)",
+    "type": "network_connection",
+    "detail": "Software update check to 140.82.112.3 (github)"
+  },
+  {
+    "id": "E-0144",
+    "timestamp": "2026-09-05T09:54:28Z",
+    "source": "svc_sql",
+    "target": "WKSTN-040",
+    "type": "authentication",
+    "detail": "Failed logon (bad password) for svc_sql"
+  },
+  {
+    "id": "E-0145",
+    "timestamp": "2026-09-05T09:56:48Z",
+    "source": "apatel",
+    "target": "WKSTN-026",
+    "type": "process_start",
+    "detail": "OneDrive.exe sync process started"
+  },
+  {
+    "id": "E-0146",
+    "timestamp": "2026-09-05T10:01:03Z",
+    "source": "WEB-01",
+    "target": "WKSTN-020",
+    "type": "network_connection",
+    "detail": "Print job submitted to PRINT-01 on 9100"
+  },
+  {
+    "id": "E-0147",
+    "timestamp": "2026-09-05T10:03:13Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-035",
+    "type": "process_start",
+    "detail": "gpupdate.exe /force"
+  },
+  {
+    "id": "E-0148",
+    "timestamp": "2026-09-05T10:03:17Z",
+    "source": "yamamoto",
+    "target": "WKSTN-010",
+    "type": "authentication",
+    "detail": "svc_backup scheduled-task logon succeeded"
+  },
+  {
+    "id": "E-0149",
+    "timestamp": "2026-09-05T10:06:25Z",
+    "source": "WKSTN-050",
+    "target": "WKSTN-057",
+    "type": "network_connection",
+    "detail": "Print job submitted to PRINT-01 on 9100"
+  },
+  {
+    "id": "E-0150",
+    "timestamp": "2026-09-05T10:08:06Z",
+    "source": "kdurand",
+    "target": "WEB-01",
+    "type": "process_start",
+    "detail": "OneDrive.exe sync process started"
+  },
+  {
+    "id": "E-0151",
+    "timestamp": "2026-09-05T10:08:08Z",
+    "source": "svc_backup",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Modified \\\\FILESRV-01\\Shared\\budget_draft.xlsx"
+  },
+  {
+    "id": "E-0152",
+    "timestamp": "2026-09-05T10:08:46Z",
+    "source": "WKSTN-030",
+    "target": "140.82.112.3 (github)",
+    "type": "network_connection",
+    "detail": "Software update check to 140.82.112.3 (github)"
+  },
+  {
+    "id": "E-0153",
+    "timestamp": "2026-09-05T10:08:47Z",
+    "source": "WKSTN-044",
+    "target": "151.101.1.140 (fastly-cdn)",
+    "type": "network_connection",
+    "detail": "TLS session established to 151.101.1.140 (fastly-cdn)"
+  },
+  {
+    "id": "E-0154",
+    "timestamp": "2026-09-05T10:10:00Z",
+    "source": "svc_edr",
+    "target": "SQL-01",
+    "type": "process_start",
+    "detail": "MsMpEng.exe opened a handle to lsass.exe during scheduled AV scan"
+  },
+  {
+    "id": "E-0155",
+    "timestamp": "2026-09-05T10:10:29Z",
+    "source": "svc_sql",
+    "target": "WKSTN-017",
+    "type": "authentication",
+    "detail": "Failed logon (bad password) for svc_sql"
+  },
+  {
+    "id": "E-0156",
+    "timestamp": "2026-09-05T10:12:14Z",
+    "source": "WKSTN-049",
+    "target": "13.107.42.14 (office365)",
+    "type": "network_connection",
+    "detail": "TLS session established to 13.107.42.14 (office365)"
+  },
+  {
+    "id": "E-0157",
+    "timestamp": "2026-09-05T10:13:29Z",
+    "source": "svc_sql",
+    "target": "WKSTN-019",
+    "type": "process_start",
+    "detail": "gpupdate.exe /force"
+  },
+  {
+    "id": "E-0158",
+    "timestamp": "2026-09-05T10:14:35Z",
+    "source": "WKSTN-013",
+    "target": "WKSTN-026",
+    "type": "network_connection",
+    "detail": "LDAP query to WKSTN-026 on 389"
+  },
+  {
+    "id": "E-0159",
+    "timestamp": "2026-09-05T10:14:39Z",
+    "source": "rgarcia",
+    "target": "WKSTN-038",
+    "type": "process_start",
+    "detail": "chrome.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0160",
+    "timestamp": "2026-09-05T10:17:14Z",
+    "source": "lchen",
+    "target": "WKSTN-005",
+    "type": "authentication",
+    "detail": "Service ticket (TGS) issued for lchen"
+  },
+  {
+    "id": "E-0161",
+    "timestamp": "2026-09-05T10:21:04Z",
+    "source": "WKSTN-040",
+    "target": "142.250.72.14 (google)",
+    "type": "network_connection",
+    "detail": "TLS session established to 142.250.72.14 (google)"
+  },
+  {
+    "id": "E-0162",
+    "timestamp": "2026-09-05T10:22:11Z",
+    "source": "WKSTN-058",
+    "target": "13.107.42.14 (office365)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 13.107.42.14 (office365)"
+  },
+  {
+    "id": "E-0163",
+    "timestamp": "2026-09-05T10:22:39Z",
+    "source": "twhite",
+    "target": "WKSTN-056",
+    "type": "process_start",
+    "detail": "Code.exe started"
+  },
+  {
+    "id": "E-0164",
+    "timestamp": "2026-09-05T10:22:53Z",
+    "source": "apatel",
+    "target": "WKSTN-048",
+    "type": "process_start",
+    "detail": "Code.exe started"
+  },
+  {
+    "id": "E-0165",
+    "timestamp": "2026-09-05T10:24:33Z",
+    "source": "nsingh",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-01\\Shared\\onboarding.pdf"
+  },
+  {
+    "id": "E-0166",
+    "timestamp": "2026-09-05T10:24:53Z",
+    "source": "svc_sql",
+    "target": "FILESRV-02",
+    "type": "file_access",
+    "detail": "Modified \\\\FILESRV-02\\Shared\\budget_draft.xlsx"
+  },
+  {
+    "id": "E-0167",
+    "timestamp": "2026-09-05T10:25:11Z",
+    "source": "rgarcia",
+    "target": "WKSTN-035",
+    "type": "authentication",
+    "detail": "Failed logon (bad password) for rgarcia"
+  },
+  {
+    "id": "E-0168",
+    "timestamp": "2026-09-05T10:25:53Z",
+    "source": "WKSTN-053",
+    "target": "140.82.112.3 (github)",
+    "type": "network_connection",
+    "detail": "Software update check to 140.82.112.3 (github)"
+  },
+  {
+    "id": "E-0169",
+    "timestamp": "2026-09-05T10:27:04Z",
+    "source": "WKSTN-005",
+    "target": "104.18.32.47 (cloudflare)",
+    "type": "network_connection",
+    "detail": "Software update check to 104.18.32.47 (cloudflare)"
+  },
+  {
+    "id": "E-0170",
+    "timestamp": "2026-09-05T10:28:55Z",
+    "source": "WKSTN-055",
+    "target": "WKSTN-026",
+    "type": "network_connection",
+    "detail": "Outbound 443 to 10.0.2.40"
+  },
+  {
+    "id": "E-0171",
+    "timestamp": "2026-09-05T10:31:08Z",
+    "source": "WKSTN-060",
+    "target": "151.101.1.140 (fastly-cdn)",
+    "type": "network_connection",
+    "detail": "Software update check to 151.101.1.140 (fastly-cdn)"
+  },
+  {
+    "id": "E-0172",
+    "timestamp": "2026-09-05T10:32:04Z",
+    "source": "WKSTN-060",
+    "target": "17.253.144.10 (apple-updates)",
+    "type": "network_connection",
+    "detail": "TLS session established to 17.253.144.10 (apple-updates)"
+  },
+  {
+    "id": "E-0173",
+    "timestamp": "2026-09-05T10:32:31Z",
+    "source": "yamamoto",
+    "target": "WKSTN-006",
+    "type": "process_start",
+    "detail": "python.exe nightly_report.py"
+  },
+  {
+    "id": "E-0174",
+    "timestamp": "2026-09-05T10:33:05Z",
+    "source": "mjones",
+    "target": "WKSTN-028",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-01\\Shared\\onboarding.pdf"
+  },
+  {
+    "id": "E-0175",
+    "timestamp": "2026-09-05T10:33:58Z",
+    "source": "lchen",
+    "target": "WKSTN-050",
+    "type": "file_access",
+    "detail": "Write C:\\Users\\lchen\\Documents\\notes.txt"
+  },
+  {
+    "id": "E-0176",
+    "timestamp": "2026-09-05T10:34:38Z",
+    "source": "svc_backup",
+    "target": "WKSTN-031",
+    "type": "authentication",
+    "detail": "svc_backup scheduled-task logon succeeded"
+  },
+  {
+    "id": "E-0177",
+    "timestamp": "2026-09-05T10:34:56Z",
+    "source": "nsingh",
+    "target": "WKSTN-018",
+    "type": "authentication",
+    "detail": "Service ticket (TGS) issued for nsingh"
+  },
+  {
+    "id": "E-0178",
+    "timestamp": "2026-09-05T10:35:00Z",
+    "source": "svc_backup",
+    "target": "FILESRV-02",
+    "type": "authentication",
+    "detail": "Network logon for svc_backup succeeded during nightly backup window"
+  },
+  {
+    "id": "E-0179",
+    "timestamp": "2026-09-05T10:35:11Z",
+    "source": "apatel",
+    "target": "WKSTN-025",
+    "type": "process_start",
+    "detail": "Code.exe started"
+  },
+  {
+    "id": "E-0180",
+    "timestamp": "2026-09-05T10:35:11Z",
+    "source": "svc_backup",
+    "target": "PRINT-01",
+    "type": "process_start",
+    "detail": "excel.exe started"
+  },
+  {
+    "id": "E-0181",
+    "timestamp": "2026-09-05T10:35:37Z",
+    "source": "WKSTN-002",
+    "target": "140.82.112.3 (github)",
+    "type": "network_connection",
+    "detail": "Software update check to 140.82.112.3 (github)"
+  },
+  {
+    "id": "E-0182",
+    "timestamp": "2026-09-05T10:36:39Z",
+    "source": "jsmith",
+    "target": "WKSTN-041",
+    "type": "authentication",
+    "detail": "Screen unlock for jsmith"
+  },
+  {
+    "id": "E-0183",
+    "timestamp": "2026-09-05T10:39:21Z",
+    "source": "mjones",
+    "target": "WKSTN-058",
+    "type": "process_start",
+    "detail": "OneDrive.exe sync process started"
+  },
+  {
+    "id": "E-0184",
+    "timestamp": "2026-09-05T10:41:05Z",
+    "source": "administrator",
+    "target": "WKSTN-056",
+    "type": "process_start",
+    "detail": "OUTLOOK.EXE started by explorer.exe"
+  },
+  {
+    "id": "E-0185",
+    "timestamp": "2026-09-05T10:41:49Z",
+    "source": "WKSTN-026",
+    "target": "17.253.144.10 (apple-updates)",
+    "type": "network_connection",
+    "detail": "Software update check to 17.253.144.10 (apple-updates)"
+  },
+  {
+    "id": "E-0186",
+    "timestamp": "2026-09-05T10:47:21Z",
+    "source": "eschmidt",
+    "target": "WKSTN-053",
+    "type": "process_start",
+    "detail": "slack.exe started"
+  },
+  {
+    "id": "E-0187",
+    "timestamp": "2026-09-05T10:47:43Z",
+    "source": "svc_sql",
+    "target": "WKSTN-022",
+    "type": "process_start",
+    "detail": "MsMpEng.exe scheduled scan started"
+  },
+  {
+    "id": "E-0188",
+    "timestamp": "2026-09-05T10:47:49Z",
+    "source": "hokonkwo",
+    "target": "WKSTN-031",
+    "type": "process_start",
+    "detail": "OUTLOOK.EXE started by explorer.exe"
+  },
+  {
+    "id": "E-0189",
+    "timestamp": "2026-09-05T10:47:52Z",
+    "source": "rgarcia",
+    "target": "WKSTN-033",
+    "type": "process_start",
+    "detail": "excel.exe started"
+  },
+  {
+    "id": "E-0190",
+    "timestamp": "2026-09-05T10:49:02Z",
+    "source": "nsingh",
+    "target": "FILESRV-02",
+    "type": "file_access",
+    "detail": "Modified \\\\FILESRV-02\\Shared\\budget_draft.xlsx"
+  },
+  {
+    "id": "E-0191",
+    "timestamp": "2026-09-05T10:49:56Z",
+    "source": "mjones",
+    "target": "FILESRV-02",
+    "type": "file_access",
+    "detail": "Modified \\\\FILESRV-02\\Shared\\budget_draft.xlsx"
+  },
+  {
+    "id": "E-0192",
+    "timestamp": "2026-09-05T10:50:00Z",
+    "source": "BACKUP-01",
+    "target": "20.150.44.10 (blob.core.windows.net Azure)",
+    "type": "network_connection",
+    "detail": "Scheduled cloud backup upload, 512GB to Azure Blob Storage"
+  },
+  {
+    "id": "E-0193",
+    "timestamp": "2026-09-05T10:51:17Z",
+    "source": "FILESRV-01",
+    "target": "DC-01",
+    "type": "network_connection",
+    "detail": "SMB read from \\\\DC-01\\Shared over 445"
+  },
+  {
+    "id": "E-0194",
+    "timestamp": "2026-09-05T10:52:35Z",
+    "source": "WKSTN-044",
+    "target": "104.18.32.47 (cloudflare)",
+    "type": "network_connection",
+    "detail": "Software update check to 104.18.32.47 (cloudflare)"
+  },
+  {
+    "id": "E-0195",
+    "timestamp": "2026-09-05T10:54:32Z",
+    "source": "svc_sql",
+    "target": "PRINT-01",
+    "type": "process_start",
+    "detail": "python.exe nightly_report.py"
+  },
+  {
+    "id": "E-0196",
+    "timestamp": "2026-09-05T10:54:58Z",
+    "source": "WKSTN-013",
+    "target": "151.101.1.140 (fastly-cdn)",
+    "type": "network_connection",
+    "detail": "TLS session established to 151.101.1.140 (fastly-cdn)"
+  },
+  {
+    "id": "E-0197",
+    "timestamp": "2026-09-05T10:55:29Z",
+    "source": "lchen",
+    "target": "BUILD-01",
+    "type": "process_start",
+    "detail": "MsMpEng.exe scheduled scan started"
+  },
+  {
+    "id": "E-0198",
+    "timestamp": "2026-09-05T10:55:55Z",
+    "source": "WKSTN-017",
+    "target": "WKSTN-029",
+    "type": "network_connection",
+    "detail": "Outbound 443 to 10.0.20.130"
+  },
+  {
+    "id": "E-0199",
+    "timestamp": "2026-09-05T10:58:41Z",
+    "source": "rgarcia",
+    "target": "WKSTN-047",
+    "type": "process_start",
+    "detail": "python.exe nightly_report.py"
+  },
+  {
+    "id": "E-0200",
+    "timestamp": "2026-09-05T10:58:49Z",
+    "source": "WKSTN-049",
+    "target": "17.253.144.10 (apple-updates)",
+    "type": "network_connection",
+    "detail": "Software update check to 17.253.144.10 (apple-updates)"
+  },
+  {
+    "id": "E-0201",
+    "timestamp": "2026-09-05T10:59:22Z",
+    "source": "eschmidt",
+    "target": "SQL-01",
+    "type": "process_start",
+    "detail": "slack.exe started"
+  },
+  {
+    "id": "E-0202",
+    "timestamp": "2026-09-05T11:00:09Z",
+    "source": "WKSTN-050",
+    "target": "13.107.42.14 (office365)",
+    "type": "network_connection",
+    "detail": "Software update check to 13.107.42.14 (office365)"
+  },
+  {
+    "id": "E-0203",
+    "timestamp": "2026-09-05T11:02:32Z",
+    "source": "yamamoto",
+    "target": "WKSTN-058",
+    "type": "authentication",
+    "detail": "Kerberos logon succeeded for yamamoto"
+  },
+  {
+    "id": "E-0204",
+    "timestamp": "2026-09-05T11:03:28Z",
+    "source": "apatel",
+    "target": "WKSTN-046",
+    "type": "process_start",
+    "detail": "msedge.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0205",
+    "timestamp": "2026-09-05T11:06:21Z",
+    "source": "WKSTN-041",
+    "target": "WKSTN-016",
+    "type": "network_connection",
+    "detail": "Print job submitted to PRINT-01 on 9100"
+  },
+  {
+    "id": "E-0206",
+    "timestamp": "2026-09-05T11:09:03Z",
+    "source": "apatel",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Modified \\\\FILESRV-01\\Shared\\budget_draft.xlsx"
+  },
+  {
+    "id": "E-0207",
+    "timestamp": "2026-09-05T11:09:56Z",
+    "source": "hokonkwo",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-01\\Shared\\onboarding.pdf"
+  },
+  {
+    "id": "E-0208",
+    "timestamp": "2026-09-05T11:10:00Z",
+    "source": "apatel",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-01\\Finance\\Q3_forecast.xlsx"
+  },
+  {
+    "id": "E-0209",
+    "timestamp": "2026-09-05T11:14:19Z",
+    "source": "svc_sql",
+    "target": "WKSTN-026",
+    "type": "authentication",
+    "detail": "Service ticket (TGS) issued for svc_sql"
+  },
+  {
+    "id": "E-0210",
+    "timestamp": "2026-09-05T11:15:24Z",
+    "source": "WKSTN-040",
+    "target": "17.253.144.10 (apple-updates)",
+    "type": "network_connection",
+    "detail": "Software update check to 17.253.144.10 (apple-updates)"
+  },
+  {
+    "id": "E-0211",
+    "timestamp": "2026-09-05T11:16:13Z",
+    "source": "svc_monitor",
+    "target": "MAIL-01",
+    "type": "process_start",
+    "detail": "excel.exe started"
+  },
+  {
+    "id": "E-0212",
+    "timestamp": "2026-09-05T11:16:51Z",
+    "source": "nsingh",
+    "target": "WKSTN-057",
+    "type": "process_start",
+    "detail": "python.exe nightly_report.py"
+  },
+  {
+    "id": "E-0213",
+    "timestamp": "2026-09-05T11:18:12Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-001",
+    "type": "process_start",
+    "detail": "msedge.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0214",
+    "timestamp": "2026-09-05T11:18:28Z",
+    "source": "eschmidt",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Write C:\\Users\\eschmidt\\Documents\\notes.txt"
+  },
+  {
+    "id": "E-0215",
+    "timestamp": "2026-09-05T11:18:31Z",
+    "source": "svc_backup",
+    "target": "WKSTN-011",
+    "type": "authentication",
+    "detail": "Screen unlock for svc_backup"
+  },
+  {
+    "id": "E-0216",
+    "timestamp": "2026-09-05T11:25:46Z",
+    "source": "WKSTN-033",
+    "target": "140.82.112.3 (github)",
+    "type": "network_connection",
+    "detail": "TLS session established to 140.82.112.3 (github)"
+  },
+  {
+    "id": "E-0217",
+    "timestamp": "2026-09-05T11:26:02Z",
+    "source": "bmurphy",
+    "target": "DC-01",
+    "type": "authentication",
+    "detail": "Screen unlock for bmurphy"
+  },
+  {
+    "id": "E-0218",
+    "timestamp": "2026-09-05T11:27:48Z",
+    "source": "apatel",
+    "target": "WKSTN-006",
+    "type": "process_start",
+    "detail": "Code.exe started"
+  },
+  {
+    "id": "E-0219",
+    "timestamp": "2026-09-05T11:29:02Z",
+    "source": "eschmidt",
+    "target": "WKSTN-005",
+    "type": "process_start",
+    "detail": "Code.exe started"
+  },
+  {
+    "id": "E-0220",
+    "timestamp": "2026-09-05T11:29:04Z",
+    "source": "nsingh",
+    "target": "DC-01",
+    "type": "process_start",
+    "detail": "msedge.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0221",
+    "timestamp": "2026-09-05T11:30:00Z",
+    "source": "hokonkwo",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-01\\HR\\employee_roster.csv"
+  },
+  {
+    "id": "E-0222",
+    "timestamp": "2026-09-05T11:35:14Z",
+    "source": "mjones",
+    "target": "WKSTN-014",
+    "type": "authentication",
+    "detail": "svc_backup scheduled-task logon succeeded"
+  },
+  {
+    "id": "E-0223",
+    "timestamp": "2026-09-05T11:35:22Z",
+    "source": "nsingh",
+    "target": "WKSTN-048",
+    "type": "authentication",
+    "detail": "Interactive logon for nsingh succeeded"
+  },
+  {
+    "id": "E-0224",
+    "timestamp": "2026-09-05T11:35:55Z",
+    "source": "WKSTN-018",
+    "target": "151.101.1.140 (fastly-cdn)",
+    "type": "network_connection",
+    "detail": "Software update check to 151.101.1.140 (fastly-cdn)"
+  },
+  {
+    "id": "E-0225",
+    "timestamp": "2026-09-05T11:36:18Z",
+    "source": "yamamoto",
+    "target": "FILESRV-02",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-02\\Shared\\weekly_report.docx"
+  },
+  {
+    "id": "E-0226",
+    "timestamp": "2026-09-05T11:37:19Z",
+    "source": "WKSTN-053",
+    "target": "WKSTN-011",
+    "type": "network_connection",
+    "detail": "LDAP query to WKSTN-011 on 389"
+  },
+  {
+    "id": "E-0227",
+    "timestamp": "2026-09-05T11:38:33Z",
+    "source": "WKSTN-047",
+    "target": "8.8.8.8 (dns)",
+    "type": "network_connection",
+    "detail": "Software update check to 8.8.8.8 (dns)"
+  },
+  {
+    "id": "E-0228",
+    "timestamp": "2026-09-05T11:39:59Z",
+    "source": "hokonkwo",
+    "target": "VPN-01",
+    "type": "process_start",
+    "detail": "python.exe nightly_report.py"
+  },
+  {
+    "id": "E-0229",
+    "timestamp": "2026-09-05T11:41:03Z",
+    "source": "BUILD-01",
+    "target": "8.8.8.8 (dns)",
+    "type": "network_connection",
+    "detail": "Software update check to 8.8.8.8 (dns)"
+  },
+  {
+    "id": "E-0230",
+    "timestamp": "2026-09-05T11:41:47Z",
+    "source": "svc_backup",
+    "target": "WKSTN-055",
+    "type": "authentication",
+    "detail": "Screen unlock for svc_backup"
+  },
+  {
+    "id": "E-0231",
+    "timestamp": "2026-09-05T11:43:57Z",
+    "source": "WKSTN-044",
+    "target": "WKSTN-049",
+    "type": "network_connection",
+    "detail": "Print job submitted to PRINT-01 on 9100"
+  },
+  {
+    "id": "E-0232",
+    "timestamp": "2026-09-05T11:44:39Z",
+    "source": "WKSTN-025",
+    "target": "8.8.8.8 (dns)",
+    "type": "network_connection",
+    "detail": "TLS session established to 8.8.8.8 (dns)"
+  },
+  {
+    "id": "E-0233",
+    "timestamp": "2026-09-05T11:45:39Z",
+    "source": "lchen",
+    "target": "WKSTN-003",
+    "type": "authentication",
+    "detail": "Failed logon (bad password) for lchen"
+  },
+  {
+    "id": "E-0234",
+    "timestamp": "2026-09-05T11:46:38Z",
+    "source": "nsingh",
+    "target": "BUILD-01",
+    "type": "process_start",
+    "detail": "OUTLOOK.EXE started by explorer.exe"
+  },
+  {
+    "id": "E-0235",
+    "timestamp": "2026-09-05T11:46:38Z",
+    "source": "WKSTN-033",
+    "target": "DC-02",
+    "type": "network_connection",
+    "detail": "Print job submitted to PRINT-01 on 9100"
+  },
+  {
+    "id": "E-0236",
+    "timestamp": "2026-09-05T11:49:56Z",
+    "source": "VPN-01",
+    "target": "17.253.144.10 (apple-updates)",
+    "type": "network_connection",
+    "detail": "TLS session established to 17.253.144.10 (apple-updates)"
+  },
+  {
+    "id": "E-0237",
+    "timestamp": "2026-09-05T11:50:25Z",
+    "source": "WKSTN-054",
+    "target": "151.101.1.140 (fastly-cdn)",
+    "type": "network_connection",
+    "detail": "Software update check to 151.101.1.140 (fastly-cdn)"
+  },
+  {
+    "id": "E-0238",
+    "timestamp": "2026-09-05T11:50:48Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-025",
+    "type": "authentication",
+    "detail": "svc_backup scheduled-task logon succeeded"
+  },
+  {
+    "id": "E-0239",
+    "timestamp": "2026-09-05T11:53:07Z",
+    "source": "lchen",
+    "target": "WEB-01",
+    "type": "process_start",
+    "detail": "Code.exe started"
+  },
+  {
+    "id": "E-0240",
+    "timestamp": "2026-09-05T11:55:00Z",
+    "source": "svc_monitor",
+    "target": "DC-01",
+    "type": "process_start",
+    "detail": "wevtutil.exe el (enumerate log names) by monitoring agent"
+  },
+  {
+    "id": "E-0241",
+    "timestamp": "2026-09-05T11:55:22Z",
+    "source": "WKSTN-036",
+    "target": "WKSTN-060",
+    "type": "network_connection",
+    "detail": "SMB read from \\\\WKSTN-060\\Shared over 445"
+  },
+  {
+    "id": "E-0242",
+    "timestamp": "2026-09-05T11:56:18Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-058",
+    "type": "file_access",
+    "detail": "Opened C:\\Users\\svc_monitor\\Downloads\\invoice.pdf"
+  },
+  {
+    "id": "E-0243",
+    "timestamp": "2026-09-05T11:56:41Z",
+    "source": "lchen",
+    "target": "WKSTN-050",
+    "type": "authentication",
+    "detail": "svc_backup scheduled-task logon succeeded"
+  },
+  {
+    "id": "E-0244",
+    "timestamp": "2026-09-05T11:56:44Z",
+    "source": "nsingh",
+    "target": "WKSTN-049",
+    "type": "authentication",
+    "detail": "svc_backup scheduled-task logon succeeded"
+  },
+  {
+    "id": "E-0245",
+    "timestamp": "2026-09-05T12:00:09Z",
+    "source": "WKSTN-009",
+    "target": "140.82.112.3 (github)",
+    "type": "network_connection",
+    "detail": "TLS session established to 140.82.112.3 (github)"
+  },
+  {
+    "id": "E-0246",
+    "timestamp": "2026-09-05T12:04:03Z",
+    "source": "FILESRV-01",
+    "target": "104.18.32.47 (cloudflare)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 104.18.32.47 (cloudflare)"
+  },
+  {
+    "id": "E-0247",
+    "timestamp": "2026-09-05T12:04:47Z",
+    "source": "WKSTN-008",
+    "target": "WKSTN-057",
+    "type": "network_connection",
+    "detail": "LDAP query to WKSTN-057 on 389"
+  },
+  {
+    "id": "E-0248",
+    "timestamp": "2026-09-05T12:05:17Z",
+    "source": "bmurphy",
+    "target": "FILESRV-01",
+    "type": "authentication",
+    "detail": "Service ticket (TGS) issued for bmurphy"
+  },
+  {
+    "id": "E-0249",
+    "timestamp": "2026-09-05T12:07:16Z",
+    "source": "eschmidt",
+    "target": "WKSTN-048",
+    "type": "authentication",
+    "detail": "Service ticket (TGS) issued for eschmidt"
+  },
+  {
+    "id": "E-0250",
+    "timestamp": "2026-09-05T12:08:06Z",
+    "source": "svc_sql",
+    "target": "WKSTN-006",
+    "type": "process_start",
+    "detail": "Code.exe started"
+  },
+  {
+    "id": "E-0251",
+    "timestamp": "2026-09-05T12:08:18Z",
+    "source": "WKSTN-018",
+    "target": "142.250.72.14 (google)",
+    "type": "network_connection",
+    "detail": "Software update check to 142.250.72.14 (google)"
+  },
+  {
+    "id": "E-0252",
+    "timestamp": "2026-09-05T12:09:45Z",
+    "source": "kdurand",
+    "target": "VPN-01",
+    "type": "process_start",
+    "detail": "Teams.exe started"
+  },
+  {
+    "id": "E-0253",
+    "timestamp": "2026-09-05T12:11:06Z",
+    "source": "twhite",
+    "target": "WKSTN-008",
+    "type": "process_start",
+    "detail": "Teams.exe started"
+  },
+  {
+    "id": "E-0254",
+    "timestamp": "2026-09-05T12:14:38Z",
+    "source": "eschmidt",
+    "target": "WKSTN-021",
+    "type": "process_start",
+    "detail": "MsMpEng.exe scheduled scan started"
+  },
+  {
+    "id": "E-0255",
+    "timestamp": "2026-09-05T12:15:33Z",
+    "source": "WKSTN-021",
+    "target": "WKSTN-039",
+    "type": "network_connection",
+    "detail": "LDAP query to WKSTN-039 on 389"
+  },
+  {
+    "id": "E-0256",
+    "timestamp": "2026-09-05T12:17:45Z",
+    "source": "WKSTN-037",
+    "target": "104.18.32.47 (cloudflare)",
+    "type": "network_connection",
+    "detail": "Software update check to 104.18.32.47 (cloudflare)"
+  },
+  {
+    "id": "E-0257",
+    "timestamp": "2026-09-05T12:19:23Z",
+    "source": "administrator",
+    "target": "WEB-01",
+    "type": "authentication",
+    "detail": "Failed logon (bad password) for administrator"
+  },
+  {
+    "id": "E-0258",
+    "timestamp": "2026-09-05T12:19:46Z",
+    "source": "administrator",
+    "target": "WKSTN-042",
+    "type": "authentication",
+    "detail": "Failed logon (bad password) for administrator"
+  },
+  {
+    "id": "E-0259",
+    "timestamp": "2026-09-05T12:20:00Z",
+    "source": "WKSTN-005",
+    "target": "DC-01",
+    "type": "authentication",
+    "detail": "Kerberos TGT for administrator during the approved Tuesday patch window (MFA)"
+  },
+  {
+    "id": "E-0260",
+    "timestamp": "2026-09-05T12:21:00Z",
+    "source": "eschmidt",
+    "target": "WKSTN-057",
+    "type": "process_start",
+    "detail": "svchost.exe -k netsvcs spawned"
+  },
+  {
+    "id": "E-0261",
+    "timestamp": "2026-09-05T12:22:06Z",
+    "source": "WKSTN-026",
+    "target": "WKSTN-009",
+    "type": "network_connection",
+    "detail": "SMB read from \\\\WKSTN-009\\Shared over 445"
+  },
+  {
+    "id": "E-0262",
+    "timestamp": "2026-09-05T12:22:19Z",
+    "source": "WKSTN-041",
+    "target": "142.250.72.14 (google)",
+    "type": "network_connection",
+    "detail": "TLS session established to 142.250.72.14 (google)"
+  },
+  {
+    "id": "E-0263",
+    "timestamp": "2026-09-05T12:22:42Z",
+    "source": "eschmidt",
+    "target": "WKSTN-023",
+    "type": "process_start",
+    "detail": "Code.exe started"
+  },
+  {
+    "id": "E-0264",
+    "timestamp": "2026-09-05T12:23:51Z",
+    "source": "lchen",
+    "target": "WKSTN-059",
+    "type": "process_start",
+    "detail": "excel.exe started"
+  },
+  {
+    "id": "E-0265",
+    "timestamp": "2026-09-05T12:25:07Z",
+    "source": "svc_sql",
+    "target": "WKSTN-022",
+    "type": "process_start",
+    "detail": "slack.exe started"
+  },
+  {
+    "id": "E-0266",
+    "timestamp": "2026-09-05T12:25:20Z",
+    "source": "FILESRV-02",
+    "target": "140.82.112.3 (github)",
+    "type": "network_connection",
+    "detail": "Software update check to 140.82.112.3 (github)"
+  },
+  {
+    "id": "E-0267",
+    "timestamp": "2026-09-05T12:25:39Z",
+    "source": "nsingh",
+    "target": "DC-02",
+    "type": "authentication",
+    "detail": "svc_backup scheduled-task logon succeeded"
+  },
+  {
+    "id": "E-0268",
+    "timestamp": "2026-09-05T12:27:33Z",
+    "source": "WKSTN-033",
+    "target": "PRINT-01",
+    "type": "network_connection",
+    "detail": "LDAP query to PRINT-01 on 389"
+  },
+  {
+    "id": "E-0269",
+    "timestamp": "2026-09-05T12:28:18Z",
+    "source": "nsingh",
+    "target": "WKSTN-048",
+    "type": "authentication",
+    "detail": "svc_backup scheduled-task logon succeeded"
+  },
+  {
+    "id": "E-0270",
+    "timestamp": "2026-09-05T12:29:03Z",
+    "source": "svc_backup",
+    "target": "PRINT-01",
+    "type": "authentication",
+    "detail": "svc_backup scheduled-task logon succeeded"
+  },
+  {
+    "id": "E-0271",
+    "timestamp": "2026-09-05T12:29:04Z",
+    "source": "WKSTN-050",
+    "target": "17.253.144.10 (apple-updates)",
+    "type": "network_connection",
+    "detail": "Software update check to 17.253.144.10 (apple-updates)"
+  },
+  {
+    "id": "E-0272",
+    "timestamp": "2026-09-05T12:29:25Z",
+    "source": "svc_sql",
+    "target": "WKSTN-006",
+    "type": "authentication",
+    "detail": "Service ticket (TGS) issued for svc_sql"
+  },
+  {
+    "id": "E-0273",
+    "timestamp": "2026-09-05T12:32:19Z",
+    "source": "WKSTN-038",
+    "target": "WKSTN-021",
+    "type": "network_connection",
+    "detail": "LDAP query to WKSTN-021 on 389"
+  },
+  {
+    "id": "E-0274",
+    "timestamp": "2026-09-05T12:36:21Z",
+    "source": "WKSTN-038",
+    "target": "WKSTN-017",
+    "type": "network_connection",
+    "detail": "LDAP query to WKSTN-017 on 389"
+  },
+  {
+    "id": "E-0275",
+    "timestamp": "2026-09-05T12:36:24Z",
+    "source": "WKSTN-036",
+    "target": "13.107.42.14 (office365)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 13.107.42.14 (office365)"
+  },
+  {
+    "id": "E-0276",
+    "timestamp": "2026-09-05T12:42:33Z",
+    "source": "WKSTN-056",
+    "target": "17.253.144.10 (apple-updates)",
+    "type": "network_connection",
+    "detail": "TLS session established to 17.253.144.10 (apple-updates)"
+  },
+  {
+    "id": "E-0277",
+    "timestamp": "2026-09-05T12:42:35Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-020",
+    "type": "authentication",
+    "detail": "Service ticket (TGS) issued for svc_monitor"
+  },
+  {
+    "id": "E-0278",
+    "timestamp": "2026-09-05T12:43:53Z",
+    "source": "WKSTN-058",
+    "target": "WKSTN-004",
+    "type": "network_connection",
+    "detail": "RDP session to WKSTN-004 on 3389"
+  },
+  {
+    "id": "E-0279",
+    "timestamp": "2026-09-05T12:46:38Z",
+    "source": "bmurphy",
+    "target": "WKSTN-057",
+    "type": "process_start",
+    "detail": "OUTLOOK.EXE started by explorer.exe"
+  },
+  {
+    "id": "E-0280",
+    "timestamp": "2026-09-05T12:46:43Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-037",
+    "type": "authentication",
+    "detail": "Service ticket (TGS) issued for svc_monitor"
+  },
+  {
+    "id": "E-0281",
+    "timestamp": "2026-09-05T12:47:33Z",
+    "source": "WKSTN-022",
+    "target": "WKSTN-009",
+    "type": "network_connection",
+    "detail": "RDP session to WKSTN-009 on 3389"
+  },
+  {
+    "id": "E-0282",
+    "timestamp": "2026-09-05T12:51:13Z",
+    "source": "rgarcia",
+    "target": "PRINT-01",
+    "type": "process_start",
+    "detail": "Code.exe started"
+  },
+  {
+    "id": "E-0283",
+    "timestamp": "2026-09-05T12:51:20Z",
+    "source": "rgarcia",
+    "target": "WKSTN-039",
+    "type": "authentication",
+    "detail": "Interactive logon for rgarcia succeeded"
+  },
+  {
+    "id": "E-0284",
+    "timestamp": "2026-09-05T12:52:53Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-005",
+    "type": "authentication",
+    "detail": "Kerberos logon succeeded for svc_monitor"
+  },
+  {
+    "id": "E-0285",
+    "timestamp": "2026-09-05T12:56:24Z",
+    "source": "nsingh",
+    "target": "WKSTN-030",
+    "type": "process_start",
+    "detail": "Code.exe started"
+  },
+  {
+    "id": "E-0286",
+    "timestamp": "2026-09-05T12:56:57Z",
+    "source": "rgarcia",
+    "target": "FILESRV-02",
+    "type": "file_access",
+    "detail": "Opened C:\\Users\\rgarcia\\Downloads\\invoice.pdf"
+  },
+  {
+    "id": "E-0287",
+    "timestamp": "2026-09-05T13:00:00Z",
+    "source": "WKSTN-044",
+    "target": "140.82.112.3 (github)",
+    "type": "network_connection",
+    "detail": "git push over HTTPS 443, 40MB to corporate GitHub org"
+  },
+  {
+    "id": "E-0288",
+    "timestamp": "2026-09-05T13:00:07Z",
+    "source": "lchen",
+    "target": "WKSTN-046",
+    "type": "process_start",
+    "detail": "gpupdate.exe /force"
+  },
+  {
+    "id": "E-0289",
+    "timestamp": "2026-09-05T13:01:57Z",
+    "source": "WKSTN-006",
+    "target": "13.107.42.14 (office365)",
+    "type": "network_connection",
+    "detail": "Software update check to 13.107.42.14 (office365)"
+  },
+  {
+    "id": "E-0290",
+    "timestamp": "2026-09-05T13:02:55Z",
+    "source": "WKSTN-045",
+    "target": "151.101.1.140 (fastly-cdn)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 151.101.1.140 (fastly-cdn)"
+  },
+  {
+    "id": "E-0291",
+    "timestamp": "2026-09-05T13:05:00Z",
+    "source": "WKSTN-049",
+    "target": "140.82.112.3 (github)",
+    "type": "network_connection",
+    "detail": "Software update check to 140.82.112.3 (github)"
+  },
+  {
+    "id": "E-0292",
+    "timestamp": "2026-09-05T13:05:35Z",
+    "source": "VPN-01",
+    "target": "13.107.42.14 (office365)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 13.107.42.14 (office365)"
+  },
+  {
+    "id": "E-0293",
+    "timestamp": "2026-09-05T13:05:54Z",
+    "source": "yamamoto",
+    "target": "WKSTN-014",
+    "type": "process_start",
+    "detail": "msedge.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0294",
+    "timestamp": "2026-09-05T13:07:30Z",
+    "source": "hokonkwo",
+    "target": "WKSTN-047",
+    "type": "process_start",
+    "detail": "python.exe nightly_report.py"
+  },
+  {
+    "id": "E-0295",
+    "timestamp": "2026-09-05T13:08:44Z",
+    "source": "lchen",
+    "target": "WKSTN-004",
+    "type": "process_start",
+    "detail": "msedge.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0296",
+    "timestamp": "2026-09-05T13:09:25Z",
+    "source": "jsmith",
+    "target": "DC-01",
+    "type": "authentication",
+    "detail": "Interactive logon for jsmith succeeded"
+  },
+  {
+    "id": "E-0297",
+    "timestamp": "2026-09-05T13:10:23Z",
+    "source": "rgarcia",
+    "target": "WKSTN-051",
+    "type": "process_start",
+    "detail": "msedge.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0298",
+    "timestamp": "2026-09-05T13:12:59Z",
+    "source": "WKSTN-014",
+    "target": "WKSTN-026",
+    "type": "network_connection",
+    "detail": "LDAP query to WKSTN-026 on 389"
+  },
+  {
+    "id": "E-0299",
+    "timestamp": "2026-09-05T13:13:47Z",
+    "source": "apatel",
+    "target": "WKSTN-023",
+    "type": "process_start",
+    "detail": "excel.exe started"
+  },
+  {
+    "id": "E-0300",
+    "timestamp": "2026-09-05T13:14:14Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-013",
+    "type": "process_start",
+    "detail": "svchost.exe -k netsvcs spawned"
+  },
+  {
+    "id": "E-0301",
+    "timestamp": "2026-09-05T13:16:47Z",
+    "source": "jsmith",
+    "target": "WKSTN-032",
+    "type": "process_start",
+    "detail": "python.exe nightly_report.py"
+  },
+  {
+    "id": "E-0302",
+    "timestamp": "2026-09-05T13:18:18Z",
+    "source": "VPN-01",
+    "target": "WKSTN-026",
+    "type": "network_connection",
+    "detail": "SMB read from \\\\WKSTN-026\\Shared over 445"
+  },
+  {
+    "id": "E-0303",
+    "timestamp": "2026-09-05T13:19:01Z",
+    "source": "hokonkwo",
+    "target": "WKSTN-025",
+    "type": "file_access",
+    "detail": "Opened C:\\Users\\hokonkwo\\Downloads\\invoice.pdf"
+  },
+  {
+    "id": "E-0304",
+    "timestamp": "2026-09-05T13:20:12Z",
+    "source": "eschmidt",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Modified \\\\FILESRV-01\\Shared\\budget_draft.xlsx"
+  },
+  {
+    "id": "E-0305",
+    "timestamp": "2026-09-05T13:22:08Z",
+    "source": "kdurand",
+    "target": "WKSTN-018",
+    "type": "process_start",
+    "detail": "chrome.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0306",
+    "timestamp": "2026-09-05T13:24:14Z",
+    "source": "WEB-01",
+    "target": "17.253.144.10 (apple-updates)",
+    "type": "network_connection",
+    "detail": "TLS session established to 17.253.144.10 (apple-updates)"
+  },
+  {
+    "id": "E-0307",
+    "timestamp": "2026-09-05T13:24:22Z",
+    "source": "WKSTN-002",
+    "target": "WKSTN-051",
+    "type": "network_connection",
+    "detail": "LDAP query to WKSTN-051 on 389"
+  },
+  {
+    "id": "E-0308",
+    "timestamp": "2026-09-05T13:24:26Z",
+    "source": "mjones",
+    "target": "FILESRV-01",
+    "type": "process_start",
+    "detail": "chrome.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0309",
+    "timestamp": "2026-09-05T13:25:49Z",
+    "source": "BUILD-01",
+    "target": "WKSTN-025",
+    "type": "network_connection",
+    "detail": "RDP session to WKSTN-025 on 3389"
+  },
+  {
+    "id": "E-0310",
+    "timestamp": "2026-09-05T13:26:23Z",
+    "source": "WKSTN-049",
+    "target": "8.8.8.8 (dns)",
+    "type": "network_connection",
+    "detail": "Software update check to 8.8.8.8 (dns)"
+  },
+  {
+    "id": "E-0311",
+    "timestamp": "2026-09-05T13:31:02Z",
+    "source": "kdurand",
+    "target": "WKSTN-039",
+    "type": "process_start",
+    "detail": "gpupdate.exe /force"
+  },
+  {
+    "id": "E-0312",
+    "timestamp": "2026-09-05T13:32:53Z",
+    "source": "nsingh",
+    "target": "WKSTN-012",
+    "type": "process_start",
+    "detail": "Teams.exe started"
+  },
+  {
+    "id": "E-0313",
+    "timestamp": "2026-09-05T13:35:14Z",
+    "source": "administrator",
+    "target": "WKSTN-017",
+    "type": "process_start",
+    "detail": "python.exe nightly_report.py"
+  },
+  {
+    "id": "E-0314",
+    "timestamp": "2026-09-05T13:36:33Z",
+    "source": "kdurand",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-01\\Shared\\weekly_report.docx"
+  },
+  {
+    "id": "E-0315",
+    "timestamp": "2026-09-05T13:37:27Z",
+    "source": "WKSTN-009",
+    "target": "20.190.128.10 (login.microsoftonline.com)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 20.190.128.10 (login.microsoftonline.com)"
+  },
+  {
+    "id": "E-0316",
+    "timestamp": "2026-09-05T13:38:11Z",
+    "source": "WKSTN-060",
+    "target": "104.18.32.47 (cloudflare)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 104.18.32.47 (cloudflare)"
+  },
+  {
+    "id": "E-0317",
+    "timestamp": "2026-09-05T13:39:51Z",
+    "source": "WKSTN-011",
+    "target": "WKSTN-003",
+    "type": "network_connection",
+    "detail": "Outbound 443 to 10.0.3.25"
+  },
+  {
+    "id": "E-0318",
+    "timestamp": "2026-09-05T13:40:39Z",
+    "source": "WKSTN-008",
+    "target": "13.107.42.14 (office365)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 13.107.42.14 (office365)"
+  },
+  {
+    "id": "E-0319",
+    "timestamp": "2026-09-05T13:41:09Z",
+    "source": "WKSTN-014",
+    "target": "WKSTN-016",
+    "type": "network_connection",
+    "detail": "RDP session to WKSTN-016 on 3389"
+  },
+  {
+    "id": "E-0320",
+    "timestamp": "2026-09-05T13:42:11Z",
+    "source": "mjones",
+    "target": "FILESRV-01",
+    "type": "process_start",
+    "detail": "python.exe nightly_report.py"
+  },
+  {
+    "id": "E-0321",
+    "timestamp": "2026-09-05T13:42:45Z",
+    "source": "FILESRV-02",
+    "target": "104.18.32.47 (cloudflare)",
+    "type": "network_connection",
+    "detail": "TLS session established to 104.18.32.47 (cloudflare)"
+  },
+  {
+    "id": "E-0322",
+    "timestamp": "2026-09-05T13:44:11Z",
+    "source": "svc_backup",
+    "target": "FILESRV-02",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-02\\Shared\\weekly_report.docx"
+  },
+  {
+    "id": "E-0323",
+    "timestamp": "2026-09-05T13:44:39Z",
+    "source": "mjones",
+    "target": "PRINT-01",
+    "type": "process_start",
+    "detail": "slack.exe started"
+  },
+  {
+    "id": "E-0324",
+    "timestamp": "2026-09-05T13:46:57Z",
+    "source": "apatel",
+    "target": "DC-02",
+    "type": "process_start",
+    "detail": "svchost.exe -k netsvcs spawned"
+  },
+  {
+    "id": "E-0325",
+    "timestamp": "2026-09-05T13:46:59Z",
+    "source": "administrator",
+    "target": "FILESRV-01",
+    "type": "authentication",
+    "detail": "svc_backup scheduled-task logon succeeded"
+  },
+  {
+    "id": "E-0326",
+    "timestamp": "2026-09-05T13:47:51Z",
+    "source": "WKSTN-036",
+    "target": "13.107.42.14 (office365)",
+    "type": "network_connection",
+    "detail": "Software update check to 13.107.42.14 (office365)"
+  },
+  {
+    "id": "E-0327",
+    "timestamp": "2026-09-05T13:52:22Z",
+    "source": "jsmith",
+    "target": "WKSTN-019",
+    "type": "file_access",
+    "detail": "Opened C:\\Users\\jsmith\\Downloads\\invoice.pdf"
+  },
+  {
+    "id": "E-0328",
+    "timestamp": "2026-09-05T13:53:18Z",
+    "source": "apatel",
+    "target": "BUILD-01",
+    "type": "file_access",
+    "detail": "Opened C:\\Users\\apatel\\Downloads\\invoice.pdf"
+  },
+  {
+    "id": "E-0329",
+    "timestamp": "2026-09-05T13:53:54Z",
+    "source": "administrator",
+    "target": "WKSTN-006",
+    "type": "process_start",
+    "detail": "Teams.exe started"
+  },
+  {
+    "id": "E-0330",
+    "timestamp": "2026-09-05T13:53:59Z",
+    "source": "mjones",
+    "target": "WKSTN-024",
+    "type": "authentication",
+    "detail": "Failed logon (bad password) for mjones"
+  },
+  {
+    "id": "E-0331",
+    "timestamp": "2026-09-05T13:54:25Z",
+    "source": "hokonkwo",
+    "target": "WKSTN-028",
+    "type": "authentication",
+    "detail": "Kerberos logon succeeded for hokonkwo"
+  },
+  {
+    "id": "E-0332",
+    "timestamp": "2026-09-05T13:59:07Z",
+    "source": "rgarcia",
+    "target": "MAIL-01",
+    "type": "authentication",
+    "detail": "Service ticket (TGS) issued for rgarcia"
+  },
+  {
+    "id": "E-0333",
+    "timestamp": "2026-09-05T13:59:32Z",
+    "source": "apatel",
+    "target": "WKSTN-012",
+    "type": "authentication",
+    "detail": "Screen unlock for apatel"
+  },
+  {
+    "id": "E-0334",
+    "timestamp": "2026-09-05T13:59:33Z",
+    "source": "rgarcia",
+    "target": "WKSTN-024",
+    "type": "process_start",
+    "detail": "msedge.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0335",
+    "timestamp": "2026-09-05T14:00:00Z",
+    "source": "lchen",
+    "target": "WKSTN-050",
+    "type": "process_start",
+    "detail": "cmd.exe /c whoami (run during a helpdesk troubleshooting call)"
+  },
+  {
+    "id": "E-0336",
+    "timestamp": "2026-09-05T14:00:10Z",
+    "source": "bmurphy",
+    "target": "WKSTN-025",
+    "type": "process_start",
+    "detail": "msedge.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0337",
+    "timestamp": "2026-09-05T14:01:49Z",
+    "source": "lchen",
+    "target": "WKSTN-003",
+    "type": "authentication",
+    "detail": "Service ticket (TGS) issued for lchen"
+  },
+  {
+    "id": "E-0338",
+    "timestamp": "2026-09-05T14:02:07Z",
+    "source": "WKSTN-042",
+    "target": "WKSTN-011",
+    "type": "network_connection",
+    "detail": "Print job submitted to PRINT-01 on 9100"
+  },
+  {
+    "id": "E-0339",
+    "timestamp": "2026-09-05T14:04:09Z",
+    "source": "bmurphy",
+    "target": "WKSTN-046",
+    "type": "process_start",
+    "detail": "msedge.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0340",
+    "timestamp": "2026-09-05T14:08:55Z",
+    "source": "PRINT-01",
+    "target": "8.8.8.8 (dns)",
+    "type": "network_connection",
+    "detail": "TLS session established to 8.8.8.8 (dns)"
+  },
+  {
+    "id": "E-0341",
+    "timestamp": "2026-09-05T14:09:40Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-047",
+    "type": "process_start",
+    "detail": "chrome.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0342",
+    "timestamp": "2026-09-05T14:10:23Z",
+    "source": "hokonkwo",
+    "target": "DC-01",
+    "type": "process_start",
+    "detail": "MsMpEng.exe scheduled scan started"
+  },
+  {
+    "id": "E-0343",
+    "timestamp": "2026-09-05T14:11:58Z",
+    "source": "nsingh",
+    "target": "FILESRV-02",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-01\\Shared\\onboarding.pdf"
+  },
+  {
+    "id": "E-0344",
+    "timestamp": "2026-09-05T14:12:53Z",
+    "source": "apatel",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Modified \\\\FILESRV-01\\Shared\\budget_draft.xlsx"
+  },
+  {
+    "id": "E-0345",
+    "timestamp": "2026-09-05T14:13:46Z",
+    "source": "WKSTN-040",
+    "target": "WKSTN-031",
+    "type": "network_connection",
+    "detail": "LDAP query to WKSTN-031 on 389"
+  },
+  {
+    "id": "E-0346",
+    "timestamp": "2026-09-05T14:17:16Z",
+    "source": "WKSTN-004",
+    "target": "WKSTN-027",
+    "type": "network_connection",
+    "detail": "RDP session to WKSTN-027 on 3389"
+  },
+  {
+    "id": "E-0347",
+    "timestamp": "2026-09-05T14:19:32Z",
+    "source": "kdurand",
+    "target": "WKSTN-024",
+    "type": "authentication",
+    "detail": "Interactive logon for kdurand succeeded"
+  },
+  {
+    "id": "E-0348",
+    "timestamp": "2026-09-05T14:23:26Z",
+    "source": "WKSTN-056",
+    "target": "WKSTN-018",
+    "type": "network_connection",
+    "detail": "Outbound 443 to 10.0.3.201"
+  },
+  {
+    "id": "E-0349",
+    "timestamp": "2026-09-05T14:24:33Z",
+    "source": "nsingh",
+    "target": "WKSTN-054",
+    "type": "process_start",
+    "detail": "OneDrive.exe sync process started"
+  },
+  {
+    "id": "E-0350",
+    "timestamp": "2026-09-05T14:26:50Z",
+    "source": "eschmidt",
+    "target": "WKSTN-017",
+    "type": "process_start",
+    "detail": "gpupdate.exe /force"
+  },
+  {
+    "id": "E-0351",
+    "timestamp": "2026-09-05T14:27:43Z",
+    "source": "eschmidt",
+    "target": "WKSTN-013",
+    "type": "authentication",
+    "detail": "Failed logon (bad password) for eschmidt"
+  },
+  {
+    "id": "E-0352",
+    "timestamp": "2026-09-05T14:29:32Z",
+    "source": "WKSTN-029",
+    "target": "WKSTN-024",
+    "type": "network_connection",
+    "detail": "SMB read from \\\\WKSTN-024\\Shared over 445"
+  },
+  {
+    "id": "E-0353",
+    "timestamp": "2026-09-05T14:30:26Z",
+    "source": "WKSTN-043",
+    "target": "140.82.112.3 (github)",
+    "type": "network_connection",
+    "detail": "Software update check to 140.82.112.3 (github)"
+  },
+  {
+    "id": "E-0354",
+    "timestamp": "2026-09-05T14:30:44Z",
+    "source": "eschmidt",
+    "target": "WKSTN-057",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-02\\Projects\\roadmap.pptx"
+  },
+  {
+    "id": "E-0355",
+    "timestamp": "2026-09-05T14:30:49Z",
+    "source": "nsingh",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Modified \\\\FILESRV-01\\Shared\\budget_draft.xlsx"
+  },
+  {
+    "id": "E-0356",
+    "timestamp": "2026-09-05T14:33:57Z",
+    "source": "eschmidt",
+    "target": "WKSTN-004",
+    "type": "process_start",
+    "detail": "svchost.exe -k netsvcs spawned"
+  },
+  {
+    "id": "E-0357",
+    "timestamp": "2026-09-05T14:34:47Z",
+    "source": "WKSTN-057",
+    "target": "WKSTN-027",
+    "type": "network_connection",
+    "detail": "Print job submitted to PRINT-01 on 9100"
+  },
+  {
+    "id": "E-0358",
+    "timestamp": "2026-09-05T14:36:58Z",
+    "source": "jsmith",
+    "target": "WKSTN-047",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-01\\Shared\\onboarding.pdf"
+  },
+  {
+    "id": "E-0359",
+    "timestamp": "2026-09-05T14:37:59Z",
+    "source": "svc_backup",
+    "target": "WKSTN-003",
+    "type": "process_start",
+    "detail": "chrome.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0360",
+    "timestamp": "2026-09-05T14:39:54Z",
+    "source": "WKSTN-056",
+    "target": "104.18.32.47 (cloudflare)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 104.18.32.47 (cloudflare)"
+  },
+  {
+    "id": "E-0361",
+    "timestamp": "2026-09-05T14:40:26Z",
+    "source": "WKSTN-002",
+    "target": "WKSTN-008",
+    "type": "network_connection",
+    "detail": "Print job submitted to PRINT-01 on 9100"
+  },
+  {
+    "id": "E-0362",
+    "timestamp": "2026-09-05T14:40:50Z",
+    "source": "apatel",
+    "target": "WKSTN-016",
+    "type": "process_start",
+    "detail": "excel.exe started"
+  },
+  {
+    "id": "E-0363",
+    "timestamp": "2026-09-05T14:41:11Z",
+    "source": "WKSTN-050",
+    "target": "8.8.8.8 (dns)",
+    "type": "network_connection",
+    "detail": "TLS session established to 8.8.8.8 (dns)"
+  },
+  {
+    "id": "E-0364",
+    "timestamp": "2026-09-05T14:42:39Z",
+    "source": "svc_monitor",
+    "target": "FILESRV-02",
+    "type": "file_access",
+    "detail": "Modified \\\\FILESRV-02\\Shared\\budget_draft.xlsx"
+  },
+  {
+    "id": "E-0365",
+    "timestamp": "2026-09-05T14:44:13Z",
+    "source": "hokonkwo",
+    "target": "PRINT-01",
+    "type": "process_start",
+    "detail": "OneDrive.exe sync process started"
+  },
+  {
+    "id": "E-0366",
+    "timestamp": "2026-09-05T14:44:15Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-025",
+    "type": "process_start",
+    "detail": "chrome.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0367",
+    "timestamp": "2026-09-05T14:46:26Z",
+    "source": "rgarcia",
+    "target": "WKSTN-019",
+    "type": "process_start",
+    "detail": "chrome.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0368",
+    "timestamp": "2026-09-05T14:48:05Z",
+    "source": "eschmidt",
+    "target": "WKSTN-012",
+    "type": "process_start",
+    "detail": "Code.exe started"
+  },
+  {
+    "id": "E-0369",
+    "timestamp": "2026-09-05T14:48:35Z",
+    "source": "mjones",
+    "target": "WKSTN-003",
+    "type": "process_start",
+    "detail": "OUTLOOK.EXE started by explorer.exe"
+  },
+  {
+    "id": "E-0370",
+    "timestamp": "2026-09-05T14:50:21Z",
+    "source": "kdurand",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-01\\Shared\\onboarding.pdf"
+  },
+  {
+    "id": "E-0371",
+    "timestamp": "2026-09-05T14:50:35Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-022",
+    "type": "process_start",
+    "detail": "Teams.exe started"
+  },
+  {
+    "id": "E-0372",
+    "timestamp": "2026-09-05T14:53:54Z",
+    "source": "jsmith",
+    "target": "FILESRV-02",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-02\\Projects\\roadmap.pptx"
+  },
+  {
+    "id": "E-0373",
+    "timestamp": "2026-09-05T14:54:23Z",
+    "source": "twhite",
+    "target": "WKSTN-057",
+    "type": "process_start",
+    "detail": "Code.exe started"
+  },
+  {
+    "id": "E-0374",
+    "timestamp": "2026-09-05T14:56:41Z",
+    "source": "eschmidt",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Modified \\\\FILESRV-01\\Shared\\budget_draft.xlsx"
+  },
+  {
+    "id": "E-0375",
+    "timestamp": "2026-09-05T14:56:47Z",
+    "source": "mjones",
+    "target": "DC-02",
+    "type": "authentication",
+    "detail": "Screen unlock for mjones"
+  },
+  {
+    "id": "E-0376",
+    "timestamp": "2026-09-05T14:58:02Z",
+    "source": "WKSTN-021",
+    "target": "17.253.144.10 (apple-updates)",
+    "type": "network_connection",
+    "detail": "Software update check to 17.253.144.10 (apple-updates)"
+  },
+  {
+    "id": "E-0377",
+    "timestamp": "2026-09-05T14:58:51Z",
+    "source": "MAIL-01",
+    "target": "13.107.42.14 (office365)",
+    "type": "network_connection",
+    "detail": "TLS session established to 13.107.42.14 (office365)"
+  },
+  {
+    "id": "E-0378",
+    "timestamp": "2026-09-05T14:59:15Z",
+    "source": "hokonkwo",
+    "target": "WKSTN-005",
+    "type": "authentication",
+    "detail": "Service ticket (TGS) issued for hokonkwo"
+  },
+  {
+    "id": "E-0379",
+    "timestamp": "2026-09-05T15:00:00Z",
+    "source": "WEB-01",
+    "target": "FILESRV-02",
+    "type": "network_connection",
+    "detail": "SMB session to FILESRV-02:445 for scheduled web asset sync"
+  },
+  {
+    "id": "E-0380",
+    "timestamp": "2026-09-05T15:02:36Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-037",
+    "type": "process_start",
+    "detail": "svchost.exe -k netsvcs spawned"
+  },
+  {
+    "id": "E-0381",
+    "timestamp": "2026-09-05T15:02:52Z",
+    "source": "nsingh",
+    "target": "WKSTN-044",
+    "type": "authentication",
+    "detail": "Kerberos logon succeeded for nsingh"
+  },
+  {
+    "id": "E-0382",
+    "timestamp": "2026-09-05T15:05:28Z",
+    "source": "yamamoto",
+    "target": "WKSTN-046",
+    "type": "process_start",
+    "detail": "msedge.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0383",
+    "timestamp": "2026-09-05T15:06:58Z",
+    "source": "apatel",
+    "target": "WKSTN-014",
+    "type": "process_start",
+    "detail": "Teams.exe started"
+  },
+  {
+    "id": "E-0384",
+    "timestamp": "2026-09-05T15:07:34Z",
+    "source": "svc_backup",
+    "target": "WKSTN-016",
+    "type": "process_start",
+    "detail": "msedge.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0385",
+    "timestamp": "2026-09-05T15:08:14Z",
+    "source": "administrator",
+    "target": "FILESRV-01",
+    "type": "process_start",
+    "detail": "OneDrive.exe sync process started"
+  },
+  {
+    "id": "E-0386",
+    "timestamp": "2026-09-05T15:08:42Z",
+    "source": "WEB-01",
+    "target": "20.190.128.10 (login.microsoftonline.com)",
+    "type": "network_connection",
+    "detail": "Software update check to 20.190.128.10 (login.microsoftonline.com)"
+  },
+  {
+    "id": "E-0387",
+    "timestamp": "2026-09-05T15:09:53Z",
+    "source": "svc_backup",
+    "target": "WKSTN-042",
+    "type": "process_start",
+    "detail": "OUTLOOK.EXE started by explorer.exe"
+  },
+  {
+    "id": "E-0388",
+    "timestamp": "2026-09-05T15:10:24Z",
+    "source": "svc_backup",
+    "target": "WKSTN-045",
+    "type": "authentication",
+    "detail": "Failed logon (bad password) for svc_backup"
+  },
+  {
+    "id": "E-0389",
+    "timestamp": "2026-09-05T15:11:10Z",
+    "source": "nsingh",
+    "target": "WKSTN-015",
+    "type": "process_start",
+    "detail": "gpupdate.exe /force"
+  },
+  {
+    "id": "E-0390",
+    "timestamp": "2026-09-05T15:13:27Z",
+    "source": "WKSTN-014",
+    "target": "WKSTN-057",
+    "type": "network_connection",
+    "detail": "RDP session to WKSTN-057 on 3389"
+  },
+  {
+    "id": "E-0391",
+    "timestamp": "2026-09-05T15:13:53Z",
+    "source": "lchen",
+    "target": "WKSTN-019",
+    "type": "process_start",
+    "detail": "python.exe nightly_report.py"
+  },
+  {
+    "id": "E-0392",
+    "timestamp": "2026-09-05T15:14:13Z",
+    "source": "bmurphy",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Write C:\\Users\\bmurphy\\Documents\\notes.txt"
+  },
+  {
+    "id": "E-0393",
+    "timestamp": "2026-09-05T15:15:26Z",
+    "source": "kdurand",
+    "target": "WKSTN-048",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-01\\Shared\\onboarding.pdf"
+  },
+  {
+    "id": "E-0394",
+    "timestamp": "2026-09-05T15:16:13Z",
+    "source": "FILESRV-02",
+    "target": "17.253.144.10 (apple-updates)",
+    "type": "network_connection",
+    "detail": "Software update check to 17.253.144.10 (apple-updates)"
+  },
+  {
+    "id": "E-0395",
+    "timestamp": "2026-09-05T15:16:18Z",
+    "source": "svc_sql",
+    "target": "SQL-01",
+    "type": "authentication",
+    "detail": "Interactive logon for svc_sql succeeded"
+  },
+  {
+    "id": "E-0396",
+    "timestamp": "2026-09-05T15:17:22Z",
+    "source": "lchen",
+    "target": "WKSTN-035",
+    "type": "process_start",
+    "detail": "svchost.exe -k netsvcs spawned"
+  },
+  {
+    "id": "E-0397",
+    "timestamp": "2026-09-05T15:18:31Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-047",
+    "type": "process_start",
+    "detail": "Code.exe started"
+  },
+  {
+    "id": "E-0398",
+    "timestamp": "2026-09-05T15:18:35Z",
+    "source": "WKSTN-040",
+    "target": "WKSTN-017",
+    "type": "network_connection",
+    "detail": "SMB read from \\\\WKSTN-017\\Shared over 445"
+  },
+  {
+    "id": "E-0399",
+    "timestamp": "2026-09-05T15:19:01Z",
+    "source": "WKSTN-030",
+    "target": "WKSTN-016",
+    "type": "network_connection",
+    "detail": "Print job submitted to PRINT-01 on 9100"
+  },
+  {
+    "id": "E-0400",
+    "timestamp": "2026-09-05T15:19:49Z",
+    "source": "svc_sql",
+    "target": "WKSTN-043",
+    "type": "file_access",
+    "detail": "Read \\\\WKSTN-043\\Shared\\weekly_report.docx"
+  },
+  {
+    "id": "E-0401",
+    "timestamp": "2026-09-05T15:21:58Z",
+    "source": "yamamoto",
+    "target": "WKSTN-022",
+    "type": "authentication",
+    "detail": "Failed logon (bad password) for yamamoto"
+  },
+  {
+    "id": "E-0402",
+    "timestamp": "2026-09-05T15:24:17Z",
+    "source": "WKSTN-038",
+    "target": "13.107.42.14 (office365)",
+    "type": "network_connection",
+    "detail": "TLS session established to 13.107.42.14 (office365)"
+  },
+  {
+    "id": "E-0403",
+    "timestamp": "2026-09-05T15:25:38Z",
+    "source": "apatel",
+    "target": "FILESRV-02",
+    "type": "file_access",
+    "detail": "Opened C:\\Users\\apatel\\Downloads\\invoice.pdf"
+  },
+  {
+    "id": "E-0404",
+    "timestamp": "2026-09-05T15:26:28Z",
+    "source": "yamamoto",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-02\\Projects\\roadmap.pptx"
+  },
+  {
+    "id": "E-0405",
+    "timestamp": "2026-09-05T15:28:50Z",
+    "source": "WKSTN-035",
+    "target": "151.101.1.140 (fastly-cdn)",
+    "type": "network_connection",
+    "detail": "Software update check to 151.101.1.140 (fastly-cdn)"
+  },
+  {
+    "id": "E-0406",
+    "timestamp": "2026-09-05T15:31:47Z",
+    "source": "apatel",
+    "target": "WKSTN-015",
+    "type": "process_start",
+    "detail": "svchost.exe -k netsvcs spawned"
+  },
+  {
+    "id": "E-0407",
+    "timestamp": "2026-09-05T15:33:59Z",
+    "source": "yamamoto",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-02\\Projects\\roadmap.pptx"
+  },
+  {
+    "id": "E-0408",
+    "timestamp": "2026-09-05T15:34:16Z",
+    "source": "WKSTN-055",
+    "target": "WKSTN-017",
+    "type": "network_connection",
+    "detail": "SMB read from \\\\WKSTN-017\\Shared over 445"
+  },
+  {
+    "id": "E-0409",
+    "timestamp": "2026-09-05T15:35:18Z",
+    "source": "WKSTN-049",
+    "target": "WKSTN-001",
+    "type": "network_connection",
+    "detail": "RDP session to WKSTN-001 on 3389"
+  },
+  {
+    "id": "E-0410",
+    "timestamp": "2026-09-05T15:37:39Z",
+    "source": "hokonkwo",
+    "target": "FILESRV-02",
+    "type": "file_access",
+    "detail": "Opened C:\\Users\\hokonkwo\\Downloads\\invoice.pdf"
+  },
+  {
+    "id": "E-0411",
+    "timestamp": "2026-09-05T15:38:58Z",
+    "source": "jsmith",
+    "target": "WKSTN-038",
+    "type": "process_start",
+    "detail": "Code.exe started"
+  },
+  {
+    "id": "E-0412",
+    "timestamp": "2026-09-05T15:40:00Z",
+    "source": "rgarcia",
+    "target": "FILESRV-01",
+    "type": "authentication",
+    "detail": "Network logon for rgarcia succeeded (Finance share access)"
+  },
+  {
+    "id": "E-0413",
+    "timestamp": "2026-09-05T15:41:13Z",
+    "source": "kdurand",
+    "target": "WKSTN-041",
+    "type": "process_start",
+    "detail": "Teams.exe started"
+  },
+  {
+    "id": "E-0414",
+    "timestamp": "2026-09-05T15:44:52Z",
+    "source": "administrator",
+    "target": "FILESRV-02",
+    "type": "file_access",
+    "detail": "Opened C:\\Users\\administrator\\Downloads\\invoice.pdf"
+  },
+  {
+    "id": "E-0415",
+    "timestamp": "2026-09-05T15:46:00Z",
+    "source": "yamamoto",
+    "target": "WKSTN-024",
+    "type": "authentication",
+    "detail": "Kerberos logon succeeded for yamamoto"
+  },
+  {
+    "id": "E-0416",
+    "timestamp": "2026-09-05T15:49:07Z",
+    "source": "WKSTN-020",
+    "target": "WKSTN-018",
+    "type": "network_connection",
+    "detail": "SMB read from \\\\WKSTN-018\\Shared over 445"
+  },
+  {
+    "id": "E-0417",
+    "timestamp": "2026-09-05T15:49:46Z",
+    "source": "WKSTN-040",
+    "target": "17.253.144.10 (apple-updates)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 17.253.144.10 (apple-updates)"
+  },
+  {
+    "id": "E-0418",
+    "timestamp": "2026-09-05T15:50:41Z",
+    "source": "WKSTN-041",
+    "target": "17.253.144.10 (apple-updates)",
+    "type": "network_connection",
+    "detail": "TLS session established to 17.253.144.10 (apple-updates)"
+  },
+  {
+    "id": "E-0419",
+    "timestamp": "2026-09-05T15:51:20Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-037",
+    "type": "process_start",
+    "detail": "python.exe nightly_report.py"
+  },
+  {
+    "id": "E-0420",
+    "timestamp": "2026-09-05T15:51:58Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-054",
+    "type": "process_start",
+    "detail": "excel.exe started"
+  },
+  {
+    "id": "E-0421",
+    "timestamp": "2026-09-05T15:55:14Z",
+    "source": "mjones",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Write C:\\Users\\mjones\\Documents\\notes.txt"
+  },
+  {
+    "id": "E-0422",
+    "timestamp": "2026-09-05T15:55:43Z",
+    "source": "hokonkwo",
+    "target": "WKSTN-045",
+    "type": "process_start",
+    "detail": "gpupdate.exe /force"
+  },
+  {
+    "id": "E-0423",
+    "timestamp": "2026-09-05T15:56:33Z",
+    "source": "WKSTN-057",
+    "target": "142.250.72.14 (google)",
+    "type": "network_connection",
+    "detail": "TLS session established to 142.250.72.14 (google)"
+  },
+  {
+    "id": "E-0424",
+    "timestamp": "2026-09-05T15:56:51Z",
+    "source": "WKSTN-038",
+    "target": "WKSTN-048",
+    "type": "network_connection",
+    "detail": "Outbound 443 to 10.0.3.130"
+  },
+  {
+    "id": "E-0425",
+    "timestamp": "2026-09-05T15:57:14Z",
+    "source": "WKSTN-050",
+    "target": "PRINT-01",
+    "type": "network_connection",
+    "detail": "LDAP query to PRINT-01 on 389"
+  },
+  {
+    "id": "E-0426",
+    "timestamp": "2026-09-05T15:59:14Z",
+    "source": "WKSTN-035",
+    "target": "20.190.128.10 (login.microsoftonline.com)",
+    "type": "network_connection",
+    "detail": "TLS session established to 20.190.128.10 (login.microsoftonline.com)"
+  },
+  {
+    "id": "E-0427",
+    "timestamp": "2026-09-05T15:59:37Z",
+    "source": "WKSTN-020",
+    "target": "WKSTN-028",
+    "type": "network_connection",
+    "detail": "RDP session to WKSTN-028 on 3389"
+  },
+  {
+    "id": "E-0428",
+    "timestamp": "2026-09-05T16:00:01Z",
+    "source": "WKSTN-039",
+    "target": "13.107.42.14 (office365)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 13.107.42.14 (office365)"
+  },
+  {
+    "id": "E-0429",
+    "timestamp": "2026-09-05T16:00:10Z",
+    "source": "jsmith",
+    "target": "WKSTN-006",
+    "type": "authentication",
+    "detail": "Failed logon (bad password) for jsmith"
+  },
+  {
+    "id": "E-0430",
+    "timestamp": "2026-09-05T16:00:34Z",
+    "source": "administrator",
+    "target": "WKSTN-012",
+    "type": "process_start",
+    "detail": "OUTLOOK.EXE started by explorer.exe"
+  },
+  {
+    "id": "E-0431",
+    "timestamp": "2026-09-05T16:01:19Z",
+    "source": "bmurphy",
+    "target": "WKSTN-021",
+    "type": "process_start",
+    "detail": "OUTLOOK.EXE started by explorer.exe"
+  },
+  {
+    "id": "E-0432",
+    "timestamp": "2026-09-05T16:04:13Z",
+    "source": "eschmidt",
+    "target": "WKSTN-032",
+    "type": "process_start",
+    "detail": "gpupdate.exe /force"
+  },
+  {
+    "id": "E-0433",
+    "timestamp": "2026-09-05T16:04:14Z",
+    "source": "svc_monitor",
+    "target": "VPN-01",
+    "type": "authentication",
+    "detail": "Service ticket (TGS) issued for svc_monitor"
+  },
+  {
+    "id": "E-0434",
+    "timestamp": "2026-09-05T16:06:08Z",
+    "source": "lchen",
+    "target": "WKSTN-002",
+    "type": "authentication",
+    "detail": "Screen unlock for lchen"
+  },
+  {
+    "id": "E-0435",
+    "timestamp": "2026-09-05T16:10:00Z",
+    "source": "svc_backup",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Created archive E:\\Backups\\finance_2026-09-05.7z (nightly backup job)"
+  },
+  {
+    "id": "E-0436",
+    "timestamp": "2026-09-05T16:10:03Z",
+    "source": "twhite",
+    "target": "WKSTN-059",
+    "type": "authentication",
+    "detail": "Service ticket (TGS) issued for twhite"
+  },
+  {
+    "id": "E-0437",
+    "timestamp": "2026-09-05T16:12:37Z",
+    "source": "WKSTN-026",
+    "target": "104.18.32.47 (cloudflare)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 104.18.32.47 (cloudflare)"
+  },
+  {
+    "id": "E-0438",
+    "timestamp": "2026-09-05T16:13:21Z",
+    "source": "svc_backup",
+    "target": "FILESRV-02",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-02\\Shared\\weekly_report.docx"
+  },
+  {
+    "id": "E-0439",
+    "timestamp": "2026-09-05T16:14:04Z",
+    "source": "yamamoto",
+    "target": "WKSTN-060",
+    "type": "process_start",
+    "detail": "chrome.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0440",
+    "timestamp": "2026-09-05T16:14:16Z",
+    "source": "DC-02",
+    "target": "WKSTN-048",
+    "type": "network_connection",
+    "detail": "LDAP query to WKSTN-048 on 389"
+  },
+  {
+    "id": "E-0441",
+    "timestamp": "2026-09-05T16:14:53Z",
+    "source": "svc_sql",
+    "target": "WKSTN-010",
+    "type": "authentication",
+    "detail": "Service ticket (TGS) issued for svc_sql"
+  },
+  {
+    "id": "E-0442",
+    "timestamp": "2026-09-05T16:16:31Z",
+    "source": "WKSTN-013",
+    "target": "WKSTN-031",
+    "type": "network_connection",
+    "detail": "SMB read from \\\\WKSTN-031\\Shared over 445"
+  },
+  {
+    "id": "E-0443",
+    "timestamp": "2026-09-05T16:17:07Z",
+    "source": "DC-01",
+    "target": "104.18.32.47 (cloudflare)",
+    "type": "network_connection",
+    "detail": "TLS session established to 104.18.32.47 (cloudflare)"
+  },
+  {
+    "id": "E-0444",
+    "timestamp": "2026-09-05T16:18:01Z",
+    "source": "apatel",
+    "target": "WKSTN-035",
+    "type": "authentication",
+    "detail": "Screen unlock for apatel"
+  },
+  {
+    "id": "E-0445",
+    "timestamp": "2026-09-05T16:19:35Z",
+    "source": "hokonkwo",
+    "target": "PRINT-01",
+    "type": "file_access",
+    "detail": "Modified \\\\PRINT-01\\Shared\\budget_draft.xlsx"
+  },
+  {
+    "id": "E-0446",
+    "timestamp": "2026-09-05T16:21:12Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-005",
+    "type": "authentication",
+    "detail": "Kerberos logon succeeded for svc_monitor"
+  },
+  {
+    "id": "E-0447",
+    "timestamp": "2026-09-05T16:23:12Z",
+    "source": "kdurand",
+    "target": "WKSTN-019",
+    "type": "file_access",
+    "detail": "Write C:\\Users\\kdurand\\Documents\\notes.txt"
+  },
+  {
+    "id": "E-0448",
+    "timestamp": "2026-09-05T16:24:41Z",
+    "source": "WKSTN-034",
+    "target": "FILESRV-01",
+    "type": "network_connection",
+    "detail": "Print job submitted to PRINT-01 on 9100"
+  },
+  {
+    "id": "E-0449",
+    "timestamp": "2026-09-05T16:26:36Z",
+    "source": "lchen",
+    "target": "DC-01",
+    "type": "process_start",
+    "detail": "OneDrive.exe sync process started"
+  },
+  {
+    "id": "E-0450",
+    "timestamp": "2026-09-05T16:27:22Z",
+    "source": "lchen",
+    "target": "WKSTN-029",
+    "type": "authentication",
+    "detail": "Failed logon (bad password) for lchen"
+  },
+  {
+    "id": "E-0451",
+    "timestamp": "2026-09-05T16:28:44Z",
+    "source": "apatel",
+    "target": "WKSTN-055",
+    "type": "process_start",
+    "detail": "slack.exe started"
+  },
+  {
+    "id": "E-0452",
+    "timestamp": "2026-09-05T16:29:07Z",
+    "source": "administrator",
+    "target": "WKSTN-054",
+    "type": "process_start",
+    "detail": "OneDrive.exe sync process started"
+  },
+  {
+    "id": "E-0453",
+    "timestamp": "2026-09-05T16:34:08Z",
+    "source": "hokonkwo",
+    "target": "WKSTN-011",
+    "type": "process_start",
+    "detail": "slack.exe started"
+  },
+  {
+    "id": "E-0454",
+    "timestamp": "2026-09-05T16:34:56Z",
+    "source": "yamamoto",
+    "target": "WKSTN-043",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-01\\Shared\\onboarding.pdf"
+  },
+  {
+    "id": "E-0455",
+    "timestamp": "2026-09-05T16:34:59Z",
+    "source": "bmurphy",
+    "target": "WKSTN-005",
+    "type": "file_access",
+    "detail": "Modified \\\\WKSTN-005\\Shared\\budget_draft.xlsx"
+  },
+  {
+    "id": "E-0456",
+    "timestamp": "2026-09-05T16:35:00Z",
+    "source": "eschmidt",
+    "target": "WKSTN-012",
+    "type": "process_start",
+    "detail": "rundll32.exe shell32.dll,OpenAs_RunDLL (Windows 'Open with' dialog)"
+  },
+  {
+    "id": "E-0457",
+    "timestamp": "2026-09-05T16:35:24Z",
+    "source": "administrator",
+    "target": "DC-02",
+    "type": "process_start",
+    "detail": "gpupdate.exe /force"
+  },
+  {
+    "id": "E-0458",
+    "timestamp": "2026-09-05T16:38:12Z",
+    "source": "bmurphy",
+    "target": "WKSTN-026",
+    "type": "authentication",
+    "detail": "Service ticket (TGS) issued for bmurphy"
+  },
+  {
+    "id": "E-0459",
+    "timestamp": "2026-09-05T16:38:59Z",
+    "source": "nsingh",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Write C:\\Users\\nsingh\\Documents\\notes.txt"
+  },
+  {
+    "id": "E-0460",
+    "timestamp": "2026-09-05T16:41:17Z",
+    "source": "lchen",
+    "target": "WKSTN-026",
+    "type": "process_start",
+    "detail": "OUTLOOK.EXE started by explorer.exe"
+  },
+  {
+    "id": "E-0461",
+    "timestamp": "2026-09-05T16:41:52Z",
+    "source": "svc_sql",
+    "target": "WKSTN-034",
+    "type": "authentication",
+    "detail": "Screen unlock for svc_sql"
+  },
+  {
+    "id": "E-0462",
+    "timestamp": "2026-09-05T16:42:42Z",
+    "source": "WKSTN-050",
+    "target": "20.190.128.10 (login.microsoftonline.com)",
+    "type": "network_connection",
+    "detail": "TLS session established to 20.190.128.10 (login.microsoftonline.com)"
+  },
+  {
+    "id": "E-0463",
+    "timestamp": "2026-09-05T16:42:59Z",
+    "source": "DC-02",
+    "target": "140.82.112.3 (github)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 140.82.112.3 (github)"
+  },
+  {
+    "id": "E-0464",
+    "timestamp": "2026-09-05T16:43:04Z",
+    "source": "nsingh",
+    "target": "SQL-01",
+    "type": "authentication",
+    "detail": "Service ticket (TGS) issued for nsingh"
+  },
+  {
+    "id": "E-0465",
+    "timestamp": "2026-09-05T16:45:12Z",
+    "source": "svc_backup",
+    "target": "MAIL-01",
+    "type": "process_start",
+    "detail": "chrome.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0466",
+    "timestamp": "2026-09-05T16:47:37Z",
+    "source": "nsingh",
+    "target": "PRINT-01",
+    "type": "process_start",
+    "detail": "gpupdate.exe /force"
+  },
+  {
+    "id": "E-0467",
+    "timestamp": "2026-09-05T16:48:52Z",
+    "source": "bmurphy",
+    "target": "WKSTN-016",
+    "type": "process_start",
+    "detail": "python.exe nightly_report.py"
+  },
+  {
+    "id": "E-0468",
+    "timestamp": "2026-09-05T16:48:55Z",
+    "source": "mjones",
+    "target": "WKSTN-007",
+    "type": "process_start",
+    "detail": "svchost.exe -k netsvcs spawned"
+  },
+  {
+    "id": "E-0469",
+    "timestamp": "2026-09-05T16:49:33Z",
+    "source": "bmurphy",
+    "target": "WKSTN-028",
+    "type": "authentication",
+    "detail": "Screen unlock for bmurphy"
+  },
+  {
+    "id": "E-0470",
+    "timestamp": "2026-09-05T16:51:14Z",
+    "source": "WKSTN-053",
+    "target": "8.8.8.8 (dns)",
+    "type": "network_connection",
+    "detail": "Software update check to 8.8.8.8 (dns)"
+  },
+  {
+    "id": "E-0471",
+    "timestamp": "2026-09-05T16:52:42Z",
+    "source": "rgarcia",
+    "target": "WKSTN-055",
+    "type": "process_start",
+    "detail": "msedge.exe started by explorer.exe"
+  },
+  {
+    "id": "E-0472",
+    "timestamp": "2026-09-05T16:53:03Z",
+    "source": "WKSTN-025",
+    "target": "DC-01",
+    "type": "network_connection",
+    "detail": "LDAP query to DC-01 on 389"
+  },
+  {
+    "id": "E-0473",
+    "timestamp": "2026-09-05T16:54:07Z",
+    "source": "bmurphy",
+    "target": "WKSTN-020",
+    "type": "process_start",
+    "detail": "svchost.exe -k netsvcs spawned"
+  },
+  {
+    "id": "E-0474",
+    "timestamp": "2026-09-05T16:54:55Z",
+    "source": "WKSTN-040",
+    "target": "151.101.1.140 (fastly-cdn)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 151.101.1.140 (fastly-cdn)"
+  },
+  {
+    "id": "E-0475",
+    "timestamp": "2026-09-05T16:56:01Z",
+    "source": "svc_monitor",
+    "target": "WKSTN-060",
+    "type": "process_start",
+    "detail": "Code.exe started"
+  },
+  {
+    "id": "E-0476",
+    "timestamp": "2026-09-05T16:58:34Z",
+    "source": "kdurand",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Modified \\\\FILESRV-01\\Shared\\budget_draft.xlsx"
+  },
+  {
+    "id": "E-0477",
+    "timestamp": "2026-09-05T16:59:56Z",
+    "source": "lchen",
+    "target": "WKSTN-004",
+    "type": "authentication",
+    "detail": "Service ticket (TGS) issued for lchen"
+  },
+  {
+    "id": "E-0478",
+    "timestamp": "2026-09-05T17:00:19Z",
+    "source": "administrator",
+    "target": "MAIL-01",
+    "type": "process_start",
+    "detail": "svchost.exe -k netsvcs spawned"
+  },
+  {
+    "id": "E-0479",
+    "timestamp": "2026-09-05T17:00:47Z",
+    "source": "mjones",
+    "target": "FILESRV-01",
+    "type": "file_access",
+    "detail": "Modified \\\\FILESRV-01\\Shared\\budget_draft.xlsx"
+  },
+  {
+    "id": "E-0480",
+    "timestamp": "2026-09-05T17:02:56Z",
+    "source": "WKSTN-019",
+    "target": "8.8.8.8 (dns)",
+    "type": "network_connection",
+    "detail": "TLS session established to 8.8.8.8 (dns)"
+  },
+  {
+    "id": "E-0481",
+    "timestamp": "2026-09-05T17:03:08Z",
+    "source": "hokonkwo",
+    "target": "WKSTN-011",
+    "type": "process_start",
+    "detail": "svchost.exe -k netsvcs spawned"
+  },
+  {
+    "id": "E-0482",
+    "timestamp": "2026-09-05T17:04:11Z",
+    "source": "WKSTN-032",
+    "target": "WKSTN-050",
+    "type": "network_connection",
+    "detail": "SMB read from \\\\WKSTN-050\\Shared over 445"
+  },
+  {
+    "id": "E-0483",
+    "timestamp": "2026-09-05T17:04:30Z",
+    "source": "lchen",
+    "target": "FILESRV-02",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-01\\Shared\\onboarding.pdf"
+  },
+  {
+    "id": "E-0484",
+    "timestamp": "2026-09-05T17:06:14Z",
+    "source": "WKSTN-033",
+    "target": "8.8.8.8 (dns)",
+    "type": "network_connection",
+    "detail": "TLS session established to 8.8.8.8 (dns)"
+  },
+  {
+    "id": "E-0485",
+    "timestamp": "2026-09-05T17:06:51Z",
+    "source": "eschmidt",
+    "target": "WKSTN-012",
+    "type": "authentication",
+    "detail": "svc_backup scheduled-task logon succeeded"
+  },
+  {
+    "id": "E-0486",
+    "timestamp": "2026-09-05T17:08:01Z",
+    "source": "WKSTN-040",
+    "target": "WKSTN-025",
+    "type": "network_connection",
+    "detail": "Print job submitted to PRINT-01 on 9100"
+  },
+  {
+    "id": "E-0487",
+    "timestamp": "2026-09-05T17:09:49Z",
+    "source": "eschmidt",
+    "target": "WKSTN-012",
+    "type": "process_start",
+    "detail": "python.exe nightly_report.py"
+  },
+  {
+    "id": "E-0488",
+    "timestamp": "2026-09-05T17:11:13Z",
+    "source": "administrator",
+    "target": "WKSTN-017",
+    "type": "process_start",
+    "detail": "Teams.exe started"
+  },
+  {
+    "id": "E-0489",
+    "timestamp": "2026-09-05T17:12:11Z",
+    "source": "WKSTN-050",
+    "target": "104.18.32.47 (cloudflare)",
+    "type": "network_connection",
+    "detail": "Outbound HTTPS to 104.18.32.47 (cloudflare)"
+  },
+  {
+    "id": "E-0490",
+    "timestamp": "2026-09-05T17:12:25Z",
+    "source": "yamamoto",
+    "target": "WKSTN-010",
+    "type": "process_start",
+    "detail": "excel.exe started"
+  },
+  {
+    "id": "E-0491",
+    "timestamp": "2026-09-05T17:15:18Z",
+    "source": "yamamoto",
+    "target": "FILESRV-02",
+    "type": "file_access",
+    "detail": "Read \\\\FILESRV-02\\Projects\\roadmap.pptx"
+  },
+  {
+    "id": "E-0492",
+    "timestamp": "2026-09-05T17:17:42Z",
+    "source": "eschmidt",
+    "target": "WKSTN-019",
+    "type": "process_start",
+    "detail": "OneDrive.exe sync process started"
+  },
+  {
+    "id": "E-0493",
+    "timestamp": "2026-09-05T17:17:53Z",
+    "source": "svc_backup",
+    "target": "FILESRV-02",
+    "type": "file_access",
+    "detail": "Write C:\\Users\\svc_backup\\Documents\\notes.txt"
+  },
+  {
+    "id": "E-0494",
+    "timestamp": "2026-09-05T17:20:39Z",
+    "source": "svc_sql",
+    "target": "WKSTN-032",
+    "type": "authentication",
+    "detail": "Kerberos logon succeeded for svc_sql"
+  },
+  {
+    "id": "E-0495",
+    "timestamp": "2026-09-05T17:21:16Z",
+    "source": "bmurphy",
+    "target": "WKSTN-019",
+    "type": "authentication",
+    "detail": "Interactive logon for bmurphy succeeded"
+  },
+  {
+    "id": "E-0496",
+    "timestamp": "2026-09-05T17:21:36Z",
+    "source": "hokonkwo",
+    "target": "WKSTN-052",
+    "type": "file_access",
+    "detail": "Read \\\\WKSTN-052\\Shared\\weekly_report.docx"
+  },
+  {
+    "id": "E-0497",
+    "timestamp": "2026-09-05T17:25:39Z",
+    "source": "kdurand",
+    "target": "WKSTN-015",
+    "type": "process_start",
+    "detail": "Code.exe started"
+  },
+  {
+    "id": "E-0498",
+    "timestamp": "2026-09-05T17:25:58Z",
+    "source": "bmurphy",
+    "target": "WKSTN-040",
+    "type": "process_start",
+    "detail": "excel.exe started"
+  },
+  {
+    "id": "E-0499",
+    "timestamp": "2026-09-05T17:26:49Z",
+    "source": "WKSTN-046",
+    "target": "WKSTN-008",
+    "type": "network_connection",
+    "detail": "Outbound 443 to 10.0.10.88"
+  },
+  {
+    "id": "E-0500",
+    "timestamp": "2026-09-05T17:28:36Z",
+    "source": "eschmidt",
+    "target": "WKSTN-043",
+    "type": "process_start",
+    "detail": "svchost.exe -k netsvcs spawned"
+  }
+]

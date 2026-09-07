@@ -164,8 +164,9 @@ visually distinct.
 ### Key Entities
 
 - **Event**: One telemetry record. `id`, `timestamp`, `source`, `target`, `type`, `detail`.
-- **Asset**: A host, user, or external address. Appears as a node. Derived from event
-  `source` and `target` fields.
+- **Asset**: A host or an external address. Appears as a node. Derived from event `source`
+  and `target` fields. Users are attributes on events and edges, not nodes, so that citation
+  validation can require an event to name both endpoints of an edge.
 - **Edge**: An attacker action from one asset to another, with `citations` (event IDs) and a
   `verified` flag set by validation, not by the model.
 - **Chain**: The set of nodes and edges returned by one analysis over one event set.
@@ -216,19 +217,12 @@ re-analysis (Story 3).
 
 ---
 
-## Open Decisions for Planning
+## Decisions
 
-- **Backend**: Spring Boot on Java 21 is already scaffolded in this repository. Treat as decided
-  unless planning finds a blocker.
-- **Frontend**: Served by Spring Boot as static assets. Choose between plain TypeScript with a
-  graph library and React. Plain is lighter for a 3 to 4 hour build.
-- **Graph layout**: Force-directed versus left-to-right by time. Left-to-right by time is easier
-  for a novice to read.
-- **Hosting**: The Dockerfile honours `PORT`, so Render, Fly, Railway, or Cloud Run all work.
-  Pick the one with the fastest path to a public URL.
-- **Model and schema**: Model choice and the exact structured output schema for the chain.
-- **Diff view**: Overlay on one graph, or before and after side by side.
-- **Name**: Sever is the working name.
+Resolved in [plan.md](plan.md). Summary: Vercel hosting, which rules out the Java scaffold;
+Python FastAPI serverless function for the API; Vite + React + React Flow with dagre
+left-to-right layout; Claude Sonnet 5 with structured output; diff shown as an overlay on one
+graph; Vitest for TypeScript logic plus a minimal pytest set for the server; working name Sever.
 
 ---
 

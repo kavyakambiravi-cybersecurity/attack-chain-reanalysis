@@ -139,7 +139,7 @@ visually distinct.
 ### Functional Requirements
 
 - **FR-001**: The system MUST bundle one synthetic scenario of approximately 500 events with
-  roughly 5 percent belonging to one planted attack.
+  roughly 3 to 5 percent belonging to one planted attack.
 - **FR-002**: Every event MUST have an ID, timestamp, source asset, target asset, type, and a
   short detail string. Event types are limited to process start, network connection,
   authentication, and file access.
@@ -164,9 +164,10 @@ visually distinct.
 ### Key Entities
 
 - **Event**: One telemetry record. `id`, `timestamp`, `source`, `target`, `type`, `detail`.
-- **Asset**: A host or an external address. Appears as a node. Derived from event `source`
-  and `target` fields. Users are attributes on events and edges, not nodes, so that citation
-  validation can require an event to name both endpoints of an edge.
+- **Asset**: A host, a user, or an external address. Appears as a node. Derived from event
+  `source` and `target` fields; kind is derived from the name. The generator guarantees every
+  seeded event names two distinct assets, so citation validation can require an event to name
+  both endpoints of an edge.
 - **Edge**: An attacker action from one asset to another, with `citations` (event IDs) and a
   `verified` flag set by validation, not by the model.
 - **Chain**: The set of nodes and edges returned by one analysis over one event set.
@@ -191,7 +192,9 @@ A reviewer with no security background can, in under two minutes:
 
 ## Out of Scope (deferred, to be named in the rationale)
 
-- Scenario 2: a benign lookalike where the correct answer is "no attack".
+- Scenario 2 in the UI: a benign lookalike where the correct answer is "no attack". Its data
+  is already generated; only the scenario switcher is deferred, as an optional task after the
+  cut line.
 - Any confidence, risk, or attack-progress score.
 - Streaming events in over time so the graph visibly evolves.
 - Narrative or report generation.

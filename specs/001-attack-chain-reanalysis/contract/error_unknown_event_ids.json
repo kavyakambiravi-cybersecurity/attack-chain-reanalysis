@@ -1,0 +1,5 @@
+{
+  "error": "unknown_event_ids",
+  "detail": "2 event ids are not in this scenario.",
+  "ids": ["E-9999", "E-0000"]
+}

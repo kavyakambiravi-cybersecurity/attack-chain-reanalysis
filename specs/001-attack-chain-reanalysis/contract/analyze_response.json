@@ -1,0 +1,34 @@
+{
+  "scenario_id": "attack-chain-01",
+  "removed_event_ids": ["E-0115", "E-0117"],
+  "prompt_version": "2026-09-07.1",
+  "nodes": [
+    { "id": "203.0.113.47", "label": "outside computer" },
+    { "id": "WKSTN-042", "label": "finance workstation" },
+    { "id": "DC-01", "label": "domain controller" }
+  ],
+  "edges": [
+    {
+      "source": "203.0.113.47",
+      "target": "WKSTN-042",
+      "action": "logged in from outside",
+      "description": "Someone outside the company logged in to a finance workstation using jsmith's account.",
+      "citations": ["E-0095"]
+    },
+    {
+      "source": "WKSTN-042",
+      "target": "203.0.113.47",
+      "action": "kept calling home",
+      "description": "The workstation began sending small regular messages to the same outside computer.",
+      "citations": ["E-0097"]
+    },
+    {
+      "source": "WKSTN-042",
+      "target": "DC-01",
+      "action": "used stolen admin password",
+      "description": "The workstation used a stolen administrator credential to get a ticket from the domain controller.",
+      "citations": ["E-0111"]
+    }
+  ],
+  "summary": "An outside computer took over a finance workstation and used a stolen administrator credential to reach the domain controller. The remaining events do not show the file server being touched."
+}

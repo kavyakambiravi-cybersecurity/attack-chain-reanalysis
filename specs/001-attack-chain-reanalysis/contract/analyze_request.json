@@ -1,0 +1,4 @@
+{
+  "scenario_id": "attack-chain-01",
+  "removed_event_ids": ["E-0115", "E-0117", "E-0115"]
+}

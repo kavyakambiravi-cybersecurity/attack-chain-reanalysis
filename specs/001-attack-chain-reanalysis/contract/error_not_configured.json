@@ -1,0 +1,4 @@
+{
+  "error": "not_configured",
+  "detail": "Live re-analysis is off: the server has no model key."
+}

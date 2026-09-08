@@ -3,10 +3,19 @@ import Toolbar from "./components/Toolbar";
 import AnswerKeyPanel from "./components/AnswerKey";
 import ChainGraph from "./graph/ChainGraph";
 import EvidencePanel from "./graph/EvidencePanel";
+import Legend from "./graph/Legend";
 import { ApiError, analyze, health, loadScenario } from "./lib/api";
+import { describeChange, diffChains } from "./lib/diff";
 import { interventionForEdge, interventionForNode, unionRemoved } from "./lib/intervene";
 import { edgeKey, validateChain } from "./lib/validate";
-import type { AnswerKey, Chain, Event, Intervention, ValidatedChain } from "./types";
+import type {
+  AnswerKey,
+  Chain,
+  DiffedChain,
+  Event,
+  Intervention,
+  ValidatedChain,
+} from "./types";
 
 const SCENARIO_ID = "attack-chain-01";
 
@@ -18,6 +27,7 @@ export default function App() {
   const [answerKey, setAnswerKey] = useState<AnswerKey | null>(null);
   const [cached, setCached] = useState<Chain | null>(null);
   const [chain, setChain] = useState<ValidatedChain | null>(null);
+  const [view, setView] = useState<DiffedChain | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [live, setLive] = useState<boolean | null>(null);
   const [model, setModel] = useState<string | null>(null);
@@ -26,6 +36,7 @@ export default function App() {
   const [removedIds, setRemovedIds] = useState<string[]>([]);
   const [running, setRunning] = useState<Intervention | null>(null);
   const [errorBanner, setErrorBanner] = useState<string | null>(null);
+  const [resultBanner, setResultBanner] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -36,7 +47,9 @@ export default function App() {
         setEvents(loaded.events);
         setAnswerKey(loaded.answer_key);
         setCached(loaded.cached);
-        setChain(loaded.cached ? validateChain(loaded.cached, loaded.events) : null);
+        const validated = loaded.cached ? validateChain(loaded.cached, loaded.events) : null;
+        setChain(validated);
+        setView(validated ? diffChains(null, validated) : null);
       } catch (error) {
         if (!cancelled) {
           setLoadError(
@@ -84,10 +97,15 @@ export default function App() {
     async (intervention: Intervention, removed: string[]) => {
       setRunning(intervention);
       setErrorBanner(null);
+      setResultBanner(null);
       try {
-        const next = await analyze(SCENARIO_ID, removed);
-        setRemovedIds(next.removed_event_ids);
-        setChain(validateChain(next, events));
+        const response = await analyze(SCENARIO_ID, removed);
+        const next = validateChain(response, events);
+        const diffed = diffChains(chain, next);
+        setRemovedIds(response.removed_event_ids);
+        setChain(next);
+        setView(diffed);
+        setResultBanner(describeChange(response.removed_event_ids.length, diffed));
         setSelectedEdgeKey(null);
       } catch (error) {
         if (error instanceof ApiError) {
@@ -100,7 +118,7 @@ export default function App() {
         setRunning(null);
       }
     },
-    [events],
+    [chain, events],
   );
 
   const intervene = useCallback(
@@ -134,13 +152,16 @@ export default function App() {
     if (busy) return;
     setRemovedIds([]);
     setErrorBanner(null);
+    setResultBanner(null);
     setSelectedEdgeKey(null);
-    setChain(cached ? validateChain(cached, events) : null);
+    const validated = cached ? validateChain(cached, events) : null;
+    setChain(validated);
+    setView(validated ? diffChains(null, validated) : null);
   }, [busy, cached, events]);
 
   const selectedEdge = useMemo(
-    () => chain?.edges.find((edge) => edgeKey(edge) === selectedEdgeKey) ?? null,
-    [chain, selectedEdgeKey],
+    () => view?.edges.find((edge) => edgeKey(edge) === selectedEdgeKey) ?? null,
+    [view, selectedEdgeKey],
   );
 
   const citedIds = useMemo(
@@ -170,6 +191,15 @@ export default function App() {
         onAnalyse={cached === null && chain === null ? onAnalyse : null}
       />
 
+      {resultBanner && !errorBanner ? (
+        <div className="banner result" role="status">
+          {resultBanner}
+          <button type="button" className="link" onClick={() => setResultBanner(null)}>
+            Dismiss
+          </button>
+        </div>
+      ) : null}
+
       {errorBanner ? (
         <div className="banner error" role="alert">
           {errorBanner}
@@ -188,9 +218,9 @@ export default function App() {
 
       <main className="workspace">
         <section className="graph-pane">
-          {chain ? (
+          {view ? (
             <ChainGraph
-              chain={chain}
+              chain={view}
               events={events}
               onIsolate={onIsolate}
               onBlock={onBlock}
@@ -207,6 +237,7 @@ export default function App() {
                 : "No analysis has been generated for this scenario yet. Use Analyse to run one."}
             </div>
           )}
+          {view ? <Legend /> : null}
           {chain?.summary ? <p className="chain-summary">{chain.summary}</p> : null}
         </section>
 

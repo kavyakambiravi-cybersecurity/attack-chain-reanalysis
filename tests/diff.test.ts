@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { diffChains } from "../src/lib/diff";
+import { describeChange, diffChains } from "../src/lib/diff";
 import { validateChain } from "../src/lib/validate";
 import type { Chain, ValidatedChain } from "../src/types";
 import { goodChain } from "./fixtures/chains";
@@ -152,5 +152,23 @@ describe("diffChains", () => {
     const before = JSON.parse(JSON.stringify(prev));
     diffChains(prev, prev);
     expect(prev).toEqual(before);
+  });
+});
+
+describe("describeChange", () => {
+  it("reports counts and never a verdict", () => {
+    const diffed = diffChains(prev, validated((chain) => ({ ...chain, edges: [] })));
+    expect(describeChange(23, diffed)).toBe(
+      "Removed 23 events. 5 vanished, 0 survived, 0 appeared.",
+    );
+    for (const word of ["secure", "safe", "contained"]) {
+      expect(describeChange(23, diffed).toLowerCase()).not.toContain(word);
+    }
+  });
+
+  it("says event, not events, for one", () => {
+    expect(describeChange(1, diffChains(prev, prev))).toBe(
+      "Removed 1 event. 0 vanished, 5 survived, 0 appeared.",
+    );
   });
 });

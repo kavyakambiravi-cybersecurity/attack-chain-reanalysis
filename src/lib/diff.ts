@@ -59,3 +59,13 @@ export function diffChains(previous: ValidatedChain | null, next: ValidatedChain
     },
   };
 }
+
+/**
+ * The one line shown after a re-analysis. Counts, never adjectives: the tool
+ * says what changed, not whether anything is better. Constitution IV.
+ */
+export function describeChange(removedCount: number, diffed: DiffedChain): string {
+  const { vanished, survived, appeared } = diffed.counts;
+  const events = `Removed ${removedCount} ${removedCount === 1 ? "event" : "events"}.`;
+  return `${events} ${vanished} vanished, ${survived} survived, ${appeared} appeared.`;
+}

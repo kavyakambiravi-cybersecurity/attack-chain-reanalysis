@@ -1,0 +1,8 @@
+{
+  "nodes": [],
+  "edges": [],
+  "summary": "The events reviewed show routine workstation logons, file access, software update traffic, and normal administrative tasks such as scheduled backups, patch windows, and helpdesk troubleshooting; none of the seemingly unusual events link together into a connected sequence of attacker actions, so the remaining events do not show a connected attack.",
+  "scenario_id": "benign-lookalike-02",
+  "removed_event_ids": [],
+  "prompt_version": "2026-09-07.2"
+}

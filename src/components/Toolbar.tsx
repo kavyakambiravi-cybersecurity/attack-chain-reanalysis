@@ -1,5 +1,9 @@
+import type { ScenarioOption } from "../lib/scenarios";
+
 export interface ToolbarProps {
-  scenarioName: string;
+  scenarios: readonly ScenarioOption[];
+  scenarioId: string;
+  onSelectScenario: (scenarioId: string) => void;
   /** Null until the health check answers. */
   live: boolean | null;
   model: string | null;
@@ -29,7 +33,9 @@ function LivePill({ live, model }: { live: boolean | null; model: string | null 
 }
 
 export default function Toolbar({
-  scenarioName,
+  scenarios,
+  scenarioId,
+  onSelectScenario,
   live,
   model,
   removedCount,
@@ -43,7 +49,21 @@ export default function Toolbar({
     <header className="toolbar">
       <div className="toolbar-left">
         <span className="brand">Sever</span>
-        <span className="scenario-name">{scenarioName}</span>
+        <label className="scenario-picker">
+          <span className="scenario-picker-label">Scenario</span>
+          <select
+            value={scenarioId}
+            disabled={busy}
+            title={busy ? "Wait for the running re-analysis to finish." : "Switch to another bundled scenario"}
+            onChange={(event) => onSelectScenario(event.target.value)}
+          >
+            {scenarios.map((scenario) => (
+              <option key={scenario.id} value={scenario.id}>
+                {scenario.name}
+              </option>
+            ))}
+          </select>
+        </label>
       </div>
       <div className="toolbar-right">
         {removedCount > 0 ? (

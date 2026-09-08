@@ -46,9 +46,28 @@ export function armMockErrorFromUrl(search: string): void {
 
 if (typeof window !== "undefined") armMockErrorFromUrl(window.location.search);
 
-/** The hand-written chain the mock serves as the cached first analysis. */
+/** The one scenario the mock has a hand-written chain for. */
+export const MOCK_ATTACK_SCENARIO_ID = "attack-chain-01";
+
+/** What the mock says for a scenario it has no chain for, benign or otherwise. */
+export const MOCK_NO_CHAIN_SUMMARY = "The remaining events do not show a connected attack.";
+
+/**
+ * The chain the mock serves as the cached first analysis: the hand-written
+ * attack chain for attack-chain-01, and an empty chain for anything else,
+ * which is what the real model returns for the benign scenario.
+ */
 export function mockCachedChain(scenarioId: string): Chain {
   const chain = ChainSchema.parse(cachedAnalysis);
+  if (scenarioId !== MOCK_ATTACK_SCENARIO_ID) {
+    return {
+      ...chain,
+      nodes: [],
+      edges: [],
+      summary: MOCK_NO_CHAIN_SUMMARY,
+      scenario_id: scenarioId,
+    };
+  }
   return { ...chain, scenario_id: scenarioId };
 }
 
@@ -99,9 +118,6 @@ export async function mockAnalyze(
     nodes,
     edges,
     removed_event_ids: [...removedEventIds],
-    summary:
-      edges.length === 0
-        ? "The remaining events do not show a connected attack."
-        : base.summary,
+    summary: edges.length === 0 ? MOCK_NO_CHAIN_SUMMARY : base.summary,
   };
 }

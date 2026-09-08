@@ -64,9 +64,14 @@ into `SYSTEM_PROMPT`, and the version bumped. The committed chain has 7 nodes an
 cites all 16 answer-key events, misses none, and every citation's source and target equal
 its edge's endpoints. No banned words.
 
-## Not done yet
+## The T028 model run
 
-- **T028**, the benign scenario's `analysis.json`. Optional, skipped.
+Run on 2026-09-07 with a real key, after the frontend merged:
+`scripts/analyze.py benign-lookalike-02`. The model returned zero nodes, zero edges, no
+banned words, and a summary saying the events do not show a connected attack. That clears
+the gate in tasks.md (zero edges, or only unverified ones), so the scenario switcher (T029)
+shipped. `data/scenarios/benign-lookalike-02/analysis.json` is committed;
+`test_cached.py` now runs for both scenarios and pins the benign one to an empty chain.
 
 ## Open questions for the first deploy
 

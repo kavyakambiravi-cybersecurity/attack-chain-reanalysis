@@ -1,5 +1,6 @@
-// The chain itself. React Flow draws it; layout.ts places it; validate.ts
-// decides which edges are drawn as fact and which are drawn as unverified.
+// The chain itself. React Flow draws it; layout.ts places it and routes every
+// edge; validate.ts decides which edges are drawn as fact and which are drawn
+// as unverified.
 import { createContext, useContext, useMemo } from "react";
 import ReactFlow, {
   Background,
@@ -13,17 +14,24 @@ import ReactFlow, {
 } from "reactflow";
 import "reactflow/dist/style.css";
 import AssetIcon from "./AssetIcon";
-import { layoutChain, type ChainEdgeData, type ChainNodeData, type LayoutInput } from "./layout";
+import {
+  layoutChain,
+  smoothPath,
+  type ChainEdgeData,
+  type ChainNodeData,
+  type LayoutInput,
+} from "./layout";
 import type { Event } from "../types";
 
 interface GraphActions {
   onIsolate: (asset: string) => void;
-  onBlock: (edgeKey: string) => void;
-  onSelectEdge: (edgeKey: string) => void;
-  selectedEdgeKey: string | null;
+  /** Called with the drawn edge's id, from uniqueEdgeIds. */
+  onBlock: (edgeId: string) => void;
+  onSelectEdge: (edgeId: string) => void;
+  selectedEdgeId: string | null;
   /** False when the server has no key, or a call is already in flight. */
   canIntervene: boolean;
-  /** The node or edge whose intervention is running right now. */
+  /** The asset name or edgeKey whose intervention is running right now. */
   busyKey: string | null;
   disabledReason: string;
 }
@@ -34,7 +42,7 @@ const ActionsContext = createContext<GraphActions>({
   onIsolate: noop,
   onBlock: noop,
   onSelectEdge: noop,
-  selectedEdgeKey: null,
+  selectedEdgeId: null,
   canIntervene: false,
   busyKey: null,
   disabledReason: "",
@@ -78,20 +86,22 @@ function ChainEdgeLine(props: EdgeProps<ChainEdgeData>) {
   const actions = useContext(ActionsContext);
   const { id, sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, data, markerEnd } =
     props;
-  const [path, labelX, labelY] = getBezierPath({
-    sourceX,
-    sourceY,
-    sourcePosition,
-    targetX,
-    targetY,
-    targetPosition,
-  });
+
+  // The route dagre planned, which starts and ends on the node borders and
+  // passes through the label. React Flow's own bezier is only a fallback.
+  const [path, labelX, labelY] = useMemo(() => {
+    if (data && data.points.length >= 2) {
+      return [smoothPath(data.points), data.label.x, data.label.y] as const;
+    }
+    return getBezierPath({ sourceX, sourceY, sourcePosition, targetX, targetY, targetPosition });
+  }, [data, sourceX, sourceY, sourcePosition, targetX, targetY, targetPosition]);
+
   const edge = data?.edge;
   const status = data?.status ?? "survived";
   const verified = edge?.verified ?? false;
   const state = status === "survived" ? (verified ? "verified" : "unverified") : status;
-  const selected = actions.selectedEdgeKey === id;
-  const busy = actions.busyKey === id;
+  const selected = actions.selectedEdgeId === id;
+  const busy = data ? actions.busyKey === data.key : false;
 
   return (
     <>
@@ -112,9 +122,17 @@ function ChainEdgeLine(props: EdgeProps<ChainEdgeData>) {
       <EdgeLabelRenderer>
         <div
           className={`edge-label state-${state} ${selected ? "selected" : ""}`}
-          style={{ transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY}px)` }}
+          style={{
+            width: data?.label.width,
+            transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY}px)`,
+          }}
         >
-          <button type="button" className="edge-label-text" onClick={() => actions.onSelectEdge(id)}>
+          <button
+            type="button"
+            className="edge-label-text"
+            title={edge?.description}
+            onClick={() => actions.onSelectEdge(id)}
+          >
             {edge?.action}
             {!verified && status !== "vanished" ? <span className="tag">unverified</span> : null}
             {status === "vanished" ? <span className="tag">gone</span> : null}
@@ -156,29 +174,38 @@ export default function ChainGraph({ chain, events, ...actions }: ChainGraphProp
     actions.onIsolate,
     actions.onBlock,
     actions.onSelectEdge,
-    actions.selectedEdgeKey,
+    actions.selectedEdgeId,
     actions.canIntervene,
     actions.busyKey,
     actions.disabledReason,
   ]);
 
+  // A new set of nodes or edges is a new picture: remount so React Flow fits
+  // it to the pane again instead of leaving part of it off screen.
+  const shape = useMemo(
+    () => [...nodes.map((node) => node.id), ...edges.map((edge) => edge.id)].join("|"),
+    [nodes, edges],
+  );
+
   return (
     <ActionsContext.Provider value={value}>
       <ReactFlow
+        key={shape}
         nodes={nodes}
         edges={edges}
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
         fitView
-        fitViewOptions={{ padding: 0.2 }}
+        fitViewOptions={{ padding: 0.08 }}
+        minZoom={0.3}
         proOptions={{ hideAttribution: false }}
         onEdgeClick={(_, edge) => actions.onSelectEdge(edge.id)}
-        nodesDraggable
+        nodesDraggable={false}
         nodesConnectable={false}
         elementsSelectable
       >
         <Background gap={24} />
-        <Controls showInteractive={false} />
+        <Controls showInteractive={false} position="bottom-right" />
       </ReactFlow>
     </ActionsContext.Provider>
   );

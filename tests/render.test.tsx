@@ -7,6 +7,7 @@ import Toolbar from "../src/components/Toolbar";
 import EvidencePanel from "../src/graph/EvidencePanel";
 import Legend from "../src/graph/Legend";
 import { diffChains } from "../src/lib/diff";
+import { SCENARIOS } from "../src/lib/scenarios";
 import { AnswerKeySchema, ChainSchema, EventsSchema } from "../src/lib/schema";
 import { validateChain } from "../src/lib/validate";
 import { readJson } from "./contract";
@@ -54,7 +55,9 @@ describe("panels render", () => {
   it("says when live re-analysis is off, without saying anything else", () => {
     const html = renderToStaticMarkup(
       <Toolbar
-        scenarioName="Finance file-server exfiltration"
+        scenarios={SCENARIOS}
+        scenarioId="attack-chain-01"
+        onSelectScenario={nothing}
         live={false}
         model="claude-sonnet-5"
         removedCount={3}
@@ -67,6 +70,26 @@ describe("panels render", () => {
     );
     expect(html).toContain("live re-analysis off");
     expect(html).toContain("3 events removed");
+  });
+
+  it("offers every bundled scenario by name and marks the open one", () => {
+    const html = renderToStaticMarkup(
+      <Toolbar
+        scenarios={SCENARIOS}
+        scenarioId="benign-lookalike-02"
+        onSelectScenario={nothing}
+        live
+        model="claude-sonnet-5"
+        removedCount={0}
+        busy={false}
+        canReset={false}
+        onReset={nothing}
+        onToggleAnswerKey={nothing}
+        onAnalyse={null}
+      />,
+    );
+    for (const scenario of SCENARIOS) expect(html).toContain(scenario.name);
+    expect(html).toMatch(/<option value="benign-lookalike-02" selected=""/);
   });
 
   it("explains the four step styles", () => {

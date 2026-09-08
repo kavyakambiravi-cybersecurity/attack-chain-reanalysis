@@ -122,3 +122,18 @@ export function explainCheck(
 export function edgeKey(edge: { source: string; target: string }): string {
   return `${edge.source}->${edge.target}`;
 }
+
+/**
+ * One id per edge for rendering and selection. Two steps between the same two
+ * assets share an edgeKey, which is right for diffing and interventions, but a
+ * drawn edge needs its own id: the second such step gets "#2", the third "#3".
+ */
+export function uniqueEdgeIds(edges: { source: string; target: string }[]): string[] {
+  const seen = new Map<string, number>();
+  return edges.map((edge) => {
+    const key = edgeKey(edge);
+    const count = (seen.get(key) ?? 0) + 1;
+    seen.set(key, count);
+    return count === 1 ? key : `${key}#${count}`;
+  });
+}

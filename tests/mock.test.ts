@@ -3,7 +3,14 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { ChainSchema } from "../src/lib/schema";
 import { validateChain } from "../src/lib/validate";
-import { MOCK_MARKER, mockAnalyze, mockCachedChain, mockHealth, setMockError } from "../src/lib/mock";
+import {
+  MOCK_MARKER,
+  MOCK_NO_CHAIN_SUMMARY,
+  mockAnalyze,
+  mockCachedChain,
+  mockHealth,
+  setMockError,
+} from "../src/lib/mock";
 import type { AnswerKey, Event } from "../src/types";
 import { readJson, repoPath } from "./contract";
 
@@ -31,6 +38,26 @@ describe("the dev mock's cached chain", () => {
     for (const asset of key.assets_involved ?? []) expect(nodeIds.has(asset)).toBe(true);
     expect(cached.nodes).toHaveLength(7);
     expect(cached.edges).toHaveLength(7);
+  });
+});
+
+describe("the dev mock's benign scenario", () => {
+  it("serves an empty chain that still validates", () => {
+    const cached = mockCachedChain("benign-lookalike-02");
+    expect(ChainSchema.safeParse(cached).success).toBe(true);
+    expect(cached.scenario_id).toBe("benign-lookalike-02");
+    expect(cached.nodes).toEqual([]);
+    expect(cached.edges).toEqual([]);
+    expect(cached.summary).toBe(MOCK_NO_CHAIN_SUMMARY);
+    const benignEvents = readJson<Event[]>("data/scenarios/benign-lookalike-02/events.json");
+    expect(validateChain(cached, benignEvents).warnings).toEqual([]);
+  });
+
+  it("re-analyses to the same empty chain", async () => {
+    const chain = await mockAnalyze("benign-lookalike-02", ["E-0046"], NO_DELAY);
+    expect(chain.edges).toEqual([]);
+    expect(chain.nodes).toEqual([]);
+    expect(chain.removed_event_ids).toEqual(["E-0046"]);
   });
 });
 

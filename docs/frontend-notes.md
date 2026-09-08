@@ -85,6 +85,26 @@ npm run build                 # prebuild copies data/scenarios to public/scenari
 - The backend's edit to `plan.md` adds three lines to `SYSTEM_PROMPT`, inside "Analysis design
   (server)" rather than the frozen wire contract, so the freeze holds.
 
-## Not done
+## Added after the merge (T029 and the graph clean-up)
 
-T029, the optional scenario dropdown, which sits after the second cut line.
+- **Scenario dropdown.** `src/lib/scenarios.ts` lists the two bundled scenarios by id and
+  answer-key name; `tests/scenarios.test.ts` keeps that list equal to `data/scenarios/` and
+  requires an `analysis.json` for each. The toolbar's select swaps `scenarioId` state in
+  `App.tsx`; switching clears removals, selection, banners, and the graph, then reloads.
+  `loadScenario` and `analyze` already took the id, so nothing on the wire changed. The mock
+  serves an empty chain for any scenario but `attack-chain-01`.
+- **No-chain state.** A chain with no nodes and no edges (the benign scenario, or an attack
+  scenario cut down to nothing) renders a plain statement that nothing was drawn, plus the
+  model's summary, instead of an empty canvas.
+- **Edge labels no longer collide.** The first layout placed each label at the midpoint of a
+  React Flow bezier, so labels on short or parallel edges landed under the node boxes, and
+  two steps between the same assets (there are two `jsmith -> WKSTN-042` and two
+  `administrator -> FILESRV-01` steps in the cached chain) shared one React Flow id and one
+  position. Now `layout.ts` hands every label to dagre as a box (`LABEL_WIDTH` 150, height
+  estimated from the text), so dagre reserves a column for labels between ranks and stacks
+  parallel ones; edges are drawn along dagre's route points with a Catmull-Rom curve
+  (`smoothPath`) and the label sits on that curve where dagre placed it. Node ids are
+  unchanged; edge ids come from `uniqueEdgeIds` (`edgeKey`, then `edgeKey#2`), while
+  interventions and diffs still key on `edgeKey`. Nodes are no longer draggable, since a
+  dragged node would leave its routed edges behind. `tests/layout.test.ts` checks, on the
+  committed chain, that no label overlaps a node or another label.

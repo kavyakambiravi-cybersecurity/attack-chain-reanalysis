@@ -7,7 +7,8 @@ import Legend from "./graph/Legend";
 import { ApiError, analyze, health, loadScenario } from "./lib/api";
 import { describeChange, diffChains } from "./lib/diff";
 import { interventionForEdge, interventionForNode, unionRemoved } from "./lib/intervene";
-import { edgeKey, validateChain } from "./lib/validate";
+import { DEFAULT_SCENARIO_ID, SCENARIOS } from "./lib/scenarios";
+import { uniqueEdgeIds, validateChain } from "./lib/validate";
 import type {
   AnswerKey,
   Chain,
@@ -17,12 +18,11 @@ import type {
   ValidatedChain,
 } from "./types";
 
-const SCENARIO_ID = "attack-chain-01";
-
 const OFFLINE_REASON = "Live re-analysis is off: the server has no model key.";
 const BUSY_REASON = "One re-analysis is already running.";
 
 export default function App() {
+  const [scenarioId, setScenarioId] = useState(DEFAULT_SCENARIO_ID);
   const [events, setEvents] = useState<Event[]>([]);
   const [answerKey, setAnswerKey] = useState<AnswerKey | null>(null);
   const [cached, setCached] = useState<Chain | null>(null);
@@ -31,7 +31,7 @@ export default function App() {
   const [loadError, setLoadError] = useState<string | null>(null);
   const [live, setLive] = useState<boolean | null>(null);
   const [model, setModel] = useState<string | null>(null);
-  const [selectedEdgeKey, setSelectedEdgeKey] = useState<string | null>(null);
+  const [selectedEdgeId, setSelectedEdgeId] = useState<string | null>(null);
   const [answerKeyOpen, setAnswerKeyOpen] = useState(false);
   const [removedIds, setRemovedIds] = useState<string[]>([]);
   const [running, setRunning] = useState<Intervention | null>(null);
@@ -42,7 +42,7 @@ export default function App() {
     let cancelled = false;
     void (async () => {
       try {
-        const loaded = await loadScenario(SCENARIO_ID);
+        const loaded = await loadScenario(scenarioId);
         if (cancelled) return;
         setEvents(loaded.events);
         setAnswerKey(loaded.answer_key);
@@ -63,7 +63,7 @@ export default function App() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [scenarioId]);
 
   useEffect(() => {
     let cancelled = false;
@@ -99,14 +99,14 @@ export default function App() {
       setErrorBanner(null);
       setResultBanner(null);
       try {
-        const response = await analyze(SCENARIO_ID, removed);
+        const response = await analyze(scenarioId, removed);
         const next = validateChain(response, events);
         const diffed = diffChains(chain, next);
         setRemovedIds(response.removed_event_ids);
         setChain(next);
         setView(diffed);
         setResultBanner(describeChange(response.removed_event_ids.length, diffed));
-        setSelectedEdgeKey(null);
+        setSelectedEdgeId(null);
       } catch (error) {
         if (error instanceof ApiError) {
           setErrorBanner(error.detail);
@@ -118,7 +118,7 @@ export default function App() {
         setRunning(null);
       }
     },
-    [chain, events],
+    [chain, events, scenarioId],
   );
 
   const intervene = useCallback(
@@ -134,12 +134,19 @@ export default function App() {
     [events, intervene],
   );
 
+  /** The drawn edges, with the id each one is selected and blocked by. */
+  const drawnEdges = useMemo(() => {
+    const edges = view?.edges ?? [];
+    const ids = uniqueEdgeIds(edges);
+    return edges.map((edge, index) => ({ id: ids[index], edge }));
+  }, [view]);
+
   const onBlock = useCallback(
-    (key: string) => {
-      const edge = chain?.edges.find((candidate) => edgeKey(candidate) === key);
-      if (edge) intervene(interventionForEdge(edge));
+    (id: string) => {
+      const drawn = drawnEdges.find((candidate) => candidate.id === id);
+      if (drawn) intervene(interventionForEdge(drawn.edge));
     },
-    [chain, intervene],
+    [drawnEdges, intervene],
   );
 
   /** Offered only when no analysis has been generated for this scenario yet. */
@@ -153,21 +160,46 @@ export default function App() {
     setRemovedIds([]);
     setErrorBanner(null);
     setResultBanner(null);
-    setSelectedEdgeKey(null);
+    setSelectedEdgeId(null);
     const validated = cached ? validateChain(cached, events) : null;
     setChain(validated);
     setView(validated ? diffChains(null, validated) : null);
   }, [busy, cached, events]);
 
+  /**
+   * Switching scenario starts over: nothing removed, nothing selected, no
+   * banners, and no graph on screen until the new scenario's files arrive.
+   */
+  const onSelectScenario = useCallback(
+    (id: string) => {
+      if (busy || id === scenarioId) return;
+      setRemovedIds([]);
+      setErrorBanner(null);
+      setResultBanner(null);
+      setSelectedEdgeId(null);
+      setAnswerKeyOpen(false);
+      setLoadError(null);
+      setEvents([]);
+      setAnswerKey(null);
+      setCached(null);
+      setChain(null);
+      setView(null);
+      setScenarioId(id);
+    },
+    [busy, scenarioId],
+  );
+
   const selectedEdge = useMemo(
-    () => view?.edges.find((edge) => edgeKey(edge) === selectedEdgeKey) ?? null,
-    [view, selectedEdgeKey],
+    () => drawnEdges.find((drawn) => drawn.id === selectedEdgeId)?.edge ?? null,
+    [drawnEdges, selectedEdgeId],
   );
 
   const citedIds = useMemo(
     () => new Set((chain?.edges ?? []).flatMap((edge) => edge.citations)),
     [chain],
   );
+
+  const noChain = view !== null && view.nodes.length === 0 && view.edges.length === 0;
 
   if (loadError) {
     return (
@@ -180,7 +212,9 @@ export default function App() {
   return (
     <div className="app">
       <Toolbar
-        scenarioName={answerKey?.scenario_name ?? "loading…"}
+        scenarios={SCENARIOS}
+        scenarioId={scenarioId}
+        onSelectScenario={onSelectScenario}
         live={live}
         model={model}
         removedCount={removedIds.length}
@@ -188,7 +222,7 @@ export default function App() {
         canReset={removedIds.length > 0 || errorBanner !== null}
         onReset={onReset}
         onToggleAnswerKey={() => setAnswerKeyOpen((open) => !open)}
-        onAnalyse={cached === null && chain === null ? onAnalyse : null}
+        onAnalyse={events.length > 0 && cached === null && chain === null ? onAnalyse : null}
       />
 
       {resultBanner && !errorBanner ? (
@@ -218,18 +252,34 @@ export default function App() {
 
       <main className="workspace">
         <section className="graph-pane">
-          {view ? (
-            <ChainGraph
-              chain={view}
-              events={events}
-              onIsolate={onIsolate}
-              onBlock={onBlock}
-              onSelectEdge={setSelectedEdgeKey}
-              selectedEdgeKey={selectedEdgeKey}
-              canIntervene={canIntervene}
-              busyKey={running?.subject ?? null}
-              disabledReason={live === true ? BUSY_REASON : OFFLINE_REASON}
-            />
+          {view && !noChain ? (
+            <div className="graph-canvas">
+              <ChainGraph
+                chain={view}
+                events={events}
+                onIsolate={onIsolate}
+                onBlock={onBlock}
+                onSelectEdge={setSelectedEdgeId}
+                selectedEdgeId={selectedEdgeId}
+                canIntervene={canIntervene}
+                busyKey={running?.subject ?? null}
+                disabledReason={live === true ? BUSY_REASON : OFFLINE_REASON}
+              />
+              <Legend />
+            </div>
+          ) : noChain ? (
+            <div className="graph-placeholder no-chain" role="status">
+              <p className="no-chain-title">No attack chain was drawn.</p>
+              <p>
+                The model read the {events.length - removedIds.length} events
+                {removedIds.length > 0 ? " that remain" : " in this scenario"} and did not link any
+                of them into a connected sequence of attacker actions, so there is nothing to draw.
+              </p>
+              <p className="muted">
+                Open the answer key to see which events were planted to look like an attack, and
+                why each one is ordinary on its own.
+              </p>
+            </div>
           ) : (
             <div className="graph-placeholder">
               {events.length === 0
@@ -237,14 +287,13 @@ export default function App() {
                 : "No analysis has been generated for this scenario yet. Use Analyse to run one."}
             </div>
           )}
-          {view ? <Legend /> : null}
           {chain?.summary ? <p className="chain-summary">{chain.summary}</p> : null}
         </section>
 
         <EvidencePanel
           edge={selectedEdge}
           events={events}
-          onClose={() => setSelectedEdgeKey(null)}
+          onClose={() => setSelectedEdgeId(null)}
         />
       </main>
 

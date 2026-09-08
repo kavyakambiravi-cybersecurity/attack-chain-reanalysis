@@ -1,0 +1,5 @@
+api/tests
+.venv
+node_modules
+dist
+public/scenarios

@@ -1,0 +1,90 @@
+# Frontend notes (branch `001-frontend`)
+
+Tasks T003 to T027 of `specs/001-attack-chain-reanalysis/tasks.md`, built in the frontend
+worktree against the frozen wire contract and a dev mock, with no Python, no key, and no
+`analysis.json` present at the time of writing. Nothing under `api/**`, `scripts/analyze.py`,
+`requirements.txt`, `vercel.json`, `.env.example`, or `data/scenarios/**` was touched.
+
+## What was created
+
+**Scaffold.** `package.json` (reactflow, dagre, zod; vitest, @types/dagre), `vite.config.ts`
+with the `/api` to `localhost:8000` dev proxy and the Vitest config, `tsconfig*.json`,
+`index.html`, and `scripts/copy_scenarios.mjs`, the `prebuild` step that copies
+`data/scenarios` into the gitignored `public/scenarios`.
+
+**Types and schemas.** `src/types.ts` carries the wire shapes verbatim in snake_case plus the
+client-only validated and diffed shapes and `assetKind(name)`. `src/lib/schema.ts` mirrors them
+in zod; objects strip unknown keys, so the server can add fields freely and no score field can
+leak in.
+
+**Logic.** `src/lib/validate.ts` (citation checking, banned-word flagging, `explainCheck`),
+`src/lib/intervene.ts` (`eventsForNode`, `eventsForEdge`, `unionRemoved`), `src/lib/diff.ts`
+(`diffChains`, `describeChange`), `src/lib/api.ts` and `src/lib/http.ts` (`loadScenario`,
+`analyze`, `health`, `ApiError`), `src/lib/mock.ts` with `src/mock/analysis.attack-chain-01.json`.
+
+**UI.** `src/graph/` — `layout.ts` (dagre LR, nodesep 40, ranksep 120), `ChainGraph.tsx`,
+`EvidencePanel.tsx`, `Legend.tsx`, `AssetIcon.tsx`. `src/components/` — `Toolbar.tsx`,
+`AnswerKey.tsx`. `src/App.tsx` wires load, health, intervention, reset, diff, and banners.
+`src/styles.css`.
+
+**Tests.** `tests/` — schema, scenario, validate, asset-kind, api, mock, cached-analysis,
+intervene, diff, layout, render, plus `tests/fixtures/{mini,chains}.ts` and `tests/contract.ts`.
+The test file was written before the module for validate, intervene, diff, and schema.
+
+## Decisions worth knowing
+
+- **Asset names are matched exactly; nothing is normalised.** A node or edge is dropped only
+  when its name matches nothing in the events, *including the unlabelled form of a labelled
+  asset*. So a model that writes `151.101.1.140` for `151.101.1.140 (fastly-cdn)` gets an
+  unverified edge with a reason rather than a silently vanished one, while an invented name
+  like `GHOST-99` is dropped with a warning. This reconciles two rows of `tests.md` that
+  disagreed under a single exact-match rule.
+- **The mock is verified absent from production, both ways.** A normal build emits no mock
+  chunk and no file in `dist/` contains `mock/analysis` or a marker phrase from the mock chain;
+  a `VITE_MOCK_API=1` build emits `assets/mock-*.js` containing both. The marker is a phrase
+  from the mock data, not an unused exported constant, so tree-shaking cannot make the check
+  pass falsely.
+- **One intervention mechanism.** Isolate and Block both build an `Intervention` and differ
+  only in which event ids they name. A citation the model invented is passed through untouched
+  so the server can reject it and the UI can show that.
+- **The first render is entirely `survived`**, never `appeared`: with nothing to compare
+  against, nothing is new.
+- **No score, no verdict.** The post-analysis banner reads
+  `Removed N events. A vanished, B survived, C appeared.` The words "secure", "safe", and
+  "contained" appear in the source only as `BANNED_WORDS` in the validator.
+
+## Running it
+
+```bash
+npm ci
+VITE_MOCK_API=1 npm run dev   # no Python and no key needed
+npx vitest run
+npm run build                 # prebuild copies data/scenarios to public/scenarios
+```
+
+`?mockError=<code>` on the page URL arms the next `analyze()` to fail with that error code.
+
+## State at the time of writing
+
+`npx vitest run` — 108 passed, 2 skipped, 11 files. `npm run build` clean. The two skips are
+`tests/cached-analysis.test.ts`, which prints its reason to stderr and activates as soon as
+`data/scenarios/attack-chain-01/analysis.json` lands from backend task T012.
+
+## Merge notes
+
+- **`vercel.json` is deliberately absent here.** The backend already committed it on
+  `001-backend`, byte-identical to the plan and including the
+  `"/api/(.*)" -> "/api/index"` rewrite this side depends on. A duplicate would buy nothing and
+  risk an add/add conflict, so this branch leaves it to them.
+- The backend's committed `analysis.json` was checked against the `cached-analysis` assertions
+  before merging: it passes all of them, citing 16 of 16 attack events with zero unverified
+  edges and zero validation warnings.
+- Its `prompt_version` is `2026-09-07.2` where the contract example says `2026-09-07.1`. Not
+  drift: the client schema only requires a non-empty string, and the backend's own pytest pins
+  it to their constant.
+- The backend's edit to `plan.md` adds three lines to `SYSTEM_PROMPT`, inside "Analysis design
+  (server)" rather than the frozen wire contract, so the freeze holds.
+
+## Not done
+
+T029, the optional scenario dropdown, which sits after the second cut line.

@@ -1,0 +1,66 @@
+{
+  "scenario_id": "attack-chain-01",
+  "removed_event_ids": [],
+  "prompt_version": "mock-0",
+  "nodes": [
+    { "id": "203.0.113.47", "label": "outside computer" },
+    { "id": "jsmith", "label": "finance staff account" },
+    { "id": "WKSTN-042", "label": "finance workstation" },
+    { "id": "DC-01", "label": "domain controller" },
+    { "id": "administrator", "label": "administrator account" },
+    { "id": "FILESRV-01", "label": "finance file server" },
+    { "id": "198.51.100.22", "label": "outside storage" }
+  ],
+  "edges": [
+    {
+      "source": "203.0.113.47",
+      "target": "WKSTN-042",
+      "action": "logged in from outside",
+      "description": "A computer outside the company signed in to a finance workstation using jsmith's account, which is how the whole thing starts.",
+      "citations": ["E-0095"]
+    },
+    {
+      "source": "jsmith",
+      "target": "WKSTN-042",
+      "action": "ran hidden commands",
+      "description": "Under jsmith's account, the mail program started a hidden command that looked around the network and copied passwords out of the workstation's memory.",
+      "citations": ["E-0096", "E-0102", "E-0107"]
+    },
+    {
+      "source": "WKSTN-042",
+      "target": "203.0.113.47",
+      "action": "kept calling home",
+      "description": "The workstation began sending small messages to the same outside computer every minute, which is how it took further instructions.",
+      "citations": ["E-0097"]
+    },
+    {
+      "source": "WKSTN-042",
+      "target": "DC-01",
+      "action": "used a stolen password",
+      "description": "The workstation used an administrator password taken from its own memory to get a network pass from the machine that manages all accounts.",
+      "citations": ["E-0111"]
+    },
+    {
+      "source": "WKSTN-042",
+      "target": "FILESRV-01",
+      "action": "reached the file server",
+      "description": "With that administrator pass, the workstation signed in to the finance file server and opened a file-sharing session to it.",
+      "citations": ["E-0115", "E-0117"]
+    },
+    {
+      "source": "administrator",
+      "target": "FILESRV-01",
+      "action": "gathered and hid files",
+      "description": "The administrator account ran commands on the file server, read finance and HR files, bundled them into one archive, then cleared the log and deleted the archive.",
+      "citations": ["E-0119", "E-0122", "E-0124", "E-0125", "E-0136", "E-0137"]
+    },
+    {
+      "source": "FILESRV-01",
+      "target": "198.51.100.22",
+      "action": "sent the files outside",
+      "description": "The file server sent 480MB of data to an outside address, which is the point at which the company's files left the building.",
+      "citations": ["E-0129"]
+    }
+  ],
+  "summary": "An outside computer signed in to a finance workstation as jsmith, took an administrator password from it, and used that password to reach the domain controller and the finance file server. Finance and HR files were gathered on the file server and 480MB was sent to an outside address."
+}

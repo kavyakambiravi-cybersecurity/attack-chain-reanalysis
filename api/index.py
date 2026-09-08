@@ -1,4 +1,4 @@
-"""FastAPI app for Sever.
+"""FastAPI app for Attack Chain Reanalysis.
 
 Routes are declared with their full paths (`/api/health`, `/api/analyze`) so the same
 app serves locally under uvicorn and on Vercel behind the `/api/(.*)` rewrite.
@@ -58,7 +58,7 @@ RATE_LIMIT_PER_MINUTE = 10
 
 _UNPRINTABLE = re.compile(r"[^\x20-\x7e]")
 
-app = FastAPI(title="Sever API", docs_url=None, redoc_url=None, openapi_url=None)
+app = FastAPI(title="Attack Chain Reanalysis API", docs_url=None, redoc_url=None, openapi_url=None)
 
 
 # --- Helpers ----------------------------------------------------------------------

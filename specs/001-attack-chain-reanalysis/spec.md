@@ -225,7 +225,7 @@ re-analysis (Story 3).
 Resolved in [plan.md](plan.md). Summary: Vercel hosting, which rules out the Java scaffold;
 Python FastAPI serverless function for the API; Vite + React + React Flow with dagre
 left-to-right layout; Claude Sonnet 5 with structured output; diff shown as an overlay on one
-graph; Vitest for TypeScript logic plus a minimal pytest set for the server; working name Sever.
+graph; Vitest for TypeScript logic plus a minimal pytest set for the server; name Attack Chain Reanalysis.
 
 ---
 

@@ -56,7 +56,7 @@ export default function Toolbar({
   return (
     <header className="toolbar">
       <div className="toolbar-left">
-        <span className="brand">Sever</span>
+        <span className="brand">Attack Chain Reanalysis</span>
         <label className="scenario-picker">
           <span className="scenario-picker-label">Scenario</span>
           <select

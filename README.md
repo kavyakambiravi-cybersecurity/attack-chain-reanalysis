@@ -1,6 +1,6 @@
-# Sever: attack chain counterfactual re-analysis
+# Attack Chain Reanalysis
 
-A security incident produces hundreds of telemetry events. Sever has Claude assemble them into
+A security incident produces hundreds of telemetry events. This tool has Claude assemble them into
 an attack chain drawn as a graph, shows the raw events behind every edge, and lets you intervene
 on the graph (isolate a host, cut a connection) and see the chain re-analyzed from the evidence
 that remains.

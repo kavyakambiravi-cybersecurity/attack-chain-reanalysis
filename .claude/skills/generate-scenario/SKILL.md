@@ -1,6 +1,6 @@
 ---
 name: generate-scenario
-description: Generate the synthetic security-telemetry scenario for Sever — ~500 events with one planted attack chain plus an answer key. Use when creating, regenerating, or tuning the bundled incident data (events.json / answer_key.json).
+description: Generate the synthetic security-telemetry scenario for Attack Chain Reanalysis — ~500 events with one planted attack chain plus an answer key. Use when creating, regenerating, or tuning the bundled incident data (events.json / answer_key.json).
 ---
 
 # generate-scenario

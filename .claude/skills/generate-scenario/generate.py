@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Scenario generator for Sever (attack-chain re-analysis take-home).
+Scenario generator for Attack Chain Reanalysis (take-home).
 
 Produces synthetic security-telemetry scenarios: ~500 events dominated by
 benign noise, seeded with a small set of "interesting" events.

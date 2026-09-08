@@ -34,7 +34,7 @@ and diffing run in the browser in plain TypeScript so they are unit-testable wit
 | Re-analysis | Live, `POST /api/analyze` | Constitution III. |
 | Tests | Vitest for all TS logic. Three pytest tests for the server's subtraction and guards. | User choice, plus the minimum to trust the server path. |
 | Agent independence | Frozen wire contract, JSON examples read by both suites, `VITE_MOCK_API` mock | Backend and frontend proceed in parallel with no shared runtime. |
-| Name | Sever | Working name stands. |
+| Name | Attack Chain Reanalysis | Plain descriptive name. The earlier working name Sever was dropped as a misnomer. |
 
 ---
 

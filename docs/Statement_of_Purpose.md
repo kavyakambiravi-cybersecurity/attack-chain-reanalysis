@@ -1,6 +1,6 @@
 # Statement of Purpose
 
-**Project working name:** Sever (alternatives: ChainSight, Untangle). Final name is a design-phase decision.
+**Project name:** Attack Chain Reanalysis. (The earlier working name Sever was dropped as a misnomer.)
 **Author:** Kavya Kambi
 **Submission:** Anthropic SWE take-home, Theme 1 (Exploration & Understanding)
 **Time budget:** 3 to 4 hours of build time

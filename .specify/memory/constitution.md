@@ -1,4 +1,4 @@
-# Sever Constitution
+# Attack Chain Reanalysis Constitution
 
 <!-- Working name. Alternatives: ChainSight, Untangle. Final name is a design decision. -->
 

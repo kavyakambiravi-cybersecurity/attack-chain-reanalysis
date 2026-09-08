@@ -6,7 +6,13 @@ import EvidencePanel from "./graph/EvidencePanel";
 import Legend from "./graph/Legend";
 import { ApiError, analyze, health, loadScenario } from "./lib/api";
 import { describeChange, diffChains } from "./lib/diff";
-import { interventionForEdge, interventionForNode, unionRemoved } from "./lib/intervene";
+import {
+  describeStaged,
+  interventionForEdge,
+  interventionForNode,
+  stagedRemoved,
+  toggleStaged,
+} from "./lib/intervene";
 import { DEFAULT_SCENARIO_ID, SCENARIOS } from "./lib/scenarios";
 import { uniqueEdgeIds, validateChain } from "./lib/validate";
 import type {
@@ -19,7 +25,7 @@ import type {
 } from "./types";
 
 const OFFLINE_REASON = "Live re-analysis is off: the server has no model key.";
-const BUSY_REASON = "One re-analysis is already running.";
+const BUSY_REASON = "Wait for the running re-analysis to finish.";
 
 export default function App() {
   const [scenarioId, setScenarioId] = useState(DEFAULT_SCENARIO_ID);
@@ -34,7 +40,9 @@ export default function App() {
   const [selectedEdgeId, setSelectedEdgeId] = useState<string | null>(null);
   const [answerKeyOpen, setAnswerKeyOpen] = useState(false);
   const [removedIds, setRemovedIds] = useState<string[]>([]);
-  const [running, setRunning] = useState<Intervention | null>(null);
+  /** Changes the user has marked but not yet sent. One analysis takes them all. */
+  const [staged, setStaged] = useState<Intervention[]>([]);
+  const [running, setRunning] = useState(false);
   const [errorBanner, setErrorBanner] = useState<string | null>(null);
   const [resultBanner, setResultBanner] = useState<string | null>(null);
 
@@ -85,17 +93,18 @@ export default function App() {
     for (const warning of chain?.warnings ?? []) console.warn(`[validate] ${warning}`);
   }, [chain]);
 
-  const busy = running !== null;
+  const busy = running;
   const canIntervene = live === true && !busy;
 
   /**
-   * The one code path for every intervention. The previous chain stays on
-   * screen until a new one arrives, and a failure leaves it there with a
-   * banner saying what the server said.
+   * The one code path for every analysis. Everything staged goes in one
+   * request. The previous chain stays on screen until a new one arrives; a
+   * failure leaves it there with a banner saying what the server said, and
+   * keeps the staged changes so they can be sent again.
    */
   const runAnalysis = useCallback(
-    async (intervention: Intervention, removed: string[]) => {
-      setRunning(intervention);
+    async (removed: string[]) => {
+      setRunning(true);
       setErrorBanner(null);
       setResultBanner(null);
       try {
@@ -103,6 +112,7 @@ export default function App() {
         const next = validateChain(response, events);
         const diffed = diffChains(chain, next);
         setRemovedIds(response.removed_event_ids);
+        setStaged([]);
         setChain(next);
         setView(diffed);
         setResultBanner(describeChange(response.removed_event_ids.length, diffed));
@@ -115,23 +125,25 @@ export default function App() {
           setErrorBanner("The re-analysis could not be started.");
         }
       } finally {
-        setRunning(null);
+        setRunning(false);
       }
     },
     [chain, events, scenarioId],
   );
 
-  const intervene = useCallback(
+  /** Mark a change, or unmark it if it was already marked. Nothing runs yet. */
+  const stage = useCallback(
     (intervention: Intervention) => {
       if (busy) return;
-      void runAnalysis(intervention, unionRemoved(removedIds, intervention.removed_event_ids));
+      setErrorBanner(null);
+      setStaged((current) => toggleStaged(current, intervention));
     },
-    [busy, removedIds, runAnalysis],
+    [busy],
   );
 
   const onIsolate = useCallback(
-    (asset: string) => intervene(interventionForNode(asset, events)),
-    [events, intervene],
+    (asset: string) => stage(interventionForNode(asset, events)),
+    [events, stage],
   );
 
   /** The drawn edges, with the id each one is selected and blocked by. */
@@ -144,20 +156,38 @@ export default function App() {
   const onBlock = useCallback(
     (id: string) => {
       const drawn = drawnEdges.find((candidate) => candidate.id === id);
-      if (drawn) intervene(interventionForEdge(drawn.edge));
+      if (drawn) stage(interventionForEdge(drawn.edge));
     },
-    [drawnEdges, intervene],
+    [drawnEdges, stage],
   );
+
+  /** The one array that goes to the server: earlier removals plus every staged change. */
+  const nextRemoved = useMemo(() => stagedRemoved(removedIds, staged), [removedIds, staged]);
+  const stagedKeys = useMemo(
+    () => new Set(staged.map((intervention) => intervention.subject)),
+    [staged],
+  );
+
+  /** Send everything staged as one analysis. */
+  const onRun = useCallback(() => {
+    if (busy || staged.length === 0) return;
+    void runAnalysis(nextRemoved);
+  }, [busy, staged.length, nextRemoved, runAnalysis]);
+
+  const onClearStaged = useCallback(() => {
+    if (!busy) setStaged([]);
+  }, [busy]);
 
   /** Offered only when no analysis has been generated for this scenario yet. */
   const onAnalyse = useCallback(() => {
     if (busy) return;
-    void runAnalysis({ kind: "isolate", subject: "", removed_event_ids: [] }, removedIds);
+    void runAnalysis(removedIds);
   }, [busy, removedIds, runAnalysis]);
 
   const onReset = useCallback(() => {
     if (busy) return;
     setRemovedIds([]);
+    setStaged([]);
     setErrorBanner(null);
     setResultBanner(null);
     setSelectedEdgeId(null);
@@ -174,6 +204,7 @@ export default function App() {
     (id: string) => {
       if (busy || id === scenarioId) return;
       setRemovedIds([]);
+      setStaged([]);
       setErrorBanner(null);
       setResultBanner(null);
       setSelectedEdgeId(null);
@@ -239,8 +270,11 @@ export default function App() {
         live={live}
         model={model}
         removedCount={removedIds.length}
+        stagedCount={staged.length}
+        stagedEvents={nextRemoved.length - removedIds.length}
+        onRun={live === true && staged.length > 0 ? onRun : null}
         busy={busy}
-        canReset={removedIds.length > 0 || errorBanner !== null}
+        canReset={removedIds.length > 0 || staged.length > 0 || errorBanner !== null}
         onReset={onReset}
         onToggleAnswerKey={() => setAnswerKeyOpen((open) => !open)}
         onAnalyse={events.length > 0 && cached === null && chain === null ? onAnalyse : null}
@@ -260,6 +294,19 @@ export default function App() {
           {errorBanner}
           <button type="button" className="link" onClick={() => setErrorBanner(null)}>
             Dismiss
+          </button>
+        </div>
+      ) : null}
+
+      {staged.length > 0 && !busy ? (
+        <div className="banner staged" role="status">
+          <span>
+            {staged.length === 1 ? "1 change" : `${staged.length} changes`} staged, not yet
+            analysed: <span className="staged-list">{describeStaged(staged)}</span>. Re-analyse
+            sends one request with {nextRemoved.length - removedIds.length} more events removed.
+          </span>
+          <button type="button" className="link" onClick={onClearStaged}>
+            Clear
           </button>
         </div>
       ) : null}
@@ -290,7 +337,7 @@ export default function App() {
                 onSelectEdge={setSelectedEdgeId}
                 selectedEdgeId={selectedEdgeId}
                 canIntervene={canIntervene}
-                busyKey={running?.subject ?? null}
+                stagedKeys={stagedKeys}
                 disabledReason={live === true ? BUSY_REASON : OFFLINE_REASON}
               />
             </div>

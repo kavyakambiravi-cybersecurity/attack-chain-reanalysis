@@ -39,3 +39,41 @@ export function interventionForNode(asset: string, events: Event[]): Interventio
 export function interventionForEdge(edge: ChainEdge): Intervention {
   return { kind: "block", subject: edgeKey(edge), removed_event_ids: eventsForEdge(edge) };
 }
+
+/** Identity of a staged change: its kind and what it acts on. */
+export function interventionKey(intervention: Pick<Intervention, "kind" | "subject">): string {
+  return `${intervention.kind}:${intervention.subject}`;
+}
+
+/**
+ * Stage a change, or unstage it if the same change is already staged. Pure:
+ * returns a new list, first-staged order kept.
+ */
+export function toggleStaged(staged: Intervention[], next: Intervention): Intervention[] {
+  const key = interventionKey(next);
+  const without = staged.filter((candidate) => interventionKey(candidate) !== key);
+  return without.length === staged.length ? [...staged, next] : without;
+}
+
+/**
+ * Everything the next analysis will remove: what earlier analyses already
+ * removed, plus every staged change, as one deduplicated list. This is the
+ * one array that goes to the server.
+ */
+export function stagedRemoved(committed: string[], staged: Intervention[]): string[] {
+  return staged.reduce(
+    (removed, intervention) => unionRemoved(removed, intervention.removed_event_ids),
+    unionRemoved([], committed),
+  );
+}
+
+/** One plain line naming the staged changes, for the banner. */
+export function describeStaged(staged: Intervention[]): string {
+  return staged
+    .map((intervention) =>
+      intervention.kind === "isolate"
+        ? `isolate ${intervention.subject}`
+        : `block ${intervention.subject.replace("->", " → ")}`,
+    )
+    .join(", ");
+}

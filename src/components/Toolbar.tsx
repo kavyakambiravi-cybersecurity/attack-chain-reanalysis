@@ -8,6 +8,11 @@ export interface ToolbarProps {
   live: boolean | null;
   model: string | null;
   removedCount: number;
+  /** Changes staged since the last analysis, and the events they add up to. */
+  stagedCount: number;
+  stagedEvents: number;
+  /** Null when there is nothing staged or the server cannot run. */
+  onRun: (() => void) | null;
   busy: boolean;
   canReset: boolean;
   onReset: () => void;
@@ -39,6 +44,9 @@ export default function Toolbar({
   live,
   model,
   removedCount,
+  stagedCount,
+  stagedEvents,
+  onRun,
   busy,
   canReset,
   onReset,
@@ -72,6 +80,23 @@ export default function Toolbar({
         {onAnalyse ? (
           <button type="button" onClick={onAnalyse} disabled={busy}>
             {busy ? "Analysing…" : "Analyse"}
+          </button>
+        ) : null}
+        {stagedCount > 0 || busy ? (
+          <button
+            type="button"
+            className="primary"
+            onClick={onRun ?? undefined}
+            disabled={busy || onRun === null}
+            title={
+              onRun
+                ? `Send one analysis with ${stagedEvents} events removed`
+                : "Live re-analysis is off: the server has no model key."
+            }
+          >
+            {busy
+              ? "Re-analysing…"
+              : `Re-analyse (${stagedCount} ${stagedCount === 1 ? "change" : "changes"}, ${stagedEvents} events)`}
           </button>
         ) : null}
         <button type="button" onClick={onReset} disabled={!canReset || busy}>

@@ -24,15 +24,16 @@ import {
 import type { Event } from "../types";
 
 interface GraphActions {
+  /** Stage or unstage isolating this asset. Nothing runs until Re-analyse. */
   onIsolate: (asset: string) => void;
-  /** Called with the drawn edge's id, from uniqueEdgeIds. */
+  /** Stage or unstage blocking this step, by the drawn edge's id from uniqueEdgeIds. */
   onBlock: (edgeId: string) => void;
   onSelectEdge: (edgeId: string) => void;
   selectedEdgeId: string | null;
   /** False when the server has no key, or a call is already in flight. */
   canIntervene: boolean;
-  /** The asset name or edgeKey whose intervention is running right now. */
-  busyKey: string | null;
+  /** Asset names and edgeKeys that are staged for the next analysis. */
+  stagedKeys: ReadonlySet<string>;
   disabledReason: string;
 }
 
@@ -44,19 +45,15 @@ const ActionsContext = createContext<GraphActions>({
   onSelectEdge: noop,
   selectedEdgeId: null,
   canIntervene: false,
-  busyKey: null,
+  stagedKeys: new Set(),
   disabledReason: "",
 });
 
-function Spinner() {
-  return <span className="spinner" aria-label="working" />;
-}
-
 function ChainNodeCard({ data }: NodeProps<ChainNodeData>) {
   const actions = useContext(ActionsContext);
-  const busy = actions.busyKey === data.asset;
+  const staged = actions.stagedKeys.has(data.asset);
   return (
-    <div className={`chain-node kind-${data.kind} status-${data.status}`}>
+    <div className={`chain-node kind-${data.kind} status-${data.status} ${staged ? "staged" : ""}`}>
       <Handle type="target" position={Position.Left} />
       <div className="chain-node-body">
         <AssetIcon kind={data.kind} />
@@ -67,15 +64,21 @@ function ChainNodeCard({ data }: NodeProps<ChainNodeData>) {
       </div>
       <button
         type="button"
-        className="node-action"
+        className={`node-action ${staged ? "staged" : ""}`}
         disabled={!actions.canIntervene}
-        title={actions.canIntervene ? `Remove every event that touches ${data.asset}` : actions.disabledReason}
+        title={
+          !actions.canIntervene
+            ? actions.disabledReason
+            : staged
+              ? `Keep ${data.asset}'s events in the next analysis`
+              : `Stage removing every event that touches ${data.asset}`
+        }
         onClick={(event) => {
           event.stopPropagation();
           actions.onIsolate(data.asset);
         }}
       >
-        {busy ? <Spinner /> : "Isolate"}
+        {staged ? "Undo isolate" : "Isolate"}
       </button>
       <Handle type="source" position={Position.Right} />
     </div>
@@ -99,14 +102,15 @@ function ChainEdgeLine(props: EdgeProps<ChainEdgeData>) {
   const edge = data?.edge;
   const status = data?.status ?? "survived";
   const verified = edge?.verified ?? false;
+  const staged = data ? actions.stagedKeys.has(data.key) : false;
   const classes = [
     `role-${edge?.role ?? "chain"}`,
     `kind-${edge?.kind ?? "action"}`,
     verified ? "verified" : "unverified",
     `status-${status}`,
     actions.selectedEdgeId === id ? "selected" : "",
+    staged ? "staged" : "",
   ].join(" ");
-  const busy = data ? actions.busyKey === data.key : false;
 
   return (
     <>
@@ -147,19 +151,21 @@ function ChainEdgeLine(props: EdgeProps<ChainEdgeData>) {
           </button>
           <button
             type="button"
-            className="edge-action"
+            className={`edge-action ${staged ? "staged" : ""}`}
             disabled={!actions.canIntervene}
             title={
-              actions.canIntervene
-                ? "Remove the events this step is built on"
-                : actions.disabledReason
+              !actions.canIntervene
+                ? actions.disabledReason
+                : staged
+                  ? "Keep this step's events in the next analysis"
+                  : "Stage removing the events this step is built on"
             }
             onClick={(event) => {
               event.stopPropagation();
               actions.onBlock(id);
             }}
           >
-            {busy ? <Spinner /> : "Block"}
+            {staged ? "Undo block" : "Block"}
           </button>
         </div>
       </EdgeLabelRenderer>
@@ -183,7 +189,7 @@ export default function ChainGraph({ chain, events, ...actions }: ChainGraphProp
     actions.onSelectEdge,
     actions.selectedEdgeId,
     actions.canIntervene,
-    actions.busyKey,
+    actions.stagedKeys,
     actions.disabledReason,
   ]);
 

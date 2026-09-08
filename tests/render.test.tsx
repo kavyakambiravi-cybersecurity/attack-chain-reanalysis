@@ -69,6 +69,9 @@ describe("panels render", () => {
         live={false}
         model="claude-sonnet-5"
         removedCount={3}
+        stagedCount={0}
+        stagedEvents={0}
+        onRun={null}
         busy={false}
         canReset
         onReset={nothing}
@@ -89,6 +92,9 @@ describe("panels render", () => {
         live
         model="claude-sonnet-5"
         removedCount={0}
+        stagedCount={0}
+        stagedEvents={0}
+        onRun={null}
         busy={false}
         canReset={false}
         onReset={nothing}
@@ -98,6 +104,36 @@ describe("panels render", () => {
     );
     for (const scenario of SCENARIOS) expect(html).toContain(scenario.name);
     expect(html).toMatch(/<option value="benign-lookalike-02" selected=""/);
+  });
+
+  it("offers one Re-analyse button for everything staged, and none when nothing is", () => {
+    const props = {
+      scenarios: SCENARIOS,
+      scenarioId: "attack-chain-01",
+      onSelectScenario: nothing,
+      live: true,
+      model: "claude-sonnet-5",
+      removedCount: 0,
+      busy: false,
+      canReset: true,
+      onReset: nothing,
+      onToggleAnswerKey: nothing,
+      onAnalyse: null,
+    };
+    const idle = renderToStaticMarkup(
+      <Toolbar {...props} stagedCount={0} stagedEvents={0} onRun={null} />,
+    );
+    expect(idle).not.toContain("Re-analyse");
+    const two = renderToStaticMarkup(
+      <Toolbar {...props} stagedCount={2} stagedEvents={41} onRun={nothing} />,
+    );
+    expect(two).toContain("Re-analyse (2 changes, 41 events)");
+    expect(two).not.toContain("disabled");
+    const offline = renderToStaticMarkup(
+      <Toolbar {...props} live={false} stagedCount={1} stagedEvents={5} onRun={null} />,
+    );
+    expect(offline).toContain("Re-analyse (1 change, 5 events)");
+    expect(offline).toContain("disabled");
   });
 
   it("explains every step style", () => {

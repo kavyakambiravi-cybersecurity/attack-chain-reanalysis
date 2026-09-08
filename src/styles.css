@@ -9,6 +9,7 @@
   --verified: #cdd9e5;
   --gone: #6e7681;
   --data-out: #f85149;
+  --staged: #d29922;
   --new: #3fb950;
   --accent: #58a6ff;
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -37,6 +38,8 @@ button {
 button:hover:not(:disabled) { background: #2d333b; }
 button:disabled { opacity: 0.45; cursor: not-allowed; }
 button.link { background: none; border: none; color: var(--accent); padding: 0; }
+button.primary { background: #1f6feb; border-color: #388bfd; color: #fff; }
+button.primary:hover:not(:disabled) { background: #2a7af5; }
 
 .app { display: flex; flex-direction: column; height: 100vh; }
 .fatal { margin: auto; max-width: 40rem; padding: 2rem; color: var(--gone); }
@@ -138,7 +141,9 @@ select:disabled { opacity: 0.45; cursor: not-allowed; }
   opacity: 0;
   transition: opacity 0.12s;
 }
-.chain-node:hover .node-action, .node-action:focus-visible { opacity: 1; }
+.chain-node:hover .node-action, .node-action:focus-visible, .node-action.staged { opacity: 1; }
+.chain-node.staged { border-color: var(--staged); box-shadow: 0 0 0 2px rgba(210, 153, 34, 0.35); }
+.node-action.staged, .edge-action.staged { border-color: var(--staged); color: var(--staged); }
 
 .chain-node.status-vanished { opacity: 0.4; border-style: dashed; border-color: var(--gone); }
 .chain-node.status-appeared { border-color: var(--new); box-shadow: 0 0 0 2px rgba(63, 185, 80, 0.35); }
@@ -190,7 +195,9 @@ select:disabled { opacity: 0.45; cursor: not-allowed; }
   opacity: 0;
   transition: opacity 0.12s;
 }
-.edge-label:hover .edge-action, .edge-action:focus-visible { opacity: 1; }
+.edge-label:hover .edge-action, .edge-action:focus-visible, .edge-action.staged { opacity: 1; }
+.edge-label.staged { border-color: var(--staged); box-shadow: 0 0 0 2px rgba(210, 153, 34, 0.35); }
+.chain-edge.staged { stroke: var(--staged); }
 
 .tag {
   font-size: 10px;
@@ -297,6 +304,8 @@ select:disabled { opacity: 0.45; cursor: not-allowed; }
 .banner.error { background: #2d1a19; color: #ffb4ae; }
 .banner.working { background: #16202c; color: var(--muted); }
 .banner.result { background: #161b22; color: var(--ink); }
+.banner.staged { background: #2a2210; color: #e3b341; }
+.banner.staged .staged-list { color: var(--ink); }
 
 /* ------------------------------------------------------------------- legend */
 

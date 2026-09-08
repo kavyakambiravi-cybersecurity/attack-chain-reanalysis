@@ -128,3 +128,14 @@ npm run build                 # prebuild copies data/scenarios to public/scenari
   Only a chain with nothing in either list falls back to the plain placeholder.
 - **Answer key.** Lookalikes cited by a noted step are marked "Noted and set aside by the
   model"; any drawn into the chain would be marked in red, which is the failure case to watch.
+
+## Staged changes, one analysis
+
+Isolate and Block no longer run an analysis each. They stage a change: the asset or step is
+outlined amber, its button flips to "Undo isolate" or "Undo block", and a banner lists what is
+staged and how many more events it removes. A "Re-analyse (N changes, M events)" button in
+the toolbar sends everything staged as one `POST /api/analyze`, whose `removed_event_ids` was
+always an array. `toggleStaged`, `stagedRemoved`, and `describeStaged` in `intervene.ts` hold
+the logic and are unit-tested; the app keeps `staged: Intervention[]` next to the committed
+`removedIds`. A failed call keeps the staged list so it can be sent again; success, Reset,
+and a scenario switch clear it. Clear in the banner drops the staged changes without running.

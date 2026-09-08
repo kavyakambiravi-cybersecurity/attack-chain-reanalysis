@@ -1,7 +1,7 @@
 // Dagre layout, left to right, so the chain reads like a story: first step on
 // the left, last on the right. Constitution V.
 import dagre from "dagre";
-import type { Edge as RFEdge, Node as RFNode } from "reactflow";
+import { MarkerType, type Edge as RFEdge, type Node as RFNode } from "reactflow";
 import { edgeKey } from "../lib/validate";
 import { assetKind } from "../types";
 import type {
@@ -50,6 +50,13 @@ function firstSeen(asset: string, input: LayoutInput, byId: Map<string, Event>):
     }
   }
   return earliest;
+}
+
+/** Arrowhead colour follows the same four states as the edge line itself. */
+function arrowColour(status: DiffStatus, verified: boolean): string {
+  if (status === "vanished") return "#e5534b";
+  if (status === "appeared") return "#3fb950";
+  return verified ? "#cdd9e5" : "#98a2b3";
 }
 
 /** Every asset the chain draws, including any that only an edge mentions. */
@@ -109,14 +116,18 @@ export function layoutChain(input: LayoutInput, events: Event[]): {
     };
   });
 
-  const edges: RFEdge<ChainEdgeData>[] = input.edges.map((edge) => ({
-    id: edgeKey(edge),
-    source: edge.source,
-    target: edge.target,
-    type: "chainEdge",
-    label: edge.action,
-    data: { edge, status: edge.status ?? "survived" },
-  }));
+  const edges: RFEdge<ChainEdgeData>[] = input.edges.map((edge) => {
+    const status = edge.status ?? "survived";
+    return {
+      id: edgeKey(edge),
+      source: edge.source,
+      target: edge.target,
+      type: "chainEdge",
+      label: edge.action,
+      markerEnd: { type: MarkerType.ArrowClosed, color: arrowColour(status, edge.verified) },
+      data: { edge, status },
+    };
+  });
 
   return { nodes, edges };
 }

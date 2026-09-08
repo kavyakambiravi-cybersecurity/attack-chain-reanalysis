@@ -226,3 +226,17 @@ button.link { background: none; border: none; color: var(--accent); padding: 0; 
 .answer-lookalikes li { display: flex; gap: 8px; border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; }
 .answer-note { margin-top: 18px; color: var(--muted); font-size: 12px; }
 .muted { color: var(--muted); font-weight: 400; }
+
+/* ------------------------------------------------------------------ banners */
+
+.banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+}
+.banner.error { background: #2d1a19; color: #ffb4ae; }
+.banner.working { background: #16202c; color: var(--muted); }
+.banner.result { background: #161b22; color: var(--ink); }

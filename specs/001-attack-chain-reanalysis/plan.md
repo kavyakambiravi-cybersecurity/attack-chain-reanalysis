@@ -423,6 +423,9 @@ Nodes
   including any label in parentheses. Never invent, shorten, or normalise a name.
 - Include only assets that take part in the attack. Leave out assets that appear only in
   ordinary activity.
+- Every asset you use as the source or target of an edge must also appear in this node list.
+  Never draw an edge to or from an asset you have not listed. This includes external addresses
+  that only receive data.
 - The label is a short plain-English description of the asset's role, at most four words,
   based only on what the events show. Example: "finance file server".
 

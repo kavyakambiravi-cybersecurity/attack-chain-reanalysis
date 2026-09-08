@@ -62,5 +62,6 @@
       "citations": ["E-0129"]
     }
   ],
+  "notable": [],
   "summary": "An outside computer signed in to a finance workstation as jsmith, took an administrator password from it, and used that password to reach the domain controller and the finance file server. Finance and HR files were gathered on the file server and 480MB was sent to an outside address."
 }

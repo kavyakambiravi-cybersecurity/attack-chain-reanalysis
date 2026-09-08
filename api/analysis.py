@@ -14,7 +14,7 @@ import anthropic
 from pydantic import BaseModel, ValidationError
 
 MODEL = "claude-sonnet-5"
-PROMPT_VERSION = "2026-09-07.2"
+PROMPT_VERSION = "2026-09-07.6"
 MAX_TOKENS = 8000
 TIMEOUT_SECONDS = 50.0
 
@@ -38,11 +38,11 @@ Return a chain with these rules.
 Nodes
 - A node is an asset. Its id must be an asset name copied exactly as it appears in the events,
   including any label in parentheses. Never invent, shorten, or normalise a name.
-- Include only assets that take part in the attack. Leave out assets that appear only in
-  ordinary activity.
-- Every asset you use as the source or target of an edge must also appear in this node list.
-  Never draw an edge to or from an asset you have not listed. This includes external addresses
-  that only receive data.
+- Include only assets that take part in the attack or in a notable step. Leave out assets
+  that appear only in ordinary activity.
+- Every asset you use as the source or target of an edge or a notable step must also appear
+  in this node list. Never draw an edge to or from an asset you have not listed. This includes
+  external addresses that only receive data.
 - The label is a short plain-English description of the asset's role, at most four words,
   based only on what the events show. Example: "finance file server".
 
@@ -59,11 +59,31 @@ Edges
   or "copied files out". "description" is one sentence a newcomer can follow, and may say why
   this step matters for the next one.
 
+Notable steps
+- Separately, in "notable", list actions that a security team would want explained even on
+  their own, but that you did not put in the chain: a transfer of megabytes or more to an
+  outside address, a logon arriving from outside the organisation, a process reading stored
+  passwords, a cleared or altered log, a privileged account used somewhere unexpected. At
+  most six. Use the same shape as an edge, with the same citation rules, and add every asset
+  they use to the node list.
+- Its "action" names what happened in three to six words. Its "description" is one sentence
+  saying why it did not join the chain: what in the events makes it ordinary, or what is
+  missing to connect it to anything else.
+- Before listing a step, check it against the kinds named above. If it matches none of them,
+  leave it out. A file read, a scheduled task, a screen unlock, a single failed password, an
+  everyday cloud connection, a routine session between two internal machines, or anything
+  whose source and target are the same asset never qualifies, even when it touches an asset
+  from the chain. An empty list is the right answer when nothing qualifies. Never add steps
+  to fill the list.
+- If there is an attack, still list any qualifying action that is not part of it. If there is
+  no attack, this list is how the reader sees what you looked at and set aside.
+
 Summary
 - At most two sentences. Say what the evidence shows happened, from first step to last.
 
-If the events do not show a connected attack, return no edges, list no nodes, and use the
-summary to say that the remaining events do not show a connected attack.
+If the events do not show a connected attack, return no edges, list only the assets used by
+notable steps, and use the summary to say that the remaining events do not show a connected
+attack.
 
 Wording
 - Plain English throughout. Do not use security jargon or technique names in "action",
@@ -91,10 +111,17 @@ class ChainEdge(BaseModel):
 
 
 class ChainOutput(BaseModel):
-    """What the model returns."""
+    """What the model returns.
+
+    `edges` is the attack chain. `notable` is what the model looked at and set aside:
+    steps that resemble attacker actions but join no chain, in the same shape so the
+    same citation checks apply. A benign scenario has an empty `edges` and, usually, a
+    non-empty `notable`.
+    """
 
     nodes: list[ChainNode]
     edges: list[ChainEdge]
+    notable: list[ChainEdge]
     summary: str
 
 
@@ -232,6 +259,7 @@ def build_response(
     return AnalyzeResponse(
         nodes=chain.nodes,
         edges=chain.edges,
+        notable=chain.notable,
         summary=chain.summary,
         scenario_id=scenario_id,
         removed_event_ids=list(removed_event_ids),

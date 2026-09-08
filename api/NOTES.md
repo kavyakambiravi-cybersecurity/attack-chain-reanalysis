@@ -64,6 +64,22 @@ into `SYSTEM_PROMPT`, and the version bumped. The committed chain has 7 nodes an
 cites all 16 answer-key events, misses none, and every citation's source and target equal
 its edge's endpoints. No banned words.
 
+## Notable steps (prompt 2026-09-07.5)
+
+`ChainOutput` gained `notable: list[ChainEdge]`: the steps the model looked at and set aside
+because they resemble an attacker's move on their own but join no chain. Same shape, same
+citation rules, so the client validates them exactly like edges. The reason a step stayed on
+its own goes in its `description`. This is what lets the benign scenario show a graph: no
+chain, but the 512GB backup upload, the 40MB code push, the VPN logon, and the rest are drawn
+and explained rather than hidden behind "nothing to draw".
+
+Three prompt iterations were needed. The first two, told to list "up to six", padded the
+attack scenario's list with routine noise (a PDF read, a failed password) on assets it had not
+listed as nodes, once with a wrong citation. The final wording says an empty list is the right
+answer when nothing qualifies and names what does not qualify. `test_cached.py` requires the
+benign file to have no edges and at least one notable step, and `scripts/analyze.py` prints
+the notable steps with the same checks, plus which answer-key lookalikes they cover.
+
 ## The T028 model run
 
 Run on 2026-09-07 with a real key, after the frontend merged:

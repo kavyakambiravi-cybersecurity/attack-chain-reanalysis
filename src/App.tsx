@@ -195,11 +195,32 @@ export default function App() {
   );
 
   const citedIds = useMemo(
-    () => new Set((chain?.edges ?? []).flatMap((edge) => edge.citations)),
+    () =>
+      new Set(
+        (chain?.edges ?? [])
+          .filter((edge) => edge.role === "chain")
+          .flatMap((edge) => edge.citations),
+      ),
+    [chain],
+  );
+  const notedIds = useMemo(
+    () =>
+      new Set(
+        (chain?.edges ?? [])
+          .filter((edge) => edge.role === "notable")
+          .flatMap((edge) => edge.citations),
+      ),
     [chain],
   );
 
-  const noChain = view !== null && view.nodes.length === 0 && view.edges.length === 0;
+  /** The model drew no attack chain. It may still have noted steps to show. */
+  const noChain = chain !== null && !chain.edges.some((edge) => edge.role === "chain");
+  /** Nothing at all to draw, not even a noted step. */
+  const nothingDrawn = view !== null && view.nodes.length === 0 && view.edges.length === 0;
+  const remaining = events.length - removedIds.length;
+  const noChainText = `The model read the ${remaining} events${
+    removedIds.length > 0 ? " that remain" : " in this scenario"
+  } and did not link any of them into a connected sequence of attacker actions.`;
 
   if (loadError) {
     return (
@@ -252,7 +273,14 @@ export default function App() {
 
       <main className="workspace">
         <section className="graph-pane">
-          {view && !noChain ? (
+          {view && !nothingDrawn && noChain ? (
+            <div className="banner no-chain-banner" role="status">
+              <span className="no-chain-title">No attack chain was drawn.</span>{" "}
+              {noChainText} The steps drawn below are the ones it looked at and set aside: each
+              resembles an attacker action on its own, and its label says why it stays on its own.
+            </div>
+          ) : null}
+          {view && !nothingDrawn ? (
             <div className="graph-canvas">
               <ChainGraph
                 chain={view}
@@ -265,16 +293,11 @@ export default function App() {
                 busyKey={running?.subject ?? null}
                 disabledReason={live === true ? BUSY_REASON : OFFLINE_REASON}
               />
-              <Legend />
             </div>
-          ) : noChain ? (
+          ) : nothingDrawn ? (
             <div className="graph-placeholder no-chain" role="status">
               <p className="no-chain-title">No attack chain was drawn.</p>
-              <p>
-                The model read the {events.length - removedIds.length} events
-                {removedIds.length > 0 ? " that remain" : " in this scenario"} and did not link any
-                of them into a connected sequence of attacker actions, so there is nothing to draw.
-              </p>
+              <p>{noChainText} It set aside no steps either, so there is nothing to draw.</p>
               <p className="muted">
                 Open the answer key to see which events were planted to look like an attack, and
                 why each one is ordinary on its own.
@@ -287,6 +310,7 @@ export default function App() {
                 : "No analysis has been generated for this scenario yet. Use Analyse to run one."}
             </div>
           )}
+          {view && !nothingDrawn ? <Legend /> : null}
           {chain?.summary ? <p className="chain-summary">{chain.summary}</p> : null}
         </section>
 
@@ -300,6 +324,7 @@ export default function App() {
       <AnswerKeyPanel
         answerKey={answerKey}
         citedIds={citedIds}
+        notedIds={notedIds}
         open={answerKeyOpen}
         onClose={() => setAnswerKeyOpen(false)}
       />

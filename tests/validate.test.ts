@@ -1,11 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { validateChain } from "../src/lib/validate";
+import { describeDataOut, validateChain } from "../src/lib/validate";
 import type { Chain } from "../src/types";
 import {
   badCitationChain,
   emptyCitationChain,
   goodChain,
   labelDroppedChain,
+  notableChain,
   userCollapsedChain,
   wrongEndpointChain,
 } from "./fixtures/chains";
@@ -172,5 +173,48 @@ describe("explainCheck", () => {
     const validated = validateChain(goodChain, mini);
     const edge = validated.edges[0];
     expect(explainCheck(edge, edge.checks[0], mini)).toBeNull();
+  });
+});
+
+describe("roles and kinds", () => {
+  it("marks a large transfer to an outside address as data out", () => {
+    const edges = validateChain(goodChain, mini).edges;
+    const kind = (source: string, target: string) =>
+      edges.find((e) => e.source === source && e.target === target)!.kind;
+    expect(kind("FILESRV-01", "198.51.100.22")).toBe("data_out");
+    expect(kind("WKSTN-042", "203.0.113.47")).toBe("action");
+    expect(kind("WKSTN-042", "FILESRV-01")).toBe("action");
+  });
+
+  it("describes the data movement from the cited event", () => {
+    const edge = goodChain.edges[4];
+    expect(describeDataOut(edge, mini)).toBe("Event E-0005 records 480MB sent to 198.51.100.22.");
+    expect(describeDataOut(goodChain.edges[2], mini)).toBeNull();
+  });
+
+  it("keeps chain steps and noted steps apart, checked the same way", () => {
+    const validated = validateChain(notableChain, mini);
+    expect(validated.warnings).toEqual([]);
+    const noted = validated.edges.filter((e) => e.role === "notable");
+    expect(noted).toHaveLength(1);
+    expect(noted[0].source).toBe("apatel");
+    expect(noted[0].verified).toBe(true);
+    expect(validated.edges.filter((e) => e.role === "chain")).toHaveLength(5);
+  });
+
+  it("flags a noted step with a bad citation as unverified, like any edge", () => {
+    const chain = {
+      ...notableChain,
+      notable: [{ ...notableChain.notable[0], citations: ["E-9999"] }],
+    };
+    const noted = validateChain(chain, mini).edges.find((e) => e.role === "notable")!;
+    expect(noted.verified).toBe(false);
+    expect(noted.checks[0].exists).toBe(false);
+  });
+
+  it("tolerates an old chain with no notable list", () => {
+    const { notable: _dropped, ...legacy } = goodChain;
+    const validated = validateChain(legacy as typeof goodChain, mini);
+    expect(validated.edges).toHaveLength(5);
   });
 });

@@ -55,7 +55,13 @@ export interface ChainEdge {
 
 export interface ChainOutput {
   nodes: ChainNode[];
+  /** The attack chain. Empty when the events show no connected attack. */
   edges: ChainEdge[];
+  /**
+   * Steps the model looked at and set aside: they resemble attacker actions
+   * on their own but join no chain. Same shape, same citation checks.
+   */
+  notable: ChainEdge[];
   summary: string;
 }
 
@@ -104,7 +110,18 @@ export interface CitationCheck {
   involvesBothEndpoints: boolean;
 }
 
+/** Where a drawn step came from: the attack chain, or the model's set-aside list. */
+export type EdgeRole = "chain" | "notable";
+
+/**
+ * What a step does, as far as code can tell from the cited events. "data_out"
+ * means a transfer of megabytes or more to an outside address, in either role.
+ */
+export type EdgeKind = "action" | "data_out";
+
 export interface ValidatedEdge extends ChainEdge {
+  role: EdgeRole;
+  kind: EdgeKind;
   verified: boolean; // citations.length > 0 && every check passes
   checks: CitationCheck[];
   bannedWords: string[];

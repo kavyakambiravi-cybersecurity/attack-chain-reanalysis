@@ -108,3 +108,23 @@ npm run build                 # prebuild copies data/scenarios to public/scenari
   interventions and diffs still key on `edgeKey`. Nodes are no longer draggable, since a
   dragged node would leave its routed edges behind. `tests/layout.test.ts` checks, on the
   committed chain, that no label overlaps a node or another label.
+
+## Noted steps and data out (after the switcher)
+
+- **Two lists from the model, one list on screen.** `Chain.notable` (steps the model set
+  aside) is validated by the same code as `edges` and merged into `ValidatedChain.edges` with
+  `role: "chain" | "notable"`. Diff, layout, evidence, and interventions did not change; the
+  diff key carries the role, so a step that moves between the chain and the set-aside list
+  shows as one vanished and one appeared. Noted steps draw dotted with a "noted" tag, and the
+  evidence panel says the step was set aside and that its description is the reason.
+- **Red means data left the network, in both scenarios.** `edgeKind` in `validate.ts` marks a
+  step `data_out` when its target is an outside address and a cited connection event records
+  a size in MB, GB, or TB. Code decides this from the events, never the model, so the same
+  red appears on the attack's 480MB transfer and on the benign backup's 512GB upload; the
+  "noted" tag and the label text carry the difference. Vanished steps moved from red to grey
+  to free the colour.
+- **The no-chain state draws the graph anyway.** When the chain is empty but noted steps
+  exist, the canvas renders them under a short overlay ("No attack chain was drawn ...").
+  Only a chain with nothing in either list falls back to the plain placeholder.
+- **Answer key.** Lookalikes cited by a noted step are marked "Noted and set aside by the
+  model"; any drawn into the chain would be marked in red, which is the failure case to watch.

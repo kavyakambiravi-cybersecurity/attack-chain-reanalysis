@@ -50,12 +50,25 @@ def test_every_citation_is_a_real_event_id(cached, scenario_id):
     assert cited <= known
 
 
-def test_benign_scenario_draws_no_chain():
-    """T028's gate: the switcher ships only if the benign run drew no confident chain."""
+def test_every_notable_citation_is_a_real_event_id(cached, scenario_id):
+    known = {event["id"] for event in load(scenario_id)}
+    cited = {event_id for step in cached.notable for event_id in step.citations}
+    assert cited <= known
+
+
+def test_benign_scenario_draws_no_chain_but_shows_what_it_looked_at():
+    """T028's gate: the switcher ships only if the benign run drew no confident chain.
+
+    The graph still has to show the reader something, so the run must also have set
+    aside at least one notable step, each with its assets in the node list.
+    """
     path = DATA_DIR / "benign-lookalike-02" / "analysis.json"
     if not path.is_file():
         pytest.skip("analysis.json not generated yet for benign-lookalike-02")
     cached = AnalyzeResponse.model_validate(json.loads(path.read_text(encoding="utf-8")))
     assert cached.edges == []
-    assert cached.nodes == []
-    assert "not show a connected attack" in cached.summary
+    assert "connected attack" in cached.summary
+    assert len(cached.notable) >= 1
+    listed = {node.id for node in cached.nodes}
+    for step in cached.notable:
+        assert {step.source, step.target} <= listed

@@ -1,10 +1,13 @@
 // Constitution I: evidence before conclusions. Code, not the model, checks that
 // every cited event exists and involves the two assets its edge connects.
 // Nothing here normalises an asset name: names are compared exactly.
+import { assetKind } from "../types";
 import type {
   Chain,
   ChainEdge,
   CitationCheck,
+  EdgeKind,
+  EdgeRole,
   Event,
   ValidatedChain,
   ValidatedEdge,
@@ -45,6 +48,30 @@ function checkCitation(edge: ChainEdge, id: string, byId: Map<string, Event>): C
   return { id, exists: true, involvesBothEndpoints };
 }
 
+/** A transfer size big enough to call data movement: megabytes or more. */
+export const DATA_SIZE_RE = /\b\d+(?:\.\d+)?\s?(?:MB|GB|TB)\b/i;
+
+/**
+ * The cited event, if any, that shows data leaving the network: a connection to
+ * an outside address whose detail records a transfer of megabytes or more.
+ * Code decides this from the events, never the model, so a red step is a fact
+ * about the evidence and not a judgement about intent.
+ */
+export function dataOutEvent(edge: ChainEdge, byId: Map<string, Event>): Event | null {
+  if (assetKind(edge.target) !== "external") return null;
+  for (const id of edge.citations) {
+    const event = byId.get(id);
+    if (!event || event.type !== "network_connection") continue;
+    if (event.target !== edge.target) continue;
+    if (DATA_SIZE_RE.test(event.detail)) return event;
+  }
+  return null;
+}
+
+export function edgeKind(edge: ChainEdge, byId: Map<string, Event>): EdgeKind {
+  return dataOutEvent(edge, byId) ? "data_out" : "action";
+}
+
 function bannedWordsIn(edge: ChainEdge): string[] {
   const found = `${edge.action} ${edge.description}`.match(BANNED_RE) ?? [];
   const lowered = new Set(found.map((word) => word.toLowerCase()));
@@ -69,23 +96,32 @@ export function validateChain(chain: Chain, events: Event[]): ValidatedChain {
     .map((node) => ({ ...node }));
 
   const edges: ValidatedEdge[] = [];
-  for (const edge of chain.edges) {
-    const unknown = [edge.source, edge.target].filter((name) => !known.has(name));
-    if (unknown.length > 0) {
-      warnings.push(
-        `Dropped edge ${edge.source} -> ${edge.target}: ${unknown.join(" and ")} appears in no event.`,
-      );
-      continue;
+  const lists: [EdgeRole, ChainEdge[]][] = [
+    ["chain", chain.edges],
+    ["notable", chain.notable ?? []],
+  ];
+  for (const [role, list] of lists) {
+    for (const edge of list) {
+      const unknown = [edge.source, edge.target].filter((name) => !known.has(name));
+      if (unknown.length > 0) {
+        const what = role === "chain" ? "edge" : "notable step";
+        warnings.push(
+          `Dropped ${what} ${edge.source} -> ${edge.target}: ${unknown.join(" and ")} appears in no event.`,
+        );
+        continue;
+      }
+      const checks = edge.citations.map((id) => checkCitation(edge, id, byId));
+      edges.push({
+        ...edge,
+        citations: [...edge.citations],
+        role,
+        kind: edgeKind(edge, byId),
+        checks,
+        verified:
+          checks.length > 0 && checks.every((c) => c.exists && c.involvesBothEndpoints),
+        bannedWords: bannedWordsIn(edge),
+      });
     }
-    const checks = edge.citations.map((id) => checkCitation(edge, id, byId));
-    edges.push({
-      ...edge,
-      citations: [...edge.citations],
-      checks,
-      verified:
-        checks.length > 0 && checks.every((c) => c.exists && c.involvesBothEndpoints),
-      bannedWords: bannedWordsIn(edge),
-    });
   }
 
   return {
@@ -121,6 +157,17 @@ export function explainCheck(
 /** Edge identity used everywhere: endpoints only, never the wording. */
 export function edgeKey(edge: { source: string; target: string }): string {
   return `${edge.source}->${edge.target}`;
+}
+
+/**
+ * One line for the evidence panel saying which cited event shows data leaving
+ * and how much. Null when the step is not a data movement.
+ */
+export function describeDataOut(edge: ChainEdge, events: Event[]): string | null {
+  const event = dataOutEvent(edge, new Map(events.map((e) => [e.id, e])));
+  if (!event) return null;
+  const size = event.detail.match(DATA_SIZE_RE)?.[0] ?? "a large amount of data";
+  return `Event ${event.id} records ${size} sent to ${event.target}.`;
 }
 
 /**

@@ -64,10 +64,26 @@ if (!repoFileExists(ATTACK)) {
     });
 
     it("never says secure, safe, or contained", () => {
-      for (const edge of chain.edges) {
+      for (const edge of [...chain.edges, ...chain.notable]) {
         expect(bannedIn(`${edge.action} ${edge.description}`)).toEqual([]);
       }
       expect(bannedIn(chain.summary)).toEqual([]);
+    });
+
+    it("draws the transfer to the outside address as data out", () => {
+      const exfil = validated.edges.find(
+        (edge) => edge.source === "FILESRV-01" && edge.target === "198.51.100.22",
+      );
+      expect(exfil?.kind).toBe("data_out");
+    });
+
+    it("lists every asset a noted step uses, and validation drops nothing", () => {
+      const listed = new Set(chain.nodes.map((node) => node.id));
+      for (const step of chain.notable) {
+        expect(listed.has(step.source), step.source).toBe(true);
+        expect(listed.has(step.target), step.target).toBe(true);
+      }
+      expect(validated.warnings).toEqual([]);
     });
   });
 }
@@ -82,12 +98,29 @@ if (!repoFileExists(BENIGN)) {
     const events = readJson<Event[]>("data/scenarios/benign-lookalike-02/events.json");
     const validated = validateChain(chain, events);
 
-    it("draws at most one verified edge", () => {
-      expect(validated.edges.filter((edge) => edge.verified).length).toBeLessThanOrEqual(1);
+    it("draws no attack chain", () => {
+      expect(chain.edges).toEqual([]);
+      expect(validated.edges.filter((edge) => edge.role === "chain")).toEqual([]);
+    });
+
+    it("still shows what it looked at: at least one noted step, all of them checkable", () => {
+      expect(chain.notable.length).toBeGreaterThanOrEqual(1);
+      expect(validated.warnings).toEqual([]);
+      const noted = validated.edges.filter((edge) => edge.role === "notable");
+      expect(noted.length).toBe(chain.notable.length);
+      expect(noted.filter((edge) => edge.verified).length).toBeGreaterThanOrEqual(1);
+    });
+
+    it("lists every asset a noted step uses", () => {
+      const listed = new Set(chain.nodes.map((node) => node.id));
+      for (const step of chain.notable) {
+        expect(listed.has(step.source), step.source).toBe(true);
+        expect(listed.has(step.target), step.target).toBe(true);
+      }
     });
 
     it("never says secure, safe, or contained", () => {
-      for (const edge of chain.edges) {
+      for (const edge of [...chain.edges, ...chain.notable]) {
         expect(bannedIn(`${edge.action} ${edge.description}`)).toEqual([]);
       }
       expect(bannedIn(chain.summary)).toEqual([]);

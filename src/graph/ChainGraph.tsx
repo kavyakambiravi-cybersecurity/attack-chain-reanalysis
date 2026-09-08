@@ -99,8 +99,13 @@ function ChainEdgeLine(props: EdgeProps<ChainEdgeData>) {
   const edge = data?.edge;
   const status = data?.status ?? "survived";
   const verified = edge?.verified ?? false;
-  const state = status === "survived" ? (verified ? "verified" : "unverified") : status;
-  const selected = actions.selectedEdgeId === id;
+  const classes = [
+    `role-${edge?.role ?? "chain"}`,
+    `kind-${edge?.kind ?? "action"}`,
+    verified ? "verified" : "unverified",
+    `status-${status}`,
+    actions.selectedEdgeId === id ? "selected" : "",
+  ].join(" ");
   const busy = data ? actions.busyKey === data.key : false;
 
   return (
@@ -109,7 +114,7 @@ function ChainEdgeLine(props: EdgeProps<ChainEdgeData>) {
         id={id}
         d={path}
         markerEnd={markerEnd}
-        className={`react-flow__edge-path chain-edge state-${state} ${selected ? "selected" : ""}`}
+        className={`react-flow__edge-path chain-edge ${classes}`}
       />
       <path
         d={path}
@@ -121,7 +126,7 @@ function ChainEdgeLine(props: EdgeProps<ChainEdgeData>) {
       />
       <EdgeLabelRenderer>
         <div
-          className={`edge-label state-${state} ${selected ? "selected" : ""}`}
+          className={`edge-label ${classes}`}
           style={{
             width: data?.label.width,
             transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY}px)`,
@@ -134,9 +139,11 @@ function ChainEdgeLine(props: EdgeProps<ChainEdgeData>) {
             onClick={() => actions.onSelectEdge(id)}
           >
             {edge?.action}
+            {edge?.kind === "data_out" ? <span className="tag data-out">data out</span> : null}
+            {edge?.role === "notable" ? <span className="tag noted">noted</span> : null}
             {!verified && status !== "vanished" ? <span className="tag">unverified</span> : null}
             {status === "vanished" ? <span className="tag">gone</span> : null}
-            {status === "appeared" ? <span className="tag">new</span> : null}
+            {status === "appeared" ? <span className="tag new">new</span> : null}
           </button>
           <button
             type="button"

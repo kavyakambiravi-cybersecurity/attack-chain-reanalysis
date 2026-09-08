@@ -5,11 +5,15 @@ import type { AnswerKey as AnswerKeyShape } from "../types";
 export default function AnswerKey({
   answerKey,
   citedIds,
+  notedIds,
   open,
   onClose,
 }: {
   answerKey: AnswerKeyShape | null;
+  /** Event ids cited by the attack chain on screen. */
   citedIds: Set<string>;
+  /** Event ids cited by the steps the model looked at and set aside. */
+  notedIds: Set<string>;
   open: boolean;
   onClose: () => void;
 }) {
@@ -63,12 +67,23 @@ export default function AnswerKey({
           <>
             <h3>Events that look like an attack but are not</h3>
             <ul className="answer-lookalikes">
-              {answerKey.lookalikes.map((lookalike) => (
-                <li key={lookalike.id} className={citedIds.has(lookalike.id) ? "cited" : ""}>
-                  <span className="event-id">{lookalike.id}</span>
-                  <span>{lookalike.why_benign}</span>
-                </li>
-              ))}
+              {answerKey.lookalikes.map((lookalike) => {
+                const drawn = citedIds.has(lookalike.id);
+                const noted = notedIds.has(lookalike.id);
+                return (
+                  <li key={lookalike.id} className={drawn ? "drawn" : noted ? "noted" : ""}>
+                    <span className="event-id">{lookalike.id}</span>
+                    <span>
+                      {lookalike.why_benign}
+                      {drawn ? (
+                        <span className="mark-word"> Drawn into the chain on screen.</span>
+                      ) : noted ? (
+                        <span className="mark-word"> Noted and set aside by the model.</span>
+                      ) : null}
+                    </span>
+                  </li>
+                );
+              })}
             </ul>
           </>
         ) : null}

@@ -7,7 +7,8 @@
   --muted: #98a2b3;
   --neutral: #7d8590;
   --verified: #cdd9e5;
-  --gone: #e5534b;
+  --gone: #6e7681;
+  --data-out: #f85149;
   --new: #3fb950;
   --accent: #58a6ff;
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -93,6 +94,8 @@ select:disabled { opacity: 0.45; cursor: not-allowed; }
 }
 .no-chain p { margin: 0 0 10px; }
 .no-chain-title { font-size: 18px; font-weight: 600; }
+.no-chain-banner { display: block; line-height: 1.45; color: var(--ink); background: #161b22; }
+.no-chain-banner .no-chain-title { font-size: 13px; font-weight: 600; }
 .chain-summary {
   margin: 0;
   padding: 10px 16px;
@@ -140,12 +143,15 @@ select:disabled { opacity: 0.45; cursor: not-allowed; }
 .chain-node.status-vanished { opacity: 0.4; border-style: dashed; border-color: var(--gone); }
 .chain-node.status-appeared { border-color: var(--new); box-shadow: 0 0 0 2px rgba(63, 185, 80, 0.35); }
 
-.chain-edge { stroke: var(--neutral); stroke-width: 1.6; }
-.chain-edge.state-verified { stroke: var(--verified); }
-.chain-edge.state-unverified { stroke: var(--muted); stroke-dasharray: 5 4; }
-.chain-edge.state-vanished { stroke: var(--gone); stroke-dasharray: 5 4; opacity: 0.4; }
-.chain-edge.state-appeared { stroke: var(--new); }
-.chain-edge.selected { stroke-width: 2.6; }
+/* Edge lines. Later rules win: a vanished step is faded whatever else it is,
+   and a data movement is red whether it is in the chain or merely noted. */
+.chain-edge { stroke: var(--verified); stroke-width: 1.6; }
+.chain-edge.unverified { stroke: var(--muted); stroke-dasharray: 5 4; }
+.chain-edge.role-notable { stroke: var(--muted); stroke-dasharray: 1.5 4; stroke-linecap: round; }
+.chain-edge.status-appeared { stroke: var(--new); }
+.chain-edge.kind-data_out { stroke: var(--data-out); stroke-width: 2.2; }
+.chain-edge.status-vanished { stroke: var(--gone); stroke-dasharray: 5 4; opacity: 0.4; }
+.chain-edge.selected { stroke-width: 3; }
 
 .edge-label {
   position: absolute;
@@ -159,9 +165,11 @@ select:disabled { opacity: 0.45; cursor: not-allowed; }
   text-align: center;
 }
 .edge-label:hover { border-color: var(--muted); }
-.edge-label.state-unverified { border-style: dashed; color: var(--muted); }
-.edge-label.state-vanished { border-color: var(--gone); opacity: 0.55; }
-.edge-label.state-appeared { border-color: var(--new); }
+.edge-label.unverified { border-style: dashed; color: var(--muted); }
+.edge-label.role-notable { border-style: dotted; color: var(--muted); }
+.edge-label.status-appeared { border-color: var(--new); }
+.edge-label.kind-data_out { border-color: var(--data-out); }
+.edge-label.status-vanished { border-color: var(--gone); opacity: 0.55; }
 .edge-label.selected { box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.5); }
 .edge-label-text {
   background: none;
@@ -192,7 +200,12 @@ select:disabled { opacity: 0.45; cursor: not-allowed; }
   border: 1px solid var(--line);
   border-radius: 4px;
   padding: 0 4px;
+  white-space: nowrap;
 }
+.tag.data-out { color: var(--data-out); border-color: var(--data-out); }
+.tag.new { color: var(--new); border-color: #23572f; }
+.evidence-note.data-out { color: var(--data-out); }
+.evidence-note.muted { color: var(--muted); }
 
 .spinner {
   display: inline-block;
@@ -264,6 +277,10 @@ select:disabled { opacity: 0.45; cursor: not-allowed; }
 .answer-lookalikes { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
 .answer-lookalikes li { display: flex; gap: 8px; border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; }
 .answer-lookalikes .event-id { flex: none; white-space: nowrap; }
+.answer-lookalikes li.noted { border-color: #3d444d; }
+.answer-lookalikes li.drawn { border-color: #5c2b28; }
+.answer-lookalikes .mark-word { color: var(--muted); }
+.answer-lookalikes li.drawn .mark-word { color: var(--data-out); }
 .answer-note { margin-top: 18px; color: var(--muted); font-size: 12px; }
 .muted { color: var(--muted); font-weight: 400; }
 
@@ -284,20 +301,18 @@ select:disabled { opacity: 0.45; cursor: not-allowed; }
 /* ------------------------------------------------------------------- legend */
 
 .legend {
-  position: absolute;
-  left: 12px;
-  bottom: 12px;
-  z-index: 5;
-  background: rgba(22, 27, 34, 0.92);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 8px 10px;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  padding: 6px 16px;
+  border-top: 1px solid var(--line);
+  background: var(--panel);
   font-size: 12px;
   color: var(--muted);
-  max-width: 300px;
 }
 .legend-title { text-transform: uppercase; letter-spacing: 0.08em; font-size: 11px; }
-.legend ul { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.legend ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 18px; }
 .legend li { display: flex; align-items: center; gap: 8px; }
 .legend-line { width: 40px; height: 8px; flex: none; overflow: visible; }
 .legend-line path { fill: none; }

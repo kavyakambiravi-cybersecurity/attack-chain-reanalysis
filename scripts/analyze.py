@@ -55,24 +55,39 @@ def review(response: AnalyzeResponse, events: list[dict], answer_key: dict | Non
         seen = any(node.id in (event["source"], event["target"]) for event in events)
         print(f"  {'ok ' if seen else 'NOT IN EVENTS'} {node.id}  ({node.label})")
 
-    print(f"\nedges ({len(response.edges)})")
-    for edge in response.edges:
-        print(f"  {edge.source} -> {edge.target}  [{edge.action}]")
-        print(f"    {edge.description}")
-        if not edge.citations:
-            print("    NO CITATIONS")
-        for event_id in edge.citations:
-            event = by_id.get(event_id)
-            if event is None:
-                print(f"    {event_id}  DOES NOT EXIST")
-                continue
-            endpoints = {event["source"], event["target"]}
-            match = endpoints == {edge.source, edge.target}
-            flag = "ok " if match else "ENDPOINTS DO NOT MATCH"
-            print(f"    {event_id}  {flag}  {event['source']} -> {event['target']}")
+    listed = {node.id for node in response.nodes}
+    for title, steps in (("edges", response.edges), ("notable", response.notable)):
+        print(f"\n{title} ({len(steps)})")
+        for edge in steps:
+            unlisted = [name for name in (edge.source, edge.target) if name not in listed]
+            print(f"  {edge.source} -> {edge.target}  [{edge.action}]")
+            print(f"    {edge.description}")
+            if unlisted:
+                print(f"    NOT IN NODE LIST: {', '.join(unlisted)}")
+            if not edge.citations:
+                print("    NO CITATIONS")
+            for event_id in edge.citations:
+                event = by_id.get(event_id)
+                if event is None:
+                    print(f"    {event_id}  DOES NOT EXIST")
+                    continue
+                endpoints = {event["source"], event["target"]}
+                match = endpoints == {edge.source, edge.target}
+                flag = "ok " if match else "ENDPOINTS DO NOT MATCH"
+                print(f"    {event_id}  {flag}  {event['source']} -> {event['target']}")
 
     cited = {event_id for edge in response.edges for event_id in edge.citations}
+    noted = {event_id for edge in response.notable for event_id in edge.citations}
     if answer_key:
+        lookalikes = answer_key.get("lookalike_event_ids") or []
+        if lookalikes:
+            seen = sorted(noted & set(lookalikes))
+            print(f"\nlookalikes      {len(seen)} of {len(lookalikes)} set aside as notable steps")
+            print(f"  noted    {seen}")
+            print(f"  missed   {sorted(set(lookalikes) - noted)}")
+            drawn = sorted(cited & set(lookalikes))
+            if drawn:
+                print(f"  DRAWN INTO THE CHAIN: {drawn}")
         attack_ids = answer_key.get("attack_event_ids") or []
         if attack_ids:
             hit = sorted(cited & set(attack_ids))
@@ -84,7 +99,8 @@ def review(response: AnalyzeResponse, events: list[dict], answer_key: dict | Non
             print(f"  cited but not in attack_event_ids: {noise}")
 
     text = " ".join(
-        [response.summary] + [f"{edge.action} {edge.description}" for edge in response.edges]
+        [response.summary]
+        + [f"{edge.action} {edge.description}" for edge in response.edges + response.notable]
     ).lower()
     found = [word for word in BANNED_WORDS if re.search(rf"\b{word}\b", text)]
     print(f"\nbanned words    {found if found else 'none'}")

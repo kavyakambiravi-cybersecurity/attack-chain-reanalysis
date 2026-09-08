@@ -52,18 +52,34 @@ export const MOCK_ATTACK_SCENARIO_ID = "attack-chain-01";
 /** What the mock says for a scenario it has no chain for, benign or otherwise. */
 export const MOCK_NO_CHAIN_SUMMARY = "The remaining events do not show a connected attack.";
 
+const AZURE = "20.150.44.10 (blob.core.windows.net Azure)";
+
 /**
  * The chain the mock serves as the cached first analysis: the hand-written
- * attack chain for attack-chain-01, and an empty chain for anything else,
- * which is what the real model returns for the benign scenario.
+ * attack chain for attack-chain-01, and for anything else no chain at all but
+ * one noted step, the nightly backup upload, which is the shape the real model
+ * returns for the benign scenario.
  */
 export function mockCachedChain(scenarioId: string): Chain {
   const chain = ChainSchema.parse(cachedAnalysis);
   if (scenarioId !== MOCK_ATTACK_SCENARIO_ID) {
     return {
       ...chain,
-      nodes: [],
+      nodes: [
+        { id: "BACKUP-01", label: "backup server" },
+        { id: AZURE, label: "company cloud storage" },
+      ],
       edges: [],
+      notable: [
+        {
+          source: "BACKUP-01",
+          target: AZURE,
+          action: "uploaded a large backup",
+          description:
+            "A scheduled 512GB backup went to the company's own cloud storage, with nothing before or after it that links to an intrusion.",
+          citations: ["E-0192"],
+        },
+      ],
       summary: MOCK_NO_CHAIN_SUMMARY,
       scenario_id: scenarioId,
     };
@@ -109,14 +125,18 @@ export async function mockAnalyze(
 
   const removed = new Set(removedEventIds);
   const base = mockCachedChain(scenarioId);
-  const edges = base.edges.filter((edge) => edge.citations.some((id) => !removed.has(id)));
-  const connected = new Set(edges.flatMap((edge) => [edge.source, edge.target]));
+  const keep = (edge: Chain["edges"][number]) =>
+    edge.citations.some((id) => !removed.has(id));
+  const edges = base.edges.filter(keep);
+  const notable = base.notable.filter(keep);
+  const connected = new Set([...edges, ...notable].flatMap((edge) => [edge.source, edge.target]));
   const nodes = base.nodes.filter((node) => connected.has(node.id));
 
   return {
     ...base,
     nodes,
     edges,
+    notable,
     removed_event_ids: [...removedEventIds],
     summary: edges.length === 0 ? MOCK_NO_CHAIN_SUMMARY : base.summary,
   };

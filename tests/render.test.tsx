@@ -11,6 +11,8 @@ import { SCENARIOS } from "../src/lib/scenarios";
 import { AnswerKeySchema, ChainSchema, EventsSchema } from "../src/lib/schema";
 import { validateChain } from "../src/lib/validate";
 import { readJson } from "./contract";
+import { notableChain } from "./fixtures/chains";
+import { mini } from "./fixtures/mini";
 
 const events = EventsSchema.parse(readJson("data/scenarios/attack-chain-01/events.json"));
 const answerKey = AnswerKeySchema.parse(readJson("data/scenarios/attack-chain-01/answer_key.json"));
@@ -45,7 +47,13 @@ describe("panels render", () => {
 
   it("marks which planted events the chain on screen cites", () => {
     const html = renderToStaticMarkup(
-      <AnswerKeyPanel answerKey={answerKey} citedIds={citedIds} open onClose={nothing} />,
+      <AnswerKeyPanel
+        answerKey={answerKey}
+        citedIds={citedIds}
+        notedIds={new Set()}
+        open
+        onClose={nothing}
+      />,
     );
     expect(html).toContain("Finance file-server exfiltration");
     expect(html).toContain("15 of 16 cited by the chain on screen");
@@ -92,7 +100,51 @@ describe("panels render", () => {
     expect(html).toMatch(/<option value="benign-lookalike-02" selected=""/);
   });
 
-  it("explains the four step styles", () => {
-    expect(renderToStaticMarkup(<Legend />)).toContain("no longer backed by the remaining events");
+  it("explains every step style", () => {
+    const html = renderToStaticMarkup(<Legend />);
+    expect(html).toContain("no longer backed by the remaining events");
+    expect(html).toContain("data left the network");
+    expect(html).toContain("joins no chain");
+  });
+
+  it("says when a step was noted and set aside, and when data left the network", () => {
+    const noted = validateChain(notableChain, mini);
+    const view = diffChains(null, noted);
+    const aside = renderToStaticMarkup(
+      <EvidencePanel
+        edge={view.edges.find((edge) => edge.role === "notable")!}
+        events={mini}
+        onClose={nothing}
+      />,
+    );
+    expect(aside).toContain("noted");
+    expect(aside).toContain("set it aside");
+    expect(aside).not.toContain("Data left the network");
+    const exfil = renderToStaticMarkup(
+      <EvidencePanel
+        edge={view.edges.find((edge) => edge.target === "198.51.100.22")!}
+        events={mini}
+        onClose={nothing}
+      />,
+    );
+    expect(exfil).toContain("Data left the network. Event E-0005 records 480MB");
+  });
+
+  it("marks lookalikes the model noted, apart from ones it drew into a chain", () => {
+    const benignKey = AnswerKeySchema.parse(
+      readJson("data/scenarios/benign-lookalike-02/answer_key.json"),
+    );
+    const html = renderToStaticMarkup(
+      <AnswerKeyPanel
+        answerKey={benignKey}
+        citedIds={new Set(["E-0046"])}
+        notedIds={new Set(["E-0192"])}
+        open
+        onClose={nothing}
+      />,
+    );
+    expect(html).toContain("Noted and set aside by the model.");
+    expect(html).toContain("Drawn into the chain on screen.");
+    expect(html.match(/mark-word/g)).toHaveLength(2);
   });
 });

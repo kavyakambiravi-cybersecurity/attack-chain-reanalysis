@@ -172,3 +172,24 @@ describe("describeChange", () => {
     );
   });
 });
+
+describe("a step that changes role", () => {
+  it("is one step vanished and one appeared, never a quiet survival", () => {
+    const before = validateChain(goodChain, mini);
+    const demoted = {
+      ...goodChain,
+      edges: goodChain.edges.slice(0, 4),
+      notable: [goodChain.edges[4]],
+    };
+    const after = validateChain(demoted, mini);
+    const diffed = diffChains(before, after);
+    const exfil = diffed.edges.filter(
+      (e) => e.source === "FILESRV-01" && e.target === "198.51.100.22",
+    );
+    expect(exfil.map((e) => `${e.role}:${e.status}`).sort()).toEqual([
+      "chain:vanished",
+      "notable:appeared",
+    ]);
+    expect(diffed.counts).toEqual({ vanished: 1, survived: 4, appeared: 1 });
+  });
+});

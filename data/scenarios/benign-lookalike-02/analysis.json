@@ -1,8 +1,83 @@
 {
-  "nodes": [],
+  "nodes": [
+    {
+      "id": "192.0.2.20 (corp-vpn-gateway)",
+      "label": "corporate VPN gateway"
+    },
+    {
+      "id": "WKSTN-017",
+      "label": "employee workstation"
+    },
+    {
+      "id": "kdurand",
+      "label": "employee user account"
+    },
+    {
+      "id": "WKSTN-044",
+      "label": "developer workstation"
+    },
+    {
+      "id": "140.82.112.3 (github)",
+      "label": "external code repository"
+    },
+    {
+      "id": "BACKUP-01",
+      "label": "backup server"
+    },
+    {
+      "id": "20.150.44.10 (blob.core.windows.net Azure)",
+      "label": "external cloud storage"
+    },
+    {
+      "id": "svc_edr",
+      "label": "antivirus service account"
+    },
+    {
+      "id": "SQL-01",
+      "label": "database server"
+    }
+  ],
   "edges": [],
-  "summary": "The events reviewed show routine workstation logons, file access, software update traffic, and normal administrative tasks such as scheduled backups, patch windows, and helpdesk troubleshooting; none of the seemingly unusual events link together into a connected sequence of attacker actions, so the remaining events do not show a connected attack.",
+  "notable": [
+    {
+      "source": "192.0.2.20 (corp-vpn-gateway)",
+      "target": "WKSTN-017",
+      "action": "remote logon from outside network",
+      "description": "An interactive logon for kdurand arrived through the corporate VPN gateway with multi-factor authentication satisfied, which is the normal way remote staff connect, so it is flagged only because it originates outside the office network.",
+      "citations": [
+        "E-0046"
+      ]
+    },
+    {
+      "source": "WKSTN-044",
+      "target": "140.82.112.3 (github)",
+      "action": "pushed 40MB of code externally",
+      "description": "A workstation sent 40 megabytes of data to the company's own GitHub organisation over a standard code-push connection, which is a large transfer worth noting even though the destination is the organisation's approved repository.",
+      "citations": [
+        "E-0287"
+      ]
+    },
+    {
+      "source": "BACKUP-01",
+      "target": "20.150.44.10 (blob.core.windows.net Azure)",
+      "action": "uploaded 512GB to cloud storage",
+      "description": "The backup server sent a very large amount of data to external cloud storage, but this matches a scheduled nightly backup job rather than any unusual activity.",
+      "citations": [
+        "E-0192"
+      ]
+    },
+    {
+      "source": "svc_edr",
+      "target": "SQL-01",
+      "action": "antivirus process read password memory",
+      "description": "The endpoint protection process briefly opened a handle to the process that holds Windows credentials, but this is a normal part of its scheduled scanning routine and is not linked to any other suspicious activity.",
+      "citations": [
+        "E-0154"
+      ]
+    }
+  ],
+  "summary": "Across the day's telemetry, activity consists of routine logons, file access, software updates and standard administrative tasks, with a handful of individually noteworthy but explainable events. No sequence of actions ties these events together into a connected attack, so no attack chain is reported.",
   "scenario_id": "benign-lookalike-02",
   "removed_event_ids": [],
-  "prompt_version": "2026-09-07.2"
+  "prompt_version": "2026-09-07.6"
 }

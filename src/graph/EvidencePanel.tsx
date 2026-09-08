@@ -1,6 +1,6 @@
 // Constitution I, made visible: for the step you clicked, here are the raw
 // events behind it and whether each one actually supports it.
-import { explainCheck } from "../lib/validate";
+import { describeDataOut, explainCheck } from "../lib/validate";
 import type { Event } from "../types";
 import type { LaidOutEdge } from "./layout";
 
@@ -35,6 +35,7 @@ export default function EvidencePanel({
   }
 
   const byId = new Map(events.map((event) => [event.id, event]));
+  const dataOut = describeDataOut(edge, events);
 
   return (
     <aside className="evidence">
@@ -52,9 +53,20 @@ export default function EvidencePanel({
       </p>
       <p className="evidence-action">
         {edge.action}
+        {edge.kind === "data_out" ? <span className="tag data-out">data out</span> : null}
+        {edge.role === "notable" ? <span className="tag noted">noted</span> : null}
         {edge.verified ? null : <span className="tag">unverified</span>}
       </p>
       <p className="evidence-description">{edge.description}</p>
+
+      {edge.role === "notable" ? (
+        <p className="evidence-note muted">
+          Noted, not part of an attack chain: the model looked at this step and set it aside.
+          The sentence above is its reason.
+        </p>
+      ) : null}
+
+      {dataOut ? <p className="evidence-note data-out">Data left the network. {dataOut}</p> : null}
 
       {edge.status === "vanished" ? (
         <p className="evidence-note">

@@ -42,22 +42,29 @@ describe("the dev mock's cached chain", () => {
 });
 
 describe("the dev mock's benign scenario", () => {
-  it("serves an empty chain that still validates", () => {
+  const benignEvents = readJson<Event[]>("data/scenarios/benign-lookalike-02/events.json");
+
+  it("serves no chain but one noted step, and it validates", () => {
     const cached = mockCachedChain("benign-lookalike-02");
     expect(ChainSchema.safeParse(cached).success).toBe(true);
     expect(cached.scenario_id).toBe("benign-lookalike-02");
-    expect(cached.nodes).toEqual([]);
     expect(cached.edges).toEqual([]);
+    expect(cached.notable).toHaveLength(1);
+    expect(cached.nodes).toHaveLength(2);
     expect(cached.summary).toBe(MOCK_NO_CHAIN_SUMMARY);
-    const benignEvents = readJson<Event[]>("data/scenarios/benign-lookalike-02/events.json");
-    expect(validateChain(cached, benignEvents).warnings).toEqual([]);
+    const validated = validateChain(cached, benignEvents);
+    expect(validated.warnings).toEqual([]);
+    expect(validated.edges.map((e) => [e.role, e.kind, e.verified])).toEqual([
+      ["notable", "data_out", true],
+    ]);
   });
 
-  it("re-analyses to the same empty chain", async () => {
-    const chain = await mockAnalyze("benign-lookalike-02", ["E-0046"], NO_DELAY);
+  it("drops the noted step when its event is removed", async () => {
+    const chain = await mockAnalyze("benign-lookalike-02", ["E-0192"], NO_DELAY);
     expect(chain.edges).toEqual([]);
+    expect(chain.notable).toEqual([]);
     expect(chain.nodes).toEqual([]);
-    expect(chain.removed_event_ids).toEqual(["E-0046"]);
+    expect(chain.removed_event_ids).toEqual(["E-0192"]);
   });
 });
 

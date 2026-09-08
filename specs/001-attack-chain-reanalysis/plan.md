@@ -184,8 +184,10 @@ interface ChainEdge {
   citations: string[];   // event ids
 }
 interface ChainOutput {  // model output, Pydantic `ChainOutput` on the server
-  nodes: ChainNode[];
-  edges: ChainEdge[];
+  nodes: ChainNode[];    // every asset used by an edge or a notable step
+  edges: ChainEdge[];    // the attack chain; empty when there is none
+  notable: ChainEdge[];  // steps looked at and set aside: same shape, same citation rules,
+                         // description says why the step joins no chain. Up to six.
   summary: string;       // at most two sentences, plain English
 }
 interface AnalyzeResponse extends ChainOutput {   // TS alias: Chain
@@ -201,7 +203,12 @@ interface AnalyzeResponse extends ChainOutput {   // TS alias: Chain
 
 ```ts
 interface CitationCheck { id: string; exists: boolean; involvesBothEndpoints: boolean; }
+type EdgeRole = "chain" | "notable";   // which list the step came from
+type EdgeKind = "action" | "data_out"; // data_out: a cited connection to an outside address
+                                       // whose detail records MB, GB, or TB. Decided by code.
 interface ValidatedEdge extends ChainEdge {
+  role: EdgeRole;
+  kind: EdgeKind;
   verified: boolean;              // citations.length > 0 && every check passes
   checks: CitationCheck[];
   bannedWords: string[];          // "secure", "safe", "contained" found in action or description
@@ -211,7 +218,8 @@ interface ValidatedChain {
   removed_event_ids: string[];
   prompt_version: string;
   nodes: ChainNode[];             // model nodes, minus any whose id appears in no event
-  edges: ValidatedEdge[];         // model edges, minus any whose endpoint appears in no event
+  edges: ValidatedEdge[];         // chain edges then notable steps, minus any whose endpoint
+                                  // appears in no event
   summary: string;
   warnings: string[];             // one line per dropped node or edge, for the console and tests
 }
@@ -227,8 +235,9 @@ interface DiffedChain {
 }
 ```
 
-Edge identity for diffing is `${source}->${target}`. Node identity is `id`. Action and label text
-are not part of identity. A vanished edge or node carries its previous data. The first render,
+Edge identity for diffing is `${source}->${target}`, prefixed with `notable:` for a set-aside
+step, so a step that moves between the chain and the set-aside list shows as one vanished and
+one appeared. Node identity is `id`. Action and label text are not part of identity. A vanished edge or node carries its previous data. The first render,
 with no previous chain, is a `DiffedChain` where everything is `survived`.
 
 
@@ -421,11 +430,11 @@ Return a chain with these rules.
 Nodes
 - A node is an asset. Its id must be an asset name copied exactly as it appears in the events,
   including any label in parentheses. Never invent, shorten, or normalise a name.
-- Include only assets that take part in the attack. Leave out assets that appear only in
-  ordinary activity.
-- Every asset you use as the source or target of an edge must also appear in this node list.
-  Never draw an edge to or from an asset you have not listed. This includes external addresses
-  that only receive data.
+- Include only assets that take part in the attack or in a notable step. Leave out assets
+  that appear only in ordinary activity.
+- Every asset you use as the source or target of an edge or a notable step must also appear
+  in this node list. Never draw an edge to or from an asset you have not listed. This includes
+  external addresses that only receive data.
 - The label is a short plain-English description of the asset's role, at most four words,
   based only on what the events show. Example: "finance file server".
 
@@ -442,11 +451,31 @@ Edges
   or "copied files out". "description" is one sentence a newcomer can follow, and may say why
   this step matters for the next one.
 
+Notable steps
+- Separately, in "notable", list actions that a security team would want explained even on
+  their own, but that you did not put in the chain: a transfer of megabytes or more to an
+  outside address, a logon arriving from outside the organisation, a process reading stored
+  passwords, a cleared or altered log, a privileged account used somewhere unexpected. At
+  most six. Use the same shape as an edge, with the same citation rules, and add every asset
+  they use to the node list.
+- Its "action" names what happened in three to six words. Its "description" is one sentence
+  saying why it did not join the chain: what in the events makes it ordinary, or what is
+  missing to connect it to anything else.
+- Before listing a step, check it against the kinds named above. If it matches none of them,
+  leave it out. A file read, a scheduled task, a screen unlock, a single failed password, an
+  everyday cloud connection, a routine session between two internal machines, or anything
+  whose source and target are the same asset never qualifies, even when it touches an asset
+  from the chain. An empty list is the right answer when nothing qualifies. Never add steps
+  to fill the list.
+- If there is an attack, still list any qualifying action that is not part of it. If there is
+  no attack, this list is how the reader sees what you looked at and set aside.
+
 Summary
 - At most two sentences. Say what the evidence shows happened, from first step to last.
 
-If the events do not show a connected attack, return no edges, list no nodes, and use the
-summary to say that the remaining events do not show a connected attack.
+If the events do not show a connected attack, return no edges, list only the assets used by
+notable steps, and use the summary to say that the remaining events do not show a connected
+attack.
 
 Wording
 - Plain English throughout. Do not use security jargon or technique names in "action",
@@ -456,7 +485,7 @@ Wording
 - Do not speculate beyond the events. Say only what the cited events support.
 ```
 
-Roughly 550 tokens. This is likely below the minimum cacheable prefix for the model, so the
+Roughly 750 tokens. This is likely below the minimum cacheable prefix for the model, so the
 `cache_control` marker may be a no-op. It costs nothing and becomes useful if the prompt grows.
 
 #### User message (`render_events(events)`)
@@ -515,6 +544,7 @@ class ChainNode(BaseModel):
 class ChainOutput(BaseModel):
     nodes: list[ChainNode]
     edges: list[ChainEdge]
+    notable: list[ChainEdge]
     summary: str
 
 class AnalyzeResponse(ChainOutput):
@@ -574,11 +604,16 @@ clicked. A legend sits in the bottom-left corner of the graph.
 - React Flow with custom node and edge components. Layout computed once per chain with dagre,
   `rankdir: "LR"`, `nodesep: 40`, `ranksep: 120`.
 - Node: rounded card with icon by kind (host, external), label, and an "Isolate" button on hover.
-- Edge: label is `action`. Styles by state:
-  - verified, survived: solid, neutral
+- Edge: label is `action`. Styles compose from role, kind, verification, and diff status:
+  - verified chain step: solid, neutral
   - unverified: dashed, muted, with a small "unverified" tag
-  - vanished (after diff): dashed, red, 40 percent opacity, still clickable
+  - notable (set aside by the model): dotted, muted, with a "noted" tag
+  - data out (code-detected transfer of MB or more to an outside address): red, in either
+    role, with a "data out" tag. The one colour that means the same thing in both scenarios.
+  - vanished (after diff): dashed, grey, 40 percent opacity, still clickable
   - appeared (after diff): solid, green
+- When the chain is empty but notable steps exist, the graph still draws them under a short
+  overlay saying no attack chain was drawn and that these are the steps the model set aside.
 - Edge click opens the evidence panel. Edge hover shows a "Block" button.
 - Nodes carry the same three diff statuses as edges. A vanished node (isolated, or no longer
   part of the chain) is still drawn, faded, so the user sees what they removed. Appeared nodes

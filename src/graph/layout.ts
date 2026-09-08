@@ -28,8 +28,8 @@ const LABEL_PADDING_Y = 12;
 const LABEL_LINE_HEIGHT = 16;
 /** Average glyph width at the label's 12px font, used only to guess line count. */
 const CHAR_WIDTH = 6.4;
-/** Width of an inline tag such as "unverified" or "gone". */
-const TAG_WIDTH = 70;
+/** Width of an inline tag such as "unverified", "noted", or "data out". */
+const TAG_WIDTH = 62;
 
 const NODE_SEP = 36;
 const RANK_SEP = 48;
@@ -90,11 +90,24 @@ function firstSeen(asset: string, input: LayoutInput, byId: Map<string, Event>):
   return earliest;
 }
 
-/** Arrowhead colour follows the same four states as the edge line itself. */
-function arrowColour(status: DiffStatus, verified: boolean): string {
-  if (status === "vanished") return "#e5534b";
+/** Arrowhead colour follows the same rules as the edge line in styles.css. */
+export function arrowColour(edge: LaidOutEdge, status: DiffStatus): string {
+  if (status === "vanished") return "#6e7681";
+  if (edge.kind === "data_out") return "#f85149";
   if (status === "appeared") return "#3fb950";
-  return verified ? "#cdd9e5" : "#98a2b3";
+  if (!edge.verified || edge.role === "notable") return "#98a2b3";
+  return "#cdd9e5";
+}
+
+/** How many small tags the label will carry, for the width estimate. */
+export function tagCount(edge: LaidOutEdge): number {
+  const status = edge.status ?? "survived";
+  return (
+    (edge.kind === "data_out" ? 1 : 0) +
+    (edge.role === "notable" ? 1 : 0) +
+    (!edge.verified && status !== "vanished" ? 1 : 0) +
+    (status !== "survived" ? 1 : 0)
+  );
 }
 
 /** Every asset the chain draws, including any that only an edge mentions. */
@@ -114,9 +127,7 @@ function allNodes(input: LayoutInput): LaidOutNode[] {
  * NODE_SEP gives it slack.
  */
 export function labelSize(edge: LaidOutEdge): { width: number; height: number } {
-  const status = edge.status ?? "survived";
-  const tagged = !edge.verified || status !== "survived";
-  const textWidth = edge.action.length * CHAR_WIDTH + (tagged ? TAG_WIDTH : 0);
+  const textWidth = edge.action.length * CHAR_WIDTH + tagCount(edge) * TAG_WIDTH;
   const inner = LABEL_WIDTH - 2 * LABEL_PADDING_X;
   const lines = Math.max(1, Math.ceil(textWidth / inner));
   return { width: LABEL_WIDTH, height: LABEL_PADDING_Y + lines * LABEL_LINE_HEIGHT };
@@ -213,7 +224,7 @@ export function layoutChain(input: LayoutInput, events: Event[]): {
       target: edge.target,
       type: "chainEdge",
       label: edge.action,
-      markerEnd: { type: MarkerType.ArrowClosed, color: arrowColour(status, edge.verified) },
+      markerEnd: { type: MarkerType.ArrowClosed, color: arrowColour(edge, status) },
       data: {
         edge,
         status,

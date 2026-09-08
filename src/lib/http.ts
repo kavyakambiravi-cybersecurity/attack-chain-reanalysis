@@ -1,6 +1,6 @@
 // Fetch helpers and the one error type the UI knows about. Shared by api.ts and
 // the dev mock so neither has to import the other.
-import type { ZodType } from "zod";
+import type { ZodType, ZodTypeDef } from "zod";
 import { ErrorResponseSchema } from "./schema";
 import type { ErrorCode } from "../types";
 
@@ -41,7 +41,10 @@ export async function errorFrom(response: Response): Promise<ApiError> {
 }
 
 /** GET a JSON document and parse it, or throw an ApiError. */
-export async function getJson<T>(url: string, schema: ZodType<T>): Promise<T> {
+export async function getJson<T>(
+  url: string,
+  schema: ZodType<T, ZodTypeDef, unknown>,
+): Promise<T> {
   const response = await fetch(url);
   if (!response.ok) throw await errorFrom(response);
   const parsed = schema.safeParse(await response.json());
@@ -52,7 +55,10 @@ export async function getJson<T>(url: string, schema: ZodType<T>): Promise<T> {
 }
 
 /** Same, but a missing or unreadable document is null rather than an error. */
-export async function getOptionalJson<T>(url: string, schema: ZodType<T>): Promise<T | null> {
+export async function getOptionalJson<T>(
+  url: string,
+  schema: ZodType<T, ZodTypeDef, unknown>,
+): Promise<T | null> {
   try {
     return await getJson(url, schema);
   } catch {

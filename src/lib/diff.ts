@@ -5,16 +5,25 @@ import { edgeKey } from "./validate";
 import type { DiffedChain, DiffedEdge, DiffedNode, ValidatedChain } from "../types";
 
 /**
- * Overlay the previous chain on the current one. Identity is endpoints for an
- * edge and the asset name for a node, never the wording, so a re-phrased step
- * counts as the same step. Anything that is gone stays in the output, carrying
- * the evidence it had, so the user can see what their change took away.
+ * Identity for diffing: endpoints, plus the role. A step that moves from the
+ * chain to the set-aside list, or back, has changed in the way that matters
+ * most, so it is shown as one step vanished and another appeared.
+ */
+function diffKey(edge: { source: string; target: string; role: string }): string {
+  return edge.role === "notable" ? `notable:${edgeKey(edge)}` : edgeKey(edge);
+}
+
+/**
+ * Overlay the previous chain on the current one. Identity is endpoints and role
+ * for an edge and the asset name for a node, never the wording, so a re-phrased
+ * step counts as the same step. Anything that is gone stays in the output,
+ * carrying the evidence it had, so the user can see what their change took away.
  */
 export function diffChains(previous: ValidatedChain | null, next: ValidatedChain): DiffedChain {
   // The very first render has nothing to compare against, so nothing is new:
   // everything is simply what the evidence shows.
   const first = previous === null;
-  const previousEdges = new Map((previous?.edges ?? []).map((edge) => [edgeKey(edge), edge]));
+  const previousEdges = new Map((previous?.edges ?? []).map((edge) => [diffKey(edge), edge]));
   const previousNodes = new Map((previous?.nodes ?? []).map((node) => [node.id, node]));
 
   const edges: DiffedEdge[] = next.edges.map((edge) => ({
@@ -22,10 +31,10 @@ export function diffChains(previous: ValidatedChain | null, next: ValidatedChain
     citations: [...edge.citations],
     checks: edge.checks.map((check) => ({ ...check })),
     bannedWords: [...edge.bannedWords],
-    status: first || previousEdges.has(edgeKey(edge)) ? "survived" : "appeared",
+    status: first || previousEdges.has(diffKey(edge)) ? "survived" : "appeared",
   }));
 
-  const nextEdgeKeys = new Set(next.edges.map(edgeKey));
+  const nextEdgeKeys = new Set(next.edges.map(diffKey));
   for (const [key, edge] of previousEdges) {
     if (nextEdgeKeys.has(key)) continue;
     edges.push({

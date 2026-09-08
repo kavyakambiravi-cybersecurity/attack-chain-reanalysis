@@ -54,5 +54,8 @@ def chain() -> analysis.ChainOutput:
     """A small, valid model output built from the frozen response example."""
     example = contract("analyze_response.json")
     return analysis.ChainOutput(
-        nodes=example["nodes"], edges=example["edges"], summary=example["summary"]
+        nodes=example["nodes"],
+        edges=example["edges"],
+        notable=example["notable"],
+        summary=example["summary"],
     )

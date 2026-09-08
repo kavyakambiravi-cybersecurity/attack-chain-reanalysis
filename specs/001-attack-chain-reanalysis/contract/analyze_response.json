@@ -30,5 +30,6 @@
       "citations": ["E-0111"]
     }
   ],
+  "notable": [],
   "summary": "An outside computer took over a finance workstation and used a stolen administrator credential to reach the domain controller. The remaining events do not show the file server being touched."
 }

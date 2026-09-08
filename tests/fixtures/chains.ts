@@ -5,6 +5,7 @@ const base = {
   scenario_id: "mini",
   removed_event_ids: [] as string[],
   prompt_version: "test-1",
+  notable: [] as ChainEdge[],
   summary: "An outside computer took over a workstation and files left the file server.",
 };
 
@@ -73,6 +74,21 @@ export const userCollapsedChain: Chain = chainWith({ citations: ["E-0002"] });
 
 /** It cites nothing at all. */
 export const emptyCitationChain: Chain = chainWith({ citations: [] });
+
+/** goodChain plus one step the model looked at and set aside. */
+export const notableChain: Chain = {
+  ...goodChain,
+  nodes: [...goodChain.nodes, { id: "apatel", label: "office user" }, { id: "WKSTN-017", label: "workstation" }],
+  notable: [
+    {
+      source: "apatel",
+      target: "WKSTN-017",
+      action: "logged in at the usual time",
+      description: "An ordinary morning logon by a user to their own workstation, touching nothing else.",
+      citations: ["E-0006"],
+    },
+  ],
+};
 
 /** An edge that drops the parenthesised label from an external asset name. */
 export const labelDroppedChain: Chain = {

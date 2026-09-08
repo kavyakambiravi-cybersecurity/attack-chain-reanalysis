@@ -57,6 +57,7 @@ export const ChainEdgeSchema = z.object({
 export const ChainOutputSchema = z.object({
   nodes: z.array(ChainNodeSchema),
   edges: z.array(ChainEdgeSchema),
+  notable: z.array(ChainEdgeSchema).default([]),
   summary: z.string(),
 });
 

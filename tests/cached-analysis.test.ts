@@ -13,9 +13,12 @@ const BENIGN = "data/scenarios/benign-lookalike-02/analysis.json";
 const bannedIn = (text: string) =>
   BANNED_WORDS.filter((word) => new RegExp(`\\b${word}\\b`, "i").test(text));
 
+const SKIP_MESSAGE = "analysis.json not generated yet (backend task T012)";
+
 if (!repoFileExists(ATTACK)) {
+  console.warn(`[cached-analysis] skipped: ${SKIP_MESSAGE}`);
   describe("cached analysis for attack-chain-01", () => {
-    it.skip("analysis.json not generated yet (backend task T012)", () => undefined);
+    it.skip(SKIP_MESSAGE, () => undefined);
   });
 } else {
   describe("cached analysis for attack-chain-01", () => {

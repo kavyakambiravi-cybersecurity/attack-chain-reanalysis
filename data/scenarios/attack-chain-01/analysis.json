@@ -1,0 +1,134 @@
+{
+  "nodes": [
+    {
+      "id": "203.0.113.47",
+      "label": "external attacker address"
+    },
+    {
+      "id": "WKSTN-042",
+      "label": "jsmith's workstation"
+    },
+    {
+      "id": "jsmith",
+      "label": "compromised user account"
+    },
+    {
+      "id": "DC-01",
+      "label": "domain controller"
+    },
+    {
+      "id": "administrator",
+      "label": "admin account, used by attacker"
+    },
+    {
+      "id": "FILESRV-01",
+      "label": "file server"
+    },
+    {
+      "id": "198.51.100.22",
+      "label": "external data destination"
+    }
+  ],
+  "edges": [
+    {
+      "source": "203.0.113.47",
+      "target": "WKSTN-042",
+      "action": "logged in from outside",
+      "description": "An outside address used a remote desktop gateway to log in to WKSTN-042 as the user jsmith, which is how the intruder first got in.",
+      "citations": [
+        "E-0095"
+      ]
+    },
+    {
+      "source": "jsmith",
+      "target": "WKSTN-042",
+      "action": "ran hidden commands and checked privileges",
+      "description": "Once logged in as jsmith, the attacker launched a disguised command line from Outlook and then ran commands to see who they were and whether they had top-level admin rights.",
+      "citations": [
+        "E-0096",
+        "E-0102"
+      ]
+    },
+    {
+      "source": "WKSTN-042",
+      "target": "203.0.113.47",
+      "action": "sent a steady outbound signal",
+      "description": "The workstation began quietly sending small bursts of data back to the same outside address every minute, a sign of ongoing remote control.",
+      "citations": [
+        "E-0097"
+      ]
+    },
+    {
+      "source": "jsmith",
+      "target": "WKSTN-042",
+      "action": "extracted stored login secrets",
+      "description": "The attacker dumped the memory of a system process that holds cached passwords, giving them material to impersonate other accounts.",
+      "citations": [
+        "E-0107"
+      ]
+    },
+    {
+      "source": "WKSTN-042",
+      "target": "DC-01",
+      "action": "used stolen credentials as admin",
+      "description": "Using the secrets taken from the workstation, the attacker requested a ticket from the domain controller pretending to be the administrator account, without ever knowing the real password.",
+      "citations": [
+        "E-0111"
+      ]
+    },
+    {
+      "source": "WKSTN-042",
+      "target": "FILESRV-01",
+      "action": "logged into file server as admin",
+      "description": "Armed with the administrator identity, the attacker connected to the file server and opened a file-sharing session, gaining broad access to company files.",
+      "citations": [
+        "E-0115",
+        "E-0117"
+      ]
+    },
+    {
+      "source": "administrator",
+      "target": "FILESRV-01",
+      "action": "ran remote commands and grabbed files",
+      "description": "The attacker then remotely executed commands on the file server and read sensitive finance and employee records, packaging them into a hidden archive for removal.",
+      "citations": [
+        "E-0119",
+        "E-0122",
+        "E-0124",
+        "E-0125"
+      ]
+    },
+    {
+      "source": "FILESRV-01",
+      "target": "198.51.100.22",
+      "action": "sent large amount of data out",
+      "description": "A very large transfer, matching the size of the packaged files, was sent from the file server to an outside address, indicating the stolen data left the network.",
+      "citations": [
+        "E-0129"
+      ]
+    },
+    {
+      "source": "FILESRV-01",
+      "target": "203.0.113.47",
+      "action": "signalled task completion",
+      "description": "The file server contacted the original outside address again, appearing to confirm that the data theft had finished.",
+      "citations": [
+        "E-0132"
+      ]
+    },
+    {
+      "source": "administrator",
+      "target": "FILESRV-01",
+      "action": "erased logs and evidence",
+      "description": "Finally, the attacker cleared the security log and deleted the archive file, actions aimed at hiding what had just happened.",
+      "citations": [
+        "E-0136",
+        "E-0137"
+      ]
+    }
+  ],
+  "summary": "An outside address logged into WKSTN-042 as jsmith, then ran hidden commands to explore the machine and steal cached credentials, which were used to impersonate the administrator account on the domain controller and file server; the attacker then read sensitive finance and HR files, packaged them, sent a large amount of data to an external address, and finally cleared logs and deleted the evidence.",
+  "scenario_id": "attack-chain-01",
+  "removed_event_ids": [],
+  "prompt_version": "2026-09-07.2"
+}
